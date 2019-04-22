@@ -20,13 +20,14 @@
         <div class="container-fruid">
             <div class="row">
                 <div class="col-sm-3 text-center">
-                    <img src="public/images/header-logo.jpg" class="img-circle" width="198px" alt="banner">
+                    <a href=""><img src="public/images/header-logo.jpg" class="img-circle" width="150px" alt="banner"></a>
                 </div>
-                <div class="col-sm-6 text-center">
+                <div class="col-sm-6" id="sologan">
                     <h3>KÍ TÚC XÁ LÀ NHÀ - BẠN BÈ LÀ ANH EM</h3>
                 </div>
                 <div class="col-sm-3 text-center">
-                    <div class="btn btn-default">Login</div>
+                    <button class="btn btn-primary">Đăng nhập</button>
+                    <button class="btn btn-default">Đăng ký</button>
                 </div>
             </div>
         </div>
@@ -82,29 +83,33 @@
 
         </div> <!-- #slider -->
 
+        <div class="space-50"></div>
+
         <div id="values">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-4">
-                        V1
+                        TRUST
                     </div>
                     <div class="col-sm-4">
-                        V2
+                        RESPONSIBILITY
                     </div>
                     <div class="col-sm-4">
-                        V3
+                        SOLIDARITY
                     </div>
                     <div class="col-sm-offset-2 col-sm-4">
-                        V4
+                        RESPECT
                     </div>
-                    <div class="col-sm-offset-2 col-sm-4">
-                        V5
+                    <div class="col-sm-4">
+                        DEMAND
                     </div>
                 </div>
             </div>
         </div> <!-- #values -->
 
     </section>
+
+    <div class="space-50"></div>
 
     <footer>
         <div class="container-fruid">
