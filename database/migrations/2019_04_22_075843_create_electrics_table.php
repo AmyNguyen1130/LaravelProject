@@ -14,7 +14,14 @@ class CreateElectricsTable extends Migration
     public function up()
     {
         Schema::create('electrics', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->integer('room_id')->unsigned();
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
+            $table->string('time', 20);
+            $table->integer('old_number');
+            $table->integer('new_number');
+            $table->integer('price');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

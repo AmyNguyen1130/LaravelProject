@@ -14,7 +14,12 @@ class CreateIssuesTable extends Migration
     public function up()
     {
         Schema::create('issues', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->text('content');
+            $table->integer('student_id')->unsigned();
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+            $table->integer('room_id')->unsigned();
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
             $table->timestamps();
         });
     }

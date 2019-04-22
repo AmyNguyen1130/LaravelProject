@@ -14,7 +14,12 @@ class CreateMisconductsTable extends Migration
     public function up()
     {
         Schema::create('misconducts', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->integer('student_id')->unsigned();
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+            $table->text('content');
+            $table->date('time');
+            $table->integer('minus');
             $table->timestamps();
         });
     }

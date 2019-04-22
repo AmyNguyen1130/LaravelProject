@@ -14,7 +14,11 @@ class CreateClassesTable extends Migration
     public function up()
     {
         Schema::create('classes', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->string('name');
+            $table->integer('educator_id')->unsigned();
+            $table->foreign('educator_id')->references('id')->on('educators')->onDelete('cascade');
+            $table->integer('number_of_students');
             $table->timestamps();
         });
     }

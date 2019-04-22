@@ -14,7 +14,14 @@ class CreateEducatorsTable extends Migration
     public function up()
     {
         Schema::create('educators', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->string('code', 10)->unique();
+            $table->string('name');
+            $table->date('birthday');
+            $table->string('gender');
+            $table->string('address');
+            $table->string('phone');
+            $table->string('qualification'); 
             $table->timestamps();
         });
     }

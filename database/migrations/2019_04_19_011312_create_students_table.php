@@ -21,7 +21,7 @@ class CreateStudentsTable extends Migration
             $table->string('gender');
             $table->string('address');
             $table->string('phone');
-            $table->integer('room_id')->unsign();
+            $table->integer('room_id')->unsigned();
             $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
             $table->integer('class_id');
             $table->timestamps();

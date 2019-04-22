@@ -14,7 +14,11 @@ class CreateKitchenExpensesTable extends Migration
     public function up()
     {
         Schema::create('kitchen-_expenses', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->date('time');
+            $table->string('item', 100);
+            $table->integer('quatity');
+            $table->integer('price');
             $table->timestamps();
         });
     }
