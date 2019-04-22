@@ -32,11 +32,11 @@
         </div>
     </header>
 
-    <section>
-        <div class="container-fruid">
+    <section id="main-content">
 
-            <div id="slide">
-                
+        <div id="slider">
+
+            <div class="container-fruid">
                 <div id="carousel-id" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carousel-id" data-slide-to="0" class=""></li>
@@ -78,21 +78,32 @@
                     <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
                     <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
                 </div>
-                
             </div>
 
-            <div class="row">
-                <div class="col-sm-3">
-                    Menu Doc
-                </div>
-                <div class="col-sm-6">
-                    Content
-                </div>
-                <div class="col-sm-3">
-                    Side Bar
+        </div> <!-- #slider -->
+
+        <div id="values">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        V1
+                    </div>
+                    <div class="col-sm-4">
+                        V2
+                    </div>
+                    <div class="col-sm-4">
+                        V3
+                    </div>
+                    <div class="col-sm-offset-2 col-sm-4">
+                        V4
+                    </div>
+                    <div class="col-sm-offset-2 col-sm-4">
+                        V5
+                    </div>
                 </div>
             </div>
-        </div>
+        </div> <!-- #values -->
+
     </section>
 
     <footer>
