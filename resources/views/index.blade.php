@@ -16,33 +16,37 @@
 
 <body>
 
-    <header>
+    <header id="header">
         <div class="container-fruid">
-            
+
             <nav class="navbar navbar-default" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="">DORMITORY</a>
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="">
+                            <img src="public/images/logo.jpg" alt="logo" width="100px">
+                        </a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        <ul class="nav navbar-nav">
+                            <li>KÍ TÚC XÁ LÀ NHÀ - BẠN BÈ LÀ ANH EM</li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">Đăng nhập</a></li>
+                            <li><a href="#">Đăng ký</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
                 </div>
-            
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav">
-                        <li>KÍ TÚC XÁ LÀ NHÀ - BẠN BÈ LÀ ANH EM</li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Đăng nhập</a></li>
-                        <li><a href="#">Đăng ký</a></li>
-                    </ul>
-                </div><!-- /.navbar-collapse -->
             </nav>
-            
+
             <!-- <div class="row">
                 <div class="col-sm-3 text-center">
                     <a href=""><img src="public/images/header-logo.jpg" class="img-circle" width="100px" alt="banner"></a>
@@ -136,6 +140,8 @@
 
     <div class="space-50"></div>
 
+    <span id="scroll-top">2</span>
+
     <footer>
         <div class="container-fruid">
             <div class="row">
@@ -145,12 +151,42 @@
                 <div class="col-sm-3">4</div>
             </div>
         </div>
-    </footer>
+    </footer> <!-- #footer -->
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Scrollable -->
+    <script>
+        window.onscroll = function() {
+            scrollMenu();
+        };
+
+        var header = document.getElementById("header");
+        var sticky = header.offsetTop + 300;
+        var scroller = document.getElementById("scroll-top");
+
+        function scrollMenu() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+            if (window.pageYOffset > sticky + 200) {
+                $('#scroll-top').show();
+            } else {
+                $('#scroll-top').hide();
+            }
+        }
+
+        $("#scroll-top").click(function() {
+            $("html, body").animate({
+                scrollTop: 0
+            }, "slow");
+            $(this).hide();
+        });
+    </script>
 </body>
 
 </html>
