@@ -1,12 +1,5 @@
-header {
-    line-height: 150px;
-    border: 1px solid #555555;
-}
-
-header #sologan {
-    margin-top: 45px;
-    text-align: center;
-    line-height: 100px;
+header .navbar-right {
+    padding-right: 50px;
 }
 
 footer {
