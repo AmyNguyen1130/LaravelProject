@@ -1,0 +1,14 @@
+header {
+    height: 200px;
+    border: 1px solid #555555;
+}
+
+section {
+    height: 500px;
+    border: 1px solid #555555;
+}
+
+footer {
+    height: 300px;
+    border: 1px solid #555555;
+}
