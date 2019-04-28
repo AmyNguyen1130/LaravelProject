@@ -12,6 +12,9 @@
     <link href="public/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="public/css/custom/index.css">
 
+    <!-- Font-Awesome 4.7.0 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 
 <body>
@@ -140,7 +143,7 @@
 
     <div class="space-50"></div>
 
-    <span id="scroll-top">2</span>
+    <i id="scroll-top" class="fa fa-arrow-up fa-lg" aria-hidden="true"></i>
 
     <footer>
         <div class="container-fruid">
@@ -159,32 +162,31 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Scrollable -->
     <script>
-        window.onscroll = function() {
-            scrollMenu();
-        };
+        var lastScrollTop = 0;
 
-        var header = document.getElementById("header");
-        var sticky = header.offsetTop + 300;
-        var scroller = document.getElementById("scroll-top");
+        $(window).scroll(function(event) {
+            var scrollTop = $(this).scrollTop();
 
-        function scrollMenu() {
-            if (window.pageYOffset > sticky) {
-                header.classList.add("sticky");
-            } else {
-                header.classList.remove("sticky");
+            if ($(document).scrollTop() > 150) {
+                if (scrollTop > lastScrollTop) {
+                    $("#header").fadeOut("slow");
+                } else {
+                    $("#header").fadeIn();
+                }
+                lastScrollTop = scrollTop;
             }
-            if (window.pageYOffset > sticky + 200) {
-                $('#scroll-top').show();
+
+            if ($(document).scrollTop() > 500) {
+                $('#scroll-top').fadeIn("slow");
             } else {
-                $('#scroll-top').hide();
+                $('#scroll-top').fadeOut("slow");
             }
-        }
+        });
 
         $("#scroll-top").click(function() {
             $("html, body").animate({
                 scrollTop: 0
             }, "slow");
-            $(this).hide();
         });
     </script>
 </body>
