@@ -11,7 +11,7 @@ class IssusesTableSeeder extends Seeder
 	 */
 	public function run()
 	{
-		DB::table('issuses')->insert([
+		DB::table('issues')->insert([
 			['content' => 'Hư quạt', 'student_id' => 1, 'room_id' => 1],
 			['content' => 'Hư tủ lạnh', 'student_id' => 2, 'room_id' => 2],
 			['content' => 'Hư chốt khóa cửa', 'student_id' => 3, 'room_id' => 3],

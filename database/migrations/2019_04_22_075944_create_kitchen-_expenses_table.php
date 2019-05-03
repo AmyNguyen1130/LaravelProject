@@ -13,11 +13,11 @@ class CreateKitchenExpensesTable extends Migration
      */
     public function up()
     {
-        Schema::create('kitchen-_expenses', function (Blueprint $table) {
+        Schema::create('kitchen_expenses', function (Blueprint $table) {
             $table->increments('id');
             $table->date('time');
             $table->string('item', 100);
-            $table->integer('quatity');
+            $table->integer('quantity');
             $table->integer('price');
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ class CreateKitchenExpensesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kitchen-_expenses');
+        Schema::dropIfExists('kitchen_expenses');
     }
 }

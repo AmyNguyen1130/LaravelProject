@@ -39,7 +39,7 @@ class UsersTableSeeder extends Seeder
             ['code' => 'SV21', 'username' => 'bliry', 'password' => Hash::make('36984'), 'role' => 'student'],
             ['code' => 'SV22', 'username' => 'hangnguyen', 'password' => Hash::make('84576'), 'role' => 'student'],
             ['code' => 'SV23', 'username' => 'xuyennguyen', 'password' => Hash::make('33251'), 'role' => 'student'],
-            ['code' => 'SV24', 'username' => 'dongnguyen', 'password' => Hash::make('54870'), 'role' => 'student'],
+            ['code' => 'SV24', 'username' => 'dongnguyenthi', 'password' => Hash::make('54870'), 'role' => 'student'],
             ['code' => 'SV25', 'username' => 'myhoih', 'password' => Hash::make('01240'), 'role' => 'student'],
             ['code' => 'SV26', 'username' => 'cuongphan', 'password' => Hash::make('52001'), 'role' => 'student'],
             ['code' => 'SV27', 'username' => 'thuho', 'password' => Hash::make('20188'), 'role' => 'student'],
