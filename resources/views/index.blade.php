@@ -12,23 +12,56 @@
     <link href="public/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="public/css/custom/index.css">
 
+    <!-- Font-Awesome 4.7.0 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 
 <body>
 
-    <header>
+    <header id="header">
         <div class="container-fruid">
-            <div class="row">
-                <div class="col-sm-3 text-center">
-                    <img src="public/images/header-logo.jpg" class="img-circle" width="198px" alt="banner">
+
+            <nav class="navbar navbar-default" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="">
+                            <img src="public/images/logo.jpg" alt="logo" width="100px">
+                        </a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        <ul class="nav navbar-nav">
+                            <li>KÍ TÚC XÁ LÀ NHÀ - BẠN BÈ LÀ ANH EM</li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">Đăng nhập</a></li>
+                            <li><a href="#">Đăng ký</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
                 </div>
-                <div class="col-sm-6 text-center">
+            </nav>
+
+            <!-- <div class="row">
+                <div class="col-sm-3 text-center">
+                    <a href=""><img src="public/images/header-logo.jpg" class="img-circle" width="100px" alt="banner"></a>
+                </div>
+                <div class="col-sm-6" id="sologan">
                     <h3>KÍ TÚC XÁ LÀ NHÀ - BẠN BÈ LÀ ANH EM</h3>
                 </div>
                 <div class="col-sm-3 text-center">
-                    <div class="btn btn-default">Login</div>
+                    <button class="btn btn-primary">Đăng nhập</button>
+                    <button class="btn btn-default">Đăng ký</button>
                 </div>
-            </div>
+            </div> -->
         </div>
     </header>
 
@@ -82,29 +115,35 @@
 
         </div> <!-- #slider -->
 
+        <div class="space-50"></div>
+
         <div id="values">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-4">
-                        V1
+                        TRUST
                     </div>
                     <div class="col-sm-4">
-                        V2
+                        RESPONSIBILITY
                     </div>
                     <div class="col-sm-4">
-                        V3
+                        SOLIDARITY
                     </div>
                     <div class="col-sm-offset-2 col-sm-4">
-                        V4
+                        RESPECT
                     </div>
-                    <div class="col-sm-offset-2 col-sm-4">
-                        V5
+                    <div class="col-sm-4">
+                        DEMAND
                     </div>
                 </div>
             </div>
         </div> <!-- #values -->
 
     </section>
+
+    <div class="space-50"></div>
+
+    <i id="scroll-top" class="fa fa-arrow-up fa-lg" aria-hidden="true"></i>
 
     <footer>
         <div class="container-fruid">
@@ -115,12 +154,41 @@
                 <div class="col-sm-3">4</div>
             </div>
         </div>
-    </footer>
+    </footer> <!-- #footer -->
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Scrollable -->
+    <script>
+        var lastScrollTop = 0;
+
+        $(window).scroll(function(event) {
+            var scrollTop = $(this).scrollTop();
+
+            if ($(document).scrollTop() > 150) {
+                if (scrollTop > lastScrollTop) {
+                    $("#header").fadeOut("slow");
+                } else {
+                    $("#header").fadeIn();
+                }
+                lastScrollTop = scrollTop;
+            }
+
+            if ($(document).scrollTop() > 500) {
+                $('#scroll-top').fadeIn("slow");
+            } else {
+                $('#scroll-top').fadeOut("slow");
+            }
+        });
+
+        $("#scroll-top").click(function() {
+            $("html, body").animate({
+                scrollTop: 0
+            }, "slow");
+        });
+    </script>
 </body>
 
 </html>
