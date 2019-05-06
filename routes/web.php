@@ -79,24 +79,24 @@ Route::group(['prefix' => 'admin/'], function () {
             'uses' => 'PagesController@getTableUsers'
         ]);
 
-        Route::get('categories', [
-            'as' => 'admin.tables.categories',
-            'uses' => 'PagesController@getTableCategories'
-        ]);
+        // Route::get('categories', [
+        //     'as' => 'admin.tables.categories',
+        //     'uses' => 'PagesController@getTableCategories'
+        // ]);
 
-        Route::get('products', [
-            'as' => 'admin.tables.products',
-            'uses' => 'PagesController@getTableProducts'
-        ]);
+        // Route::get('products', [
+        //     'as' => 'admin.tables.products',
+        //     'uses' => 'PagesController@getTableProducts'
+        // ]);
 
-        Route::get('orders', [
-            'as' => 'admin.tables.orders',
-            'uses' => 'PagesController@getTableOrders'
-        ]);
+        // Route::get('orders', [
+        //     'as' => 'admin.tables.orders',
+        //     'uses' => 'PagesController@getTableOrders'
+        // ]);
 
-        Route::get('bills', [
-            'as' => 'admin.tables.bills',
-            'uses' => 'PagesController@getTableBills'
-        ]);
+        // Route::get('bills', [
+        //     'as' => 'admin.tables.bills',
+        //     'uses' => 'PagesController@getTableBills'
+        // ]);
     });
 });
