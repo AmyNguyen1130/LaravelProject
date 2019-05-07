@@ -1,8 +1,8 @@
 /* HEADER */
 
 header {
-	position: fixed;
-	top: 0;
+    position: fixed;
+    top: 0;
     width: 100%;
     z-index: 1000;
 }
@@ -23,7 +23,7 @@ header .navbar-default .navbar-toggle {
 
 header .navbar {
     margin-bottom: 1px;
-    background: 0 0 1 0 rgba(0,0,0.5,0.5);
+    background: 0 0 1 0 rgba(0, 0, 0.5, 0.5);
 }
 
 @media (min-width: 768px) {
@@ -62,12 +62,48 @@ section {
 
 /* FOOTER */
 
+/* 
 footer {
-    background: #03b8ff;
+    background: #22bbea !important;
 }
 
 footer .col-sm-3 {
     height: 250px;
+} */
+
+.before-footer {
+    height: 20px;
+    background: #22bbea;
+}
+
+.footer {
+    background: #2b2c31;
+}
+
+.footer a {
+    color: #adadad;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #22bbea;
+}
+
+.footer h4 {
+    color: #ffff;
+}
+
+.footer span {
+    color: #adadad;
+}
+
+.footer hr {
+    border: 1px solid #22bbea;
+}
+
+.title {
+    color: #22bbea;
+    font-weight: 5px;
 }
 
 #values .col-sm-4 {
@@ -79,7 +115,6 @@ footer .col-sm-3 {
 .space-50 {
     height: 50px;
 }
-
 
 /* BREAKPOINT */
 
