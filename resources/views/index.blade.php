@@ -10,58 +10,76 @@
 
     <!-- Bootstrap CSS -->
     <link href="public/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="public/css/custom/index.css">
 
     <!-- Font-Awesome 4.7.0 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="public/css/custom/style.css">
 
 </head>
 
 <body>
 
     <header id="header">
-        <div class="container-fruid">
-
-            <nav class="navbar navbar-default" role="navigation">
-                <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="header-center">
+            <div id="banner">
                 <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="">
-                            <img src="public/images/logo.jpg" alt="logo" width="100px">
-                        </a>
+                    <div class="row">
+                        <div class="col-sm-3 left text-center">
+                            <a href="">
+                                <img src="public/images/logo.jpg" width="130">
+                            </a>
+                        </div>
+                        <div class="col-sm-5 center">
+
+                        </div>
+                        <div class="col-sm-4 right">
+                            <ul class="list-inline">
+                                <li><a href="#">Đăng nhập</a></li>
+                                <li><a href="#">Đăng ký</a></li>
+                            </ul>
+                        </div>
                     </div>
+                </div>
+            </div>
+            <div id="menu-hr">
+                <div class="container-fruid">
+                    <nav class="navbar navbar-default">
+                        <div class="container">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <div class="dropdown">
 
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse navbar-ex1-collapse">
-                        <ul class="nav navbar-nav">
-                            <!-- <li>KÍ TÚC XÁ LÀ NHÀ - BẠN BÈ LÀ ANH EM</li> -->
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#">Đăng nhập</a></li>
-                            <li><a href="#">Đăng ký</a></li>
-                        </ul>
-                    </div><!-- /.navbar-collapse -->
+                                </div>
+                            </div>
+                            <div class="collapse navbar-collapse" id="myNavbar">
+                                <ul class="nav navbar-nav text-uppercase">
+                                    <li class="active"><a href="">Trang Chủ</a></li>
+                                    <li><a href="">Giới Thiệu</a></li>
+                                    <li><a href="">Liên Hệ</a></li>
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li>
+                                        <form method="POST" action="search.php" class="navbar-form">
+                                            <div class="input-group search-box">
+                                                <input type="text" class="form-control" placeholder="Tìm kiếm...">
+                                                <span class="input-group-addon btn btn-primary">
+                                                    <i class="glyphicon glyphicon-search"></i>
+                                                </span>
+                                            </div>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
                 </div>
-            </nav>
-
-            <!-- <div class="row">
-                <div class="col-sm-3 text-center">
-                    <a href=""><img src="public/images/header-logo.jpg" class="img-circle" width="100px" alt="banner"></a>
-                </div>
-                <div class="col-sm-6" id="sologan">
-                    <h3>KÍ TÚC XÁ LÀ NHÀ - BẠN BÈ LÀ ANH EM</h3>
-                </div>
-                <div class="col-sm-3 text-center">
-                    <button class="btn btn-primary">Đăng nhập</button>
-                    <button class="btn btn-default">Đăng ký</button>
-                </div>
-            </div> -->
+            </div>
         </div>
     </header>
 
@@ -137,28 +155,17 @@
     <i id="scroll-top" class="fa fa-arrow-up fa-lg" aria-hidden="true"></i>
 
     <footer>
-        <div class="before-footer">
-
-        </div>
-        <div class="footer">
-            <div class="container">
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                    <h4>GIỚI THIỆU</h4>
-                    <hr>
-                    <p class="title">PASSERELLES NUMERIQUES VIETNAM</p>
-                    <p class="title">Địa chỉ: </p><span>99 Tô Hiến Thành, Sơn Trà, Đà Nẵng</span>
+        <div class="container-fruid">
+            <div class="row">
+                <div class="col-sm-4 text-center">
+                    <h4 class="text-uppercase">Liên Hệ</h4>
+                    <a href=""><img src="public/images/pn-logo.jpg" width="130"></a>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                    <h4>ĐỊA CHỈ LIÊN HỆ</h4>
-                    <hr>
-                    <p class="title">Liên hệ với chúng tôi </p>
-                    <p><a href="#"><span><i class="fa fa-phone"></i></span> 0348 543 343 </a></p>
-                    <p><a href="#"><span><i class="fa fa-envelope-o "></i></span> contactpnv@gmail.com</a></p>
-                    <p><a href="#"><span><i class="fa fa-address-card "></i></span> +84 348 543 343</a></p> <br>
+                <div class="col-sm-4">
+                    <h4 class="text-uppercase">Giới Thiệu</h4>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                    <h4>MẠNG XÃ HỘI</h4>
-                    <hr>
+                <div class="col-sm-4">
+                    <h4 class="text-uppercase">Kết Nối</h4>
                 </div>
             </div>
         </div>
@@ -170,18 +177,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Scrollable -->
     <script>
-        var lastScrollTop = 0;
-
         $(window).scroll(function(event) {
-            var scrollTop = $(this).scrollTop();
-
-            if ($(document).scrollTop() > 150) {
-                if (scrollTop > lastScrollTop) {
-                    $("#header").fadeOut("slow");
-                } else {
-                    $("#header").fadeIn();
-                }
-                lastScrollTop = scrollTop;
+            if ($(document).scrollTop() > $("#menu-hr").scrollTop() + 100) {
+                $("#menu-hr").addClass("sticky");
+            } else {
+                $("#menu-hr").removeClass("sticky");
             }
 
             if ($(document).scrollTop() > 500) {
@@ -197,6 +197,7 @@
             }, "slow");
         });
     </script>
+
 </body>
 
 </html>
