@@ -36,8 +36,8 @@
                         </div>
                         <div class="col-sm-4 right">
                             <ul class="list-inline">
-                                <li><a href="#">Đăng nhập</a></li>
-                                <li><a href="#">Đăng ký</a></li>
+                                <li><a href="#" onclick="$('#login-modal').fadeIn()">Đăng nhập</a></li>
+                                <li><a href="#" onclick="$('#login-modal').fadeIn()">Đăng ký</a></li>
                             </ul>
                         </div>
                     </div>
@@ -84,6 +84,17 @@
     </header>
 
     <section id="main-content">
+
+
+        <div id="login-modal" class="modal">
+
+            <form class="modal-content animate" action="">
+                <div class="header-modal">
+                    <span onclick="$('#login-modal').fadeOut('slow')" class="close" title="Close">&times;</span>
+                </div>
+            </form>
+
+        </div>
 
         <div id="slider">
 
@@ -213,6 +224,14 @@
                 scrollTop: 0
             }, "slow");
         });
+    </script>
+
+    <script>
+        window.onclick = function(event) {
+            if (event.target == $("#login-modal")) {
+                $("#login-modal").fadeOut("slow");
+            }
+        }
     </script>
 
 </body>

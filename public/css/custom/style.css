@@ -1,124 +1,202 @@
 /* HEADER */
 
 header #banner .list-inline li a {
-	text-decoration: none;
-	color: #333;
+    text-decoration: none;
+    color: #333;
 }
 
 header #banner .list-inline li a:hover {
-	color: rgb(218, 185, 0);
+    color: rgb(218, 185, 0);
 }
 
 header #banner .list-inline li {
-	padding: 0 20px;
+    padding: 0 20px;
 }
 
 header #banner ul {
-	margin-top: 38px;
-	margin-left: 120px;
+    margin-top: 38px;
+    margin-left: 120px;
 }
 
 .header-center {
-	height: 157px;
-	width: 100%;
-	position: relative;
+    height: 157px;
+    width: 100%;
+    position: relative;
 }
 
 .header-center .center {
-	height: 100px;
-	line-height: 100%;
+    height: 100px;
+    line-height: 100%;
 }
 
 #banner {
-	height: 100px;
-	width: 100%;
-	background: #FFFFFF;
+    height: 100px;
+    width: 100%;
+    background: #FFFFFF;
 }
 
 #menu-hr {
-	z-index: 1000;
-	clear: both;
-	height: 60px;
-	width: 100%;
+    z-index: 1000;
+    clear: both;
+    height: 60px;
+    width: 100%;
 }
 
 #menu-hr .navbar-brand {
-	height: 55px;
-	color: #FFFFFF;
-	box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.5);
+    height: 55px;
+    color: #FFFFFF;
+    box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.5);
 }
 
 #menu-hr .navbar-brand {
-	font-size: 100%;
+    font-size: 100%;
 }
 
 #menu-hr .navbar-brand:hover, #menu-hr .navbar-brand:focus {
-	background: #dff0d8;
-	color: #111111;
+    background: #dff0d8;
+    color: #111111;
 }
 
 #menu-hr .navbar {
-	z-index: 999;
-	box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.5);
 }
 
 #menu-hr .navbar a {
-	padding: 17px 18px;
-	height: 55px;
+    padding: 17px 18px;
+    height: 55px;
 }
 
 #menu-hr .search-box {
-	padding: 2px 25px;
+    padding: 2px 25px;
 }
 
 #menu-hr .navbar a:hover {
-	color: #111111;
+    color: #111111;
 }
 
 #menu-hr .navbar-default {
-	background: #FFFFFF;
-	color: #333333;
+    background: #FFFFFF;
+    color: #333333;
 }
 
 #menu-hr .navbar li:hover a {
-	color: #111111;
-	background: #dff0d8;
+    color: #111111;
+    background: #dff0d8;
 }
 
 #menu-hr .navbar li:hover .dropdown-menu a {
-	color: #333;
+    color: #333;
 }
 
 #menu-hr .open:hover .user-choice a {
-	background: #FFFFFF;
+    background: #FFFFFF;
 }
 
 #menu-hr .user-choice {
-	top: 101%;
+    top: 101%;
 }
 
 #menu-hr .user-choice li a {
-	height: 30px;
-	padding: 5px 18px;
+    height: 30px;
+    padding: 5px 18px;
 }
 
 #menu-hr .navbar .dropdown-menu i {
-	padding-right: 3px;
+    padding-right: 3px;
 }
 
 #menu-hr .open .user-choice:hover a {
-	color: #111;
+    color: #111;
 }
 
 .sticky {
-	position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: 1000;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 /* CONTENT */
 
+/* MODAL LOGIN */
+
+#login-modal {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    display: none;
+    z-index: 1001;
+    background-color:rgba(0, 0, 0, 0.5);
+}
+
+#login-modal .header-modal {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+
+/* Modal Content/Box */
+
+#login-modal .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    border: 1px solid #888;
+    width: 60%;
+}
+
+#login-modal .close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+#login-modal .close:hover, #login-modal .close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* Add Zoom Animation */
+
+#login-modal .animate {
+    -webkit-animation: animatezoom 0.8s;
+    animation: animatezoom 0.8s
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
+/* Change styles for span and cancel button on extra small screens */
+
+@media screen and (max-width: 300px) {
+    #login-modal span.psw {
+        display: block;
+        float: none;
+    }
+    #login-modal .cancelbtn {
+        width: 100%;
+    }
+}
+
+/* END MODAL LOGIN */
 
 #scroll-top {
     display: none;
@@ -150,49 +228,49 @@ header #banner ul {
 /* SOCIAL */
 
 .social a {
-	height: 100%;
-	width: 100%;
-	color: #333333;
+    height: 100%;
+    width: 100%;
+    color: #333333;
 }
 
 .social li {
-	text-align: center;
-	padding: 0.9em 0.5em;
-	background: #FFFFFF;
-	color: #333333;
-	width: 35px;
-	height: 35px;
-	line-height: 20px;
-	margin-left: 5px;
-	border: 2px solid #e6e6e6;
-	border-radius: 10px;
+    text-align: center;
+    padding: 0.9em 0.5em;
+    background: #FFFFFF;
+    color: #333333;
+    width: 35px;
+    height: 35px;
+    line-height: 20px;
+    margin-left: 5px;
+    border: 2px solid #e6e6e6;
+    border-radius: 10px;
 }
 
 .social li:hover a {
-	color: #FFFFFF;
+    color: #FFFFFF;
 }
 
 .facebook:hover {
-	background: #003d99;
+    background: #003d99;
 }
 
 .twitter:hover {
-	background: #0099ff;
+    background: #0099ff;
 }
 
 .youtube:hover {
-	background: #cc0000;
+    background: #cc0000;
 }
 
 .pinterest:hover {
-	background: #b30000;
+    background: #b30000;
 }
 
 .google-plus:hover {
-	background: #ff3333;
+    background: #ff3333;
 }
-/* FOOTER */
 
+/* FOOTER */
 
 .before-footer {
     height: 20px;
@@ -233,26 +311,20 @@ header #banner ul {
     height: 50px;
 }
 
-
 /* BREAKPOINT */
 
 @media screen and (max-width: 768px) {
-	
-	#scroll-top {
+    #scroll-top {
         right: 45%;
         bottom: 60px;
-	}
-
-	#banner {
-		display: none;
-	}
-	
-	header #menu-hr {
-		display: block;
-	}
-
-	.header-center {
-		height: 52px;
-	}
-
+    }
+    #banner {
+        display: none;
+    }
+    header #menu-hr {
+        display: block;
+    }
+    .header-center {
+        height: 52px;
+    }
 }
