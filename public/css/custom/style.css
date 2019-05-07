@@ -193,9 +193,40 @@ header #banner ul {
 }
 /* FOOTER */
 
-footer {
-    background: #03b8ff;
-    padding: 30px;
+
+.before-footer {
+    height: 20px;
+    background: #22bbea;
+}
+
+.footer {
+    background: #2b2c31;
+}
+
+.footer a {
+    color: #adadad;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #22bbea;
+}
+
+.footer h4 {
+    color: #ffff;
+}
+
+.footer span {
+    color: #adadad;
+}
+
+.footer hr {
+    border: 1px solid #22bbea;
+}
+
+.title {
+    color: #22bbea;
+    font-weight: 5px;
 }
 
 .space-50 {
