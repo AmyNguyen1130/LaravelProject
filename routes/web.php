@@ -100,3 +100,16 @@ Route::group(['prefix' => 'admin/'], function () {
         // ]);
     });
 });
+
+//STUDENT
+
+Route::group(['prefix' => 'student/'], function () {
+
+    Route::get('', [
+        'as' => 'student.pages.index',
+        function () {
+            return view('student.pages.index');
+        }
+    ]);
+
+});
