@@ -100,3 +100,7 @@ Route::group(['prefix' => 'admin/'], function () {
         ]);
     });
 });
+
+Route::get('educator', function(){
+    return view('educator');
+});
