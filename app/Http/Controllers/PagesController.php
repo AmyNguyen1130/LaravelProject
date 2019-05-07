@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\User;
 
 class PagesController extends Controller
 {
@@ -18,6 +19,6 @@ class PagesController extends Controller
     public function getTableUsers()
     {
         $users = User::all();
-        return view('admin.tables.users.users', compact('users'));
+        return view('admin.tables.users', compact('users'));
     }
 }
