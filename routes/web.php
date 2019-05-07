@@ -107,9 +107,7 @@ Route::group(['prefix' => 'student/'], function () {
 
     Route::get('', [
         'as' => 'student.pages.index',
-        function () {
-            return view('student.pages.index');
-        }
+        'uses' => 'StudentController@getIndex'
     ]);
 
 });

@@ -119,32 +119,31 @@ header #banner ul {
 
 /* CONTENT */
 
-
 #scroll-top {
-    display: none;
-    position: fixed;
-    z-index: 99999;
-    right: 100px;
-    bottom: 70px;
-    padding: 10px;
-    -webkit-border-top-left-radius: 10px;
-    -moz-border-radius-topleft: 10px;
-    border-top-left-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius-bottomleft: 10px;
-    border-radius: 5px;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.4);
-    font-size: 28px;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
+	display: none;
+	position: fixed;
+	z-index: 99999;
+	right: 100px;
+	bottom: 70px;
+	padding: 10px;
+	-webkit-border-top-left-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	border-top-left-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	border-radius: 5px;
+	color: #fff;
+	background: rgba(0, 0, 0, 0.4);
+	font-size: 28px;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 #values .col-sm-4 {
-    height: 300px;
-    text-align: center;
-    line-height: 300px;
+	height: 300px;
+	text-align: center;
+	line-height: 300px;
 }
 
 /* SOCIAL */
@@ -191,68 +190,94 @@ header #banner ul {
 .google-plus:hover {
 	background: #ff3333;
 }
+
 /* FOOTER */
 
-
 .before-footer {
-    height: 20px;
-    background: #22bbea;
+	height: 20px;
+	background: #22bbea;
 }
 
 .footer {
-    background: #2b2c31;
+	background: #2b2c31;
 }
 
 .footer a {
-    color: #adadad;
-    text-decoration: none;
+	color: #adadad;
+	text-decoration: none;
 }
 
 .footer a:hover {
-    color: #22bbea;
+	color: #22bbea;
 }
 
 .footer h4 {
-    color: #ffff;
+	color: #ffff;
 }
 
 .footer span {
-    color: #adadad;
+	color: #adadad;
 }
 
 .footer hr {
-    border: 1px solid #22bbea;
+	border: 1px solid #22bbea;
 }
 
 .title {
-    color: #22bbea;
-    font-weight: 5px;
+	color: #22bbea;
+	font-weight: 5px;
 }
 
 .space-50 {
-    height: 50px;
+	height: 50px;
 }
-
 
 /* BREAKPOINT */
 
 @media screen and (max-width: 768px) {
-	
 	#scroll-top {
-        right: 45%;
-        bottom: 60px;
+		right: 45%;
+		bottom: 60px;
 	}
-
 	#banner {
 		display: none;
 	}
-	
 	header #menu-hr {
 		display: block;
 	}
-
 	.header-center {
 		height: 52px;
 	}
+}
 
+/* STUDENT */
+
+.box-product-head {
+	height: 31px;
+	border-bottom: 2px solid #22bbea;
+	margin-top: 100px;
+	margin-bottom: 50px;
+}
+
+.box-product-head .box-title {
+	color: #fff;
+	/*text-transform: uppercase;*/
+	border-bottom: 0px solid #ff3300;
+	font-size: 18px;
+	padding: 10px 20px 8px 15px;
+	background: #22bbea;
+}
+
+.box-product-head .box-title a {
+	color: #ffffff;
+}
+
+.box-product-head>span.af-ter {
+	border: 19px solid #22bbea;
+	border-right-color: transparent;
+	border-top-color: transparent;
+	height: 30px;
+	position: absolute;
+	width: 30px;
+	margin-top: -7px;
 }

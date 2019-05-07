@@ -1,33 +1,26 @@
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- Scrollable -->
-    <script>
-        var lastScrollTop = 0;
+  <!-- Bootstrap JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- Scrollable -->
+  <script>
+      $(window).scroll(function(event) {
+          if ($(document).scrollTop() > $("#menu-hr").scrollTop() + 100) {
+              $("#menu-hr").addClass("sticky");
+          } else {
+              $("#menu-hr").removeClass("sticky");
+          }
 
-        $(window).scroll(function(event) {
-            var scrollTop = $(this).scrollTop();
+          if ($(document).scrollTop() > 500) {
+              $('#scroll-top').fadeIn("slow");
+          } else {
+              $('#scroll-top').fadeOut("slow");
+          }
+      });
 
-            if ($(document).scrollTop() > 150) {
-                if (scrollTop > lastScrollTop) {
-                    $("#header").fadeOut("slow");
-                } else {
-                    $("#header").fadeIn();
-                }
-                lastScrollTop = scrollTop;
-            }
-
-            if ($(document).scrollTop() > 500) {
-                $('#scroll-top').fadeIn("slow");
-            } else {
-                $('#scroll-top').fadeOut("slow");
-            }
-        });
-
-        $("#scroll-top").click(function() {
-            $("html, body").animate({
-                scrollTop: 0
-            }, "slow");
-        });
-    </script>
+      $("#scroll-top").click(function() {
+          $("html, body").animate({
+              scrollTop: 0
+          }, "slow");
+      });
+  </script>
