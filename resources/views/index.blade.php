@@ -36,8 +36,8 @@
                         </div>
                         <div class="col-sm-4 right">
                             <ul class="list-inline">
-                                <li><a href="#" onclick="$('#login-modal').fadeIn()">Đăng nhập</a></li>
-                                <li><a href="#" onclick="$('#login-modal').fadeIn()">Đăng ký</a></li>
+                                <li><a href="#login-form" onclick="login()">Đăng nhập</a></li>
+                                <li><a href="#signup-form" onclick="signup()">Đăng ký</a></li>
                             </ul>
                         </div>
                     </div>
@@ -88,11 +88,57 @@
 
         <div id="login-modal" class="modal">
 
-            <form class="modal-content animate" action="">
+            <div class="modal-content animate">
                 <div class="header-modal">
-                    <span onclick="$('#login-modal').fadeOut('slow')" class="close" title="Close">&times;</span>
+                    <span onclick="$('#login-modal').fadeOut('slow');" class="close" title="Close">&times;</span>
                 </div>
-            </form>
+
+                <ul role="tablist" class="nav nav-tabs">
+                    <li id="login-title" class="active text-uppercase">
+                        <a href="#login-form" data-toggle="tab" aria-expanded="false">Đăng Nhập</a>
+                    </li>
+                    <li id="signup-title" class="text-uppercase">
+                        <a href="#signup-form" data-toggle="tab" aria-expanded="false">Đăng Ký</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+
+                    <div class="tab-pane active in" id="login-form">
+                        <div class="form">
+                            <legend></legend>
+
+                            <div class="form-group">
+                                <input type="email" class="form-control" name="email" placeholder="Địa chỉ email..." required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="password" placeholder="Mật khẩu..." required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="signup-form">
+                        <div class="form">
+                            <legend></legend>
+
+                            <div class="form-group">
+                                <input type="email" class="form-control" name="email" placeholder="Địa chỉ email..." required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="password" placeholder="Mật khẩu..." required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Đăng Ký</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -232,8 +278,27 @@
                 $("#login-modal").fadeOut("slow");
             }
         }
-    </script>
 
+        function login() {
+            $('#login-form').addClass('active');
+            $('#login-form').addClass('in');
+            $('#signup-form').removeClass('active');
+            $('#signup-form').removeClass('in');
+            $('#login-title').addClass('active');
+            $('#signup-title').removeClass('active');
+            $('#login-modal').show();
+        }
+
+        function signup() {
+            $('#login-form').removeClass('active');
+            $('#login-form').removeClass('in');
+            $('#signup-form').addClass('active');
+            $('#signup-form').addClass('in');
+            $('#login-title').removeClass('active');
+            $('#signup-title').addClass('active');
+            $('#login-modal').show();
+        }
+    </script>
 </body>
 
 </html>

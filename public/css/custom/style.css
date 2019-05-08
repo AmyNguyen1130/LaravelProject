@@ -142,7 +142,12 @@ header #banner ul {
     background-color: #fefefe;
     margin: 5% auto 15% auto;
     border: 1px solid #888;
-    width: 60%;
+    width: 50%;
+}
+
+#login-modal .form {
+    padding: 30px;
+    background: #22bbea;
 }
 
 #login-modal .close {
