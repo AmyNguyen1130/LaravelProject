@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,45 +20,9 @@ Route::get('/', [
 
 Route::group(['prefix' => ''], function () {
 
-    Route::get('products', [
-        'as' => 'products',
-        'uses' => 'PagesController@getProducts'
-    ]);
-
-    Route::get('product-type/{id}', [
-        'as' => 'product-type',
-        'uses' => 'PagesController@getProductType'
-    ]);
-
-    Route::get('product-detail/{id}', [
-        'as' => 'product-detail',
-        'uses' => 'PagesController@getProductDetail'
-    ]);
-
-    Route::get('contact', [
-        'as' => 'contact',
-        'uses' => 'PagesController@getContact'
-    ]);
-
-    Route::get('about', [
-        'as' => 'about',
-        'uses' => 'PagesController@getAbout'
-    ]);
-
-    // CART
-    Route::get('add-to-cart/{id}', [
-        'as' => 'add-to-cart',
-        'uses' => 'PagesController@getAddToCart'
-    ]);
-
-    Route::get('delete-from-cart/{id}', [
-        'as' => 'delete-from-cart',
-        'uses' => 'PagesController@getDeleteFromCart'
-    ]);
-
-    Route::get('checkout', [
-        'as' => 'checkout',
-        'uses' => 'PagesController@getCheckout'
+    Route::post('login', [
+        'as' => 'login',
+        'uses' => 'PagesController@checkLogin'
     ]);
     
 });

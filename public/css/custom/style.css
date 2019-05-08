@@ -6,7 +6,7 @@ header #banner .list-inline li a {
 }
 
 header #banner .list-inline li a:hover {
-    color: rgb(218, 185, 0);
+    color: rgb(236, 166, 14);
 }
 
 header #banner .list-inline li {
@@ -16,6 +16,11 @@ header #banner .list-inline li {
 header #banner ul {
     margin-top: 38px;
     margin-left: 120px;
+}
+
+header #menu-hr .navbar-default .navbar-nav .active a {
+    color: rgb(236, 166, 14);
+    background: rgba(250, 247, 247, 0.966);
 }
 
 .header-center {
@@ -42,19 +47,8 @@ header #banner ul {
     width: 100%;
 }
 
-#menu-hr .navbar-brand {
-    height: 55px;
-    color: #FFFFFF;
-    box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.5);
-}
-
-#menu-hr .navbar-brand {
-    font-size: 100%;
-}
-
-#menu-hr .navbar-brand:hover, #menu-hr .navbar-brand:focus {
-    background: #dff0d8;
-    color: #111111;
+header #menu-hr .navbar-default #collapse-menu {
+    display: none;
 }
 
 #menu-hr .navbar {
@@ -71,18 +65,13 @@ header #banner ul {
     padding: 2px 25px;
 }
 
-#menu-hr .navbar a:hover {
-    color: #111111;
-}
-
 #menu-hr .navbar-default {
     background: #FFFFFF;
     color: #333333;
 }
 
 #menu-hr .navbar li:hover a {
-    color: #111111;
-    background: #dff0d8;
+    color: rgb(236, 166, 14);
 }
 
 #menu-hr .navbar li:hover .dropdown-menu a {
@@ -125,14 +114,14 @@ header #banner ul {
     position: fixed;
     height: 100%;
     width: 100%;
-    display: none;
+    display: block;
     z-index: 1001;
-    background-color:rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 #login-modal .header-modal {
     text-align: center;
-    margin: 24px 0 12px 0;
+    margin: 24px 0 10px 0;
     position: relative;
 }
 
@@ -140,20 +129,20 @@ header #banner ul {
 
 #login-modal .modal-content {
     background-color: #fefefe;
-    margin: 5% auto 15% auto;
+    margin: 10% auto 15% auto;
     border: 1px solid #888;
-    width: 50%;
+    width: 40%;
 }
 
 #login-modal .form {
-    padding: 30px;
+    padding: 30px 60px 80px 60px;
     background: #22bbea;
 }
 
 #login-modal .close {
     position: absolute;
     right: 25px;
-    top: 0;
+    top: -5px;
     color: #000;
     font-size: 35px;
     font-weight: bold;
@@ -169,6 +158,20 @@ header #banner ul {
 #login-modal .animate {
     -webkit-animation: animatezoom 0.8s;
     animation: animatezoom 0.8s
+}
+
+#login-modal ul .active a {
+    color: rgb(236, 166, 14);
+}
+
+#login-modal ul li {
+    height: 30px;
+    line-height: 30px;
+    width: 40%;
+}
+
+#login-modal ul li a {
+    text-decoration: none;
 }
 
 @-webkit-keyframes animatezoom {
@@ -331,5 +334,27 @@ header #banner ul {
     }
     .header-center {
         height: 52px;
+    }
+    #login-modal .modal-content {
+        margin: 35% auto 35% auto;
+        width: 80%;
+    }
+    header #menu-hr .navbar-default .navbar-nav .active a {
+        color: rgb(236, 166, 14);
+        background: rgba(250, 247, 247, 0.966);
+    }
+    header #menu-hr .navbar-toggle {
+        z-index: 100;
+    }
+    header #menu-hr .navbar-default #collapse-menu {
+        display: block;
+    }
+    header #menu-hr #collapse-menu li a {
+        color: #333;
+        background: #FFFFFF;
+        width: 140px;
+    }
+    header #menu-hr #collapse-menu li a:hover {
+        color: rgb(236, 166, 14);
     }
 }

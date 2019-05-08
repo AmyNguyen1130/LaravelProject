@@ -53,9 +53,10 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-                                <div class="dropdown">
-
-                                </div>
+                                <ul id="collapse-menu" class="nav list-inline">
+                                    <li class="text-uppercase"><a href="#login-form" onclick="login()">Đăng nhập</a></li>
+                                    <!-- <li class="text-uppercase"><a href="#signup-form" onclick="signup()">Đăng ký</a></li> -->
+                                </ul>
                             </div>
                             <div class="collapse navbar-collapse" id="myNavbar">
                                 <ul class="nav navbar-nav text-uppercase">
@@ -63,6 +64,7 @@
                                     <li><a href="">Giới Thiệu</a></li>
                                     <li><a href="">Liên Hệ</a></li>
                                 </ul>
+
                                 <ul class="nav navbar-nav navbar-right">
                                     <li>
                                         <form method="POST" action="search.php" class="navbar-form">
@@ -93,46 +95,56 @@
                     <span onclick="$('#login-modal').fadeOut('slow');" class="close" title="Close">&times;</span>
                 </div>
 
-                <ul role="tablist" class="nav nav-tabs">
-                    <li id="login-title" class="active text-uppercase">
-                        <a href="#login-form" data-toggle="tab" aria-expanded="false">Đăng Nhập</a>
-                    </li>
-                    <li id="signup-title" class="text-uppercase">
-                        <a href="#signup-form" data-toggle="tab" aria-expanded="false">Đăng Ký</a>
-                    </li>
-                </ul>
+                <div class="text-center">
+                    <ul role="tablist" class="list-inline">
+                        <li id="login-title" class="active text-uppercase">
+                            <a href="#login-form" data-toggle="tab" aria-expanded="false">Đăng Nhập</a>
+                        </li>
+                        <li id="signup-title" class="text-uppercase">
+                            <a href="#signup-form" data-toggle="tab" aria-expanded="false">Đăng Ký</a>
+                        </li>
+                    </ul>
+                </div>
 
                 <div class="tab-content">
 
                     <div class="tab-pane active in" id="login-form">
                         <div class="form">
-                            <legend></legend>
+                            <form action="login" method="POST">
+                                <legend></legend>
+                                {{ csrf_field() }}
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="email" placeholder="Địa chỉ email..." required>
+                                </div>
 
-                            <div class="form-group">
-                                <input type="email" class="form-control" name="email" placeholder="Địa chỉ email..." required>
-                            </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="password" placeholder="Mật khẩu..." required>
+                                </div>
 
-                            <div class="form-group">
-                                <input type="password" class="form-control" name="password" placeholder="Mật khẩu..." required>
-                            </div>
+                                <div class="form-group">
+                                    <p>Bạn <a style="color: #FFFFFF; text-decoration: none" href="#signup-form" onclick="signup()">Chưa có tài khoản</a> hoặc <a style="color: #FFFFFF; text-decoration: none" href="forgot-password">Quên mật khẩu</a>?</p>
+                                </div>
 
-                            <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+                                <button type="submit" class="btn btn-primary col-xs-12">Đăng Nhập</button>
+                            </form>
                         </div>
                     </div>
 
                     <div class="tab-pane fade" id="signup-form">
                         <div class="form">
-                            <legend></legend>
+                            <form action="" method="POST">
+                                <legend></legend>
 
-                            <div class="form-group">
-                                <input type="email" class="form-control" name="email" placeholder="Địa chỉ email..." required>
-                            </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="email" placeholder="Địa chỉ email..." required>
+                                </div>
 
-                            <div class="form-group">
-                                <input type="password" class="form-control" name="password" placeholder="Mật khẩu..." required>
-                            </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="password" placeholder="Mật khẩu..." required>
+                                </div>
 
-                            <button type="submit" class="btn btn-primary">Đăng Ký</button>
+                                <button type="submit" class="btn btn-primary col-xs-12">Đăng Ký</button>
+                            </form>
                         </div>
                     </div>
 
@@ -273,12 +285,6 @@
     </script>
 
     <script>
-        window.onclick = function(event) {
-            if (event.target == $("#login-modal")) {
-                $("#login-modal").fadeOut("slow");
-            }
-        }
-
         function login() {
             $('#login-form').addClass('active');
             $('#login-form').addClass('in');
