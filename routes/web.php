@@ -22,7 +22,7 @@ Route::group(['prefix' => ''], function () {
 
     Route::post('login', [
         'as' => 'login',
-        'uses' => 'PagesController@checkLogin'
+        'uses' => 'LoginController@checkLogin'
     ]);
     
 });

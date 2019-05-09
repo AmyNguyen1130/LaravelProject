@@ -131,7 +131,7 @@ header #menu-hr .navbar-default #collapse-menu {
     background-color: #fefefe;
     margin: 10% auto 15% auto;
     border: 1px solid #888;
-    width: 40%;
+    width: 35%;
 }
 
 #login-modal .form {
@@ -338,6 +338,9 @@ header #menu-hr .navbar-default #collapse-menu {
     #login-modal .modal-content {
         margin: 35% auto 35% auto;
         width: 80%;
+    }
+    #login-modal .form {
+        padding: 30px 30px 80px 30px;
     }
     header #menu-hr .navbar-default .navbar-nav .active a {
         color: rgb(236, 166, 14);

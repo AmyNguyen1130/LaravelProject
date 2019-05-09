@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Title Page</title>
     <base href="{{ asset('') }}">
 
@@ -36,8 +37,8 @@
                         </div>
                         <div class="col-sm-4 right">
                             <ul class="list-inline">
-                                <li><a href="#login-form" onclick="login()">Đăng nhập</a></li>
-                                <li><a href="#signup-form" onclick="signup()">Đăng ký</a></li>
+                                <li><a href="#login-form" onclick="loginControl()">Đăng nhập</a></li>
+                                <li><a href="#signup-form" onclick="signupControl()">Đăng ký</a></li>
                             </ul>
                         </div>
                     </div>
@@ -54,8 +55,8 @@
                                     <span class="icon-bar"></span>
                                 </button>
                                 <ul id="collapse-menu" class="nav list-inline">
-                                    <li class="text-uppercase"><a href="#login-form" onclick="login()">Đăng nhập</a></li>
-                                    <!-- <li class="text-uppercase"><a href="#signup-form" onclick="signup()">Đăng ký</a></li> -->
+                                    <li class="text-uppercase"><a href="#login-form" onclick="loginControl()">Đăng nhập</a></li>
+                                    <!-- <li class="text-uppercase"><a href="#signup-form" onclick="signupControl()">Đăng ký</a></li> -->
                                 </ul>
                             </div>
                             <div class="collapse navbar-collapse" id="myNavbar">
@@ -110,22 +111,37 @@
 
                     <div class="tab-pane active in" id="login-form">
                         <div class="form">
+                            <!-- START VALIDATION LOGIN MESSAGE -->
+
+                            <div class="alert alert-danger error errorLogin" style="display: none;">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <p style="color:red; display:none;" class="error errorLogin"></p>
+                            </div>
+
+                            <!-- END VALIDATION LOGIN MESSAGE -->
+
                             <form action="login" method="POST">
                                 <legend></legend>
-                                {{ csrf_field() }}
+                                <!-- {{ csrf_field() }} -->
                                 <div class="form-group">
-                                    <input type="email" class="form-control" name="email" placeholder="Địa chỉ email..." required>
+                                    <input type="email" class="form-control" id="email" placeholder="Địa chỉ email..." value="{{old('email')}}" required>
+                                    <p class="text-danger error errorEmail"></p>
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="password" class="form-control" name="password" placeholder="Mật khẩu..." required>
+                                    <input type="password" class="form-control" id="password" placeholder="Mật khẩu..." value="" required>
+                                    <p class="text-danger error errorPassword"></p>
                                 </div>
 
                                 <div class="form-group">
-                                    <p>Bạn <a style="color: #FFFFFF; text-decoration: none" href="#signup-form" onclick="signup()">Chưa có tài khoản</a> hoặc <a style="color: #FFFFFF; text-decoration: none" href="forgot-password">Quên mật khẩu</a>?</p>
+                                    <input type="checkbox" name="remember"> Ghi nhớ mật khẩu
                                 </div>
 
-                                <button type="submit" class="btn btn-primary col-xs-12">Đăng Nhập</button>
+                                <div class="form-group">
+                                    <p>Bạn <a style="color: #FFFFFF; text-decoration: none" href="#signup-form" onclick="signupControl()">Chưa có tài khoản</a> hoặc <a style="color: #FFFFFF; text-decoration: none" href="forgot-password">Quên mật khẩu</a>?</p>
+                                </div>
+
+                                <button type="button" id="btn-login" class="btn btn-primary col-xs-12">Đăng Nhập</button>
                             </form>
                         </div>
                     </div>
@@ -143,7 +159,7 @@
                                     <input type="password" class="form-control" name="password" placeholder="Mật khẩu..." required>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary col-xs-12">Đăng Ký</button>
+                                <button type="submit" id="btn-signup" class="btn btn-primary col-xs-12">Đăng Ký</button>
                             </form>
                         </div>
                     </div>
@@ -284,8 +300,9 @@
         });
     </script>
 
+    <!-- Control Login/ Signup -->
     <script>
-        function login() {
+        function loginControl() {
             $('#login-form').addClass('active');
             $('#login-form').addClass('in');
             $('#signup-form').removeClass('active');
@@ -295,7 +312,7 @@
             $('#login-modal').show();
         }
 
-        function signup() {
+        function signupControl() {
             $('#login-form').removeClass('active');
             $('#login-form').removeClass('in');
             $('#signup-form').addClass('active');
@@ -304,6 +321,43 @@
             $('#signup-title').addClass('active');
             $('#login-modal').show();
         }
+
+        $(document).ready(function() {
+            $('#btn-login').click(function(e) {
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    'type': 'POST',
+                    'url': 'login',
+                    'data': {
+                        'email': $('#email').val(),
+                        'password': $('#password').val(),
+                        '_token': $(this).data('token')
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        if (data.error == true) {
+                            $('.error').hide();
+                            if (data.message.email != undefined) {
+                                $('.errorEmail').show().text(data.message.email[0]);
+                            }
+                            if (data.message.password != undefined) {
+                                $('.errorPassword').show().text(data.message.password[0]);
+                            }
+                            if (data.message.errorlogin != undefined) {
+                                $('.errorLogin').show().text(data.message.errorlogin[0]);
+                            }
+                        } else {
+                            window.location.href = "http://localhost/loginerror"
+                        }
+                    }
+                });
+            })
+        });
     </script>
 </body>
 
