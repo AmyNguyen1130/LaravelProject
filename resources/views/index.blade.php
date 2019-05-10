@@ -138,7 +138,7 @@
 								</div>
 
 								<div class="form-group">
-									<p>Bạn <a style="color: #FFFFFF; text-decoration: none" href="#signup-form" onclick="signupControl()">chưa có tài khoản</a> hoặc <a style="color: #FFFFFF; text-decoration: none" href="forgot-password">quên mật khẩu</a>?</p>
+									<p>Bạn <a style="color: #FFFFFF; text-decoration: none; cursor: pointer" onclick="signupControl()">chưa có tài khoản</a> hoặc <a style="color: #FFFFFF; text-decoration: none" href="forgot-password">quên mật khẩu</a>?</p>
 								</div>
 
 								<button type="button" id="btn-login" class="btn btn-primary col-xs-12">Đăng Nhập</button>
@@ -148,44 +148,27 @@
 
 					<div class="tab-pane fade" id="signup-form">
 						<div class="form">
-							<form method="post" novalidate>
-								<div id="msform">
-									<!-- progressbar -->
-									<ul id="progressbar">
-										<li class="active">Account Setup</li>
-										<li>Social Profiles</li>
-										<li>Personal Details</li>
-									</ul>
-									<!-- fieldsets -->
-									<fieldset>
-										<h2 class="fs-title">Create your account</h2>
-										<h3 class="fs-subtitle">This is step 1</h3>
-										<input type="text" name="email" placeholder="Email" />
-										<input type="password" name="pass" placeholder="Password" />
-										<input type="password" name="cpass" placeholder="Confirm Password" />
-										<input type="button" name="next" class="next action-button" value="Next" />
-									</fieldset>
-									<fieldset>
-										<h2 class="fs-title">Social Profiles</h2>
-										<h3 class="fs-subtitle">Your presence on the social network</h3>
-										<input type="text" name="twitter" placeholder="Twitter" />
-										<input type="text" name="facebook" placeholder="Facebook" />
-										<input type="text" name="gplus" placeholder="Google Plus" />
-										<input type="button" name="previous" class="previous action-button" value="Previous" />
-										<input type="button" name="next" class="next action-button" value="Next" />
-									</fieldset>
-									<fieldset>
-										<h2 class="fs-title">Personal Detail</h2>
-										<h3 class="fs-subtitle">We will never sell it</h3>
-										<input type="text" name="fname" placeholder="First Name" />
-										<input type="text" name="lname" placeholder="Last Name" />
-										<input type="text" name="phone" placeholder="Phone" />
-										<textarea name="address" placeholder="Address"></textarea>
-										<input type="button" name="previous" class="previous action-button" value="Previous" />
-										<input type="submit" name="submit" class="submit action-button" value="Submit" />
-									</fieldset>
+
+							<form action="" method="POST" role="form">
+								<div id="progress-bar">
+
+								</div>
+								<legend></legend>
+
+								<div class="form-group">
+									<input type="text" class="form-control" id="email" placeholder="Nhập địa chỉ email...">
+								</div>
+
+								<div class="form-group">
+									<input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu...">
+								</div>
+
+								<div class="text-center">
+									<!-- <button type="button" id="btn-previous" class="btn btn-default col-sm-6 hide"> Quay lại </button> -->
+									<button type="button" id="btn-next" class="btn btn-primary col-sm-6"> Tiếp </button>
 								</div>
 							</form>
+
 						</div>
 					</div>
 
