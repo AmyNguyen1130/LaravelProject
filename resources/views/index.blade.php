@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Title Page</title>
     <base href="{{ asset('') }}">
 
@@ -36,8 +37,8 @@
                         </div>
                         <div class="col-sm-4 right">
                             <ul class="list-inline">
-                                <li><a href="#">Đăng nhập</a></li>
-                                <li><a href="#">Đăng ký</a></li>
+                                <li><a href="#login-form" onclick="loginControl()">Đăng nhập</a></li>
+                                <li><a href="#signup-form" onclick="signupControl()">Đăng ký</a></li>
                             </ul>
                         </div>
                     </div>
@@ -53,9 +54,10 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-                                <div class="dropdown">
-
-                                </div>
+                                <ul id="collapse-menu" class="nav list-inline">
+                                    <li class="text-uppercase"><a href="#login-form" onclick="loginControl()">Đăng nhập</a></li>
+                                    <!-- <li class="text-uppercase"><a href="#signup-form" onclick="signupControl()">Đăng ký</a></li> -->
+                                </ul>
                             </div>
                             <div class="collapse navbar-collapse" id="myNavbar">
                                 <ul class="nav navbar-nav text-uppercase">
@@ -63,6 +65,7 @@
                                     <li><a href="">Giới Thiệu</a></li>
                                     <li><a href="">Liên Hệ</a></li>
                                 </ul>
+
                                 <ul class="nav navbar-nav navbar-right">
                                     <li>
                                         <form method="POST" action="search.php" class="navbar-form">
@@ -84,6 +87,88 @@
     </header>
 
     <section id="main-content">
+
+
+        <div id="login-modal" class="modal">
+
+            <div class="modal-content animate">
+                <div class="header-modal">
+                    <span onclick="$('#login-modal').fadeOut('slow');" class="close" title="Close">&times;</span>
+                </div>
+
+                <div class="text-center">
+                    <ul role="tablist" class="list-inline">
+                        <li id="login-title" class="active text-uppercase">
+                            <a href="#login-form" data-toggle="tab" aria-expanded="false">Đăng Nhập</a>
+                        </li>
+                        <li id="signup-title" class="text-uppercase">
+                            <a href="#signup-form" data-toggle="tab" aria-expanded="false">Đăng Ký</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-content">
+
+                    <div class="tab-pane active in" id="login-form">
+                        <div class="form">
+                            <!-- START VALIDATION LOGIN MESSAGE -->
+
+                            <div class="alert alert-danger error errorLogin" style="display: none;">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <p style="color:red; display:none;" class="error errorLogin"></p>
+                            </div>
+
+                            <!-- END VALIDATION LOGIN MESSAGE -->
+
+                            <form action="login" method="POST">
+                                <legend></legend>
+                                <!-- {{ csrf_field() }} -->
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="email" placeholder="Địa chỉ email..." value="{{old('email')}}" required>
+                                    <p class="text-danger error errorEmail"></p>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="password" class="form-control" id="password" placeholder="Mật khẩu..." value="" required>
+                                    <p class="text-danger error errorPassword"></p>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="checkbox" name="remember"> Ghi nhớ mật khẩu
+                                </div>
+
+                                <div class="form-group">
+                                    <p>Bạn <a style="color: #FFFFFF; text-decoration: none" href="#signup-form" onclick="signupControl()">Chưa có tài khoản</a> hoặc <a style="color: #FFFFFF; text-decoration: none" href="forgot-password">Quên mật khẩu</a>?</p>
+                                </div>
+
+                                <button type="button" id="btn-login" class="btn btn-primary col-xs-12">Đăng Nhập</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="signup-form">
+                        <div class="form">
+                            <form action="" method="POST">
+                                <legend></legend>
+
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="email" placeholder="Địa chỉ email..." required>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="password" placeholder="Mật khẩu..." required>
+                                </div>
+
+                                <button type="submit" id="btn-signup" class="btn btn-primary col-xs-12">Đăng Ký</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
         <div id="slider">
 
@@ -155,20 +240,37 @@
     <i id="scroll-top" class="fa fa-arrow-up fa-lg" aria-hidden="true"></i>
 
     <footer>
-        <div class="container-fruid">
-            <div class="row">
-                <div class="col-sm-4 text-center">
-                    <h4 class="text-uppercase">Liên Hệ</h4>
-                    <a href=""><img src="public/images/pn-logo.jpg" width="130"></a>
+        <div class="before-footer">
+
+        </div>
+        <div class="footer">
+            <div class="container">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                    <h4>GIỚI THIỆU</h4>
+                    <hr>
+                    <p class="title">PASSERELLES NUMERIQUES VIETNAM</p>
+                    <p class="title">Địa chỉ: </p>
+                    <a href="https://www.google.com/maps/place/99+T%C3%B4+Hi%E1%BA%BFn+Th%C3%A0nh,+Ph%C6%B0%E1%BB%9Bc+M%E1%BB%B9,+S%C6%A1n+Tr%C3%A0,+%C4%90%C3%A0+N%E1%BA%B5ng+550000,+Vietnam/@16.0597632,108.2414633,17z/data=!3m1!4b1!4m5!3m4!1s0x3142177f2ced6d8b:0xeac35f2960ca74a4!8m2!3d16.0597966!4d108.2434978" target="_blank">
+                        <span>99 Tô Hiến Thành, Sơn Trà, Đà Nẵng</span>
+                    </a>
                 </div>
-                <div class="col-sm-4">
-                    <h4 class="text-uppercase">Giới Thiệu</h4>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                    <h4>ĐỊA CHỈ LIÊN HỆ</h4>
+                    <hr>
+                    <p class="title">Liên hệ với chúng tôi </p>
+                    <p><a href="mailto:ngoctai.dev@gmail.com"><span><i class="fa fa-envelope-o "></i></span> ngoctai.dev@gmail.com</a></p>
+                    <p><a href="tel:(+84) 348 543 343"><span><i class="fa fa-address-card "></i></span> (+84) 348 543 343</a></p> <br>
                 </div>
-                <div class="col-sm-4">
-                    <h4 class="text-uppercase">Kết Nối</h4>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                    <h4>MẠNG XÃ HỘI</h4>
+                    <hr>
+                    <p class="title">Facebook:</p>
+                    <p class="title">Youtube:</p>
+                    <p class="title">Google+:</p>
                 </div>
             </div>
         </div>
+
     </footer> <!-- #footer -->
 
     <!-- jQuery -->
@@ -198,6 +300,65 @@
         });
     </script>
 
+    <!-- Control Login/ Signup -->
+    <script>
+        function loginControl() {
+            $('#login-form').addClass('active');
+            $('#login-form').addClass('in');
+            $('#signup-form').removeClass('active');
+            $('#signup-form').removeClass('in');
+            $('#login-title').addClass('active');
+            $('#signup-title').removeClass('active');
+            $('#login-modal').show();
+        }
+
+        function signupControl() {
+            $('#login-form').removeClass('active');
+            $('#login-form').removeClass('in');
+            $('#signup-form').addClass('active');
+            $('#signup-form').addClass('in');
+            $('#login-title').removeClass('active');
+            $('#signup-title').addClass('active');
+            $('#login-modal').show();
+        }
+
+        $(document).ready(function() {
+            $('#btn-login').click(function(e) {
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    'type': 'POST',
+                    'url': 'login',
+                    'data': {
+                        'email': $('#email').val(),
+                        'password': $('#password').val(),
+                        '_token': $(this).data('token')
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        if (data.error == true) {
+                            $('.error').hide();
+                            if (data.message.email != undefined) {
+                                $('.errorEmail').show().text(data.message.email[0]);
+                            }
+                            if (data.message.password != undefined) {
+                                $('.errorPassword').show().text(data.message.password[0]);
+                            }
+                            if (data.message.errorlogin != undefined) {
+                                $('.errorLogin').show().text(data.message.errorlogin[0]);
+                            }
+                        } else {
+                            window.location.href = "http://localhost/loginerror"
+                        }
+                    }
+                });
+            })
+        });
+    </script>
 </body>
 
 </html>

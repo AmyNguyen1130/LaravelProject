@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     protected $table = "Users";
-    protected $filllable = ['id', 'code', 'username', 'password', 'role'];
+    protected $filllable = ['id', 'email', 'password', 'role'];
     public $timestamp = true;
 
     public function Educator(){

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\User;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class PagesController extends Controller
 {
@@ -12,7 +13,6 @@ class PagesController extends Controller
     {
         return view('index');
     }
-
     // ADMIN PAGES
 
     // TABLE users

@@ -26,7 +26,6 @@
     @include('student.layout.footer')
 
     @include('student.layout.script')
-
   
 </body>
 
