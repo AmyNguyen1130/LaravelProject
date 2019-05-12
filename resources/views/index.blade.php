@@ -147,28 +147,64 @@
 					</div>
 
 					<div class="tab-pane fade" id="signup-form">
-						<div class="form">
+						<div class="show" id="signup-form-step1">
+							<div class="form">
 
-							<form action="" method="POST" role="form">
-								<div id="progress-bar">
+								<form action="" method="POST" role="form">
+									<div id="progress-bar">
 
-								</div>
-								<legend></legend>
+									</div>
+									<legend>Bước 1: Tạo tài khoản</legend>
 
-								<div class="form-group">
-									<input type="text" class="form-control" id="email" placeholder="Nhập địa chỉ email...">
-								</div>
+									<div class="form-group">
+										<input type="text" class="form-control" id="signup-email" placeholder="Nhập địa chỉ email...">
+									</div>
 
-								<div class="form-group">
-									<input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu...">
-								</div>
+									<div class="form-group">
+										<input type="password" class="form-control" id="signup-password" placeholder="Nhập mật khẩu...">
+									</div>
 
-								<div class="text-center">
-									<!-- <button type="button" id="btn-previous" class="btn btn-default col-sm-6 hide"> Quay lại </button> -->
-									<button type="button" id="btn-next" class="btn btn-primary col-sm-6"> Tiếp </button>
-								</div>
-							</form>
+									<div class="text-center">
+										<!-- <button type="button" class="btn btn-default col-sm-6"> Quay lại </button> -->
+										<button type="button" id="btn-next" class="btn btn-primary col-sm-12"> Tiếp theo </button>
+									</div>
+								</form>
 
+							</div>
+						</div>
+
+						<div class="hide" id="signup-form-step2">
+							<div class="form">
+
+								<form action="" method="POST" role="form">
+									<div id="progress-bar">
+
+									</div>
+									<legend>Bước 2: Cập nhật thông tin</legend>
+
+									<div class="form-group">
+										<input type="text" class="form-control" id="name" placeholder="Họ và tên" required>
+									</div>
+
+									<div class="form-group">
+										<input type="password" class="form-control" id="class" placeholder="Mật khẩu" required>
+									</div>
+
+									<div class="form-group">
+										<input type="date" class="form-control" id="birthday" placeholder="Ngày sinh" required>
+									</div>
+
+									<div class="form-group">
+										<input type="text" class="form-control" id="phone" placeholder="Số điện thoại" required>
+									</div>
+
+									<div class="text-center">
+										<button type="button" id="btn-previous" class="btn btn-default col-sm-6"> Quay lại </button>
+										<button type="button" id="btn-signup" class="btn btn-primary col-sm-6"> Cập nhật </button>
+									</div>
+								</form>
+
+							</div>
 						</div>
 					</div>
 

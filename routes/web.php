@@ -24,6 +24,21 @@ Route::group(['prefix' => ''], function () {
 		'as' => 'login',
 		'uses' => 'LoginController@checkLogin'
 	]);
+
+	Route::group(['prefix' => 'signup/'], function () {
+
+		Route::post('step-1', [
+			'as' => 'signup-step-1',
+			'uses' => 'SignupController@validateStep1'
+		]);
+	
+		Route::post('step-2', [
+			'as' => 'signup-step-2',
+			'uses' => 'SignupController@validateStep2'
+		]);
+	
+	});
+
 });
 
 // ADMIN
