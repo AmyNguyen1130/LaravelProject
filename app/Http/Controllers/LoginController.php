@@ -42,7 +42,7 @@ class LoginController extends Controller
 				if (Hash::check($password, $user->password)) {
 					$message = new MessageBag(['errorlogin' => 'Đăng nhập thành công']);
 					return response()->json([
-						'error' => true,
+						'error' => false,
 						'message' => $message
 					], 200);
 				} else {
