@@ -133,9 +133,15 @@ header #menu-hr .navbar-default #collapse-menu {
 
 #login-modal .modal-content {
     background-color: #fefefe;
-    margin: 10% auto 15% auto;
+    /* margin: 10% auto 15% auto; */
     border: 1px solid #888;
     width: 35%;
+    /*  */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*  */
 }
 
 #login-modal .form {
@@ -209,8 +215,6 @@ header #menu-hr .navbar-default #collapse-menu {
 }
 
 /* SIGNUP FORM */
-
-
 
 /* END SIGNUP FORM */
 
@@ -346,7 +350,10 @@ header #menu-hr .navbar-default #collapse-menu {
         height: 52px;
     }
     #login-modal .modal-content {
-        margin: 35% auto 35% auto;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         width: 80%;
     }
     #login-modal .form {
