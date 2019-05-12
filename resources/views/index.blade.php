@@ -37,8 +37,9 @@
 						</div>
 						<div class="col-sm-4 right">
 							<ul class="list-inline">
-								<li><a onclick="loginControl()">Đăng nhập</a></li>
-								<li><a onclick="signupControl()">Đăng ký</a></li>
+								<li><a class="{{ Session::has('user') ? 'hide' : 'show' }}" onclick="loginControl()">Đăng nhập</a></li>
+								<li><a class="{{ Session::has('user') ? 'hide' : 'show' }}" onclick="signupControl()">Đăng ký</a></li>
+								<li><a class="{{ Session::has('user') ? 'show' : 'hide' }}" href="logout">Đăng Xuất</a></li>
 							</ul>
 						</div>
 					</div>
@@ -55,8 +56,8 @@
 									<span class="icon-bar"></span>
 								</button>
 								<ul id="collapse-menu" class="nav list-inline">
-									<li class="text-uppercase"><a onclick="loginControl()">Đăng nhập</a></li>
-									<!-- <li class="text-uppercase"><a href="#signup-form" onclick="signupControl()">Đăng ký</a></li> -->
+									<li class="text-uppercase {{ Session::has('user') ? 'hide' : 'show' }}"><a onclick="loginControl()">Đăng nhập</a></li>
+									<li class="text-uppercase {{ Session::has('user') ? 'show' : 'hide' }}"><a href="logout">Đăng Xuất</a></li>
 								</ul>
 							</div>
 							<div class="collapse navbar-collapse" id="myNavbar">
@@ -122,19 +123,19 @@
 
 							<form action="login" method="POST">
 								<legend></legend>
-								<!-- {{ csrf_field() }} -->
+
 								<div class="form-group">
-									<input type="email" class="form-control" onclick="$('.errorEmail').fadeOut()" id="email" placeholder="Địa chỉ email..." value="{{old('email')}}" required>
+									<input type="email" class="form-control" onclick="$('.errorEmail').fadeOut()" id="email" placeholder="Địa chỉ email" value="{{ Cookie::has('remember') ? Cookie::get('remember_email') : old('email')}}" required>
 									<p class="text-danger error errorEmail"></p>
 								</div>
 
 								<div class="form-group">
-									<input type="password" class="form-control" onclick="$('.errorPassword').fadeOut()" id="password" placeholder="Mật khẩu..." value="" required>
+									<input type="password" class="form-control" onclick="$('.errorPassword').fadeOut()" id="password" placeholder="Mật khẩu" value="{{ Cookie::has('remember') ? Cookie::get('remember_password') : old('password') }}" required>
 									<p class="text-danger error errorPassword"></p>
 								</div>
 
 								<div class="form-group">
-									<input type="checkbox" name="remember"> Ghi nhớ mật khẩu
+									<input type="checkbox" id="remember" {{ Cookie::has('remember') ? "checked" : "" }}> Lưu tài khoản
 								</div>
 
 								<div class="form-group">

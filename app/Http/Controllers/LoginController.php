@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Validator;
-use Auth;
 use Illuminate\Support\MessageBag;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -40,10 +41,15 @@ class LoginController extends Controller
 			$password = $request->password;
 			if ($user = User::where('email', $email)->first()) {
 				if (Hash::check($password, $user->password)) {
-					$message = new MessageBag(['errorlogin' => 'Đăng nhập thành công']);
+					if (isset($request->remember)) {
+						Cookie::queue('remember', 'true', 43200); // 30days
+						Cookie::queue('remember_email', $user->email, 43200); // 30days
+						Cookie::queue('remember_password', $request->password, 43200); // 30days
+					}
+					Session::put('user', $user);
 					return response()->json([
 						'error' => false,
-						'message' => $message
+						'message' => "Đăng nhập thành công"
 					], 200);
 				} else {
 					$message = new MessageBag(['errorlogin' => 'Địa chỉ email hoặc mật khẩu không chính xác']);
@@ -58,6 +64,17 @@ class LoginController extends Controller
 					'error' => true,
 					'message' => $errors
 				], 200);
+			}
+		}
+	}
+
+	public function logout()
+	{
+		if (Session::has('user')) {
+			Session::forget('user');
+			Session::save();
+			if (!Session::has('user')) {
+				return redirect()->back();
 			}
 		}
 	}
