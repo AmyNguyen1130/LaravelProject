@@ -72,6 +72,16 @@ Route::group(['prefix' => 'student/'], function () {
     Route::get('', [
         'as' => 'student.pages.index',
         'uses' => 'StudentController@getIndex'
+	]);
+	
+	Route::get('issue', [
+        'as' => 'student.pages.issue',
+        'uses' => 'StudentController@getIssue'
+	]);
+	
+	Route::get('bill', [
+        'as' => 'student.pages.bill',
+        'uses' => 'StudentController@getBill'
     ]);
 
 });

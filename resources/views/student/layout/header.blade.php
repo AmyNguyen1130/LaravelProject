@@ -37,8 +37,10 @@
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav text-uppercase">
                                 <li class="active"><a href="">Trang Chủ</a></li>
-                                <li><a href="">Giới Thiệu</a></li>
-                                <li><a href="">Liên Hệ</a></li>
+                                <li><a href="student/issue">Báo Cáo Hư Hỏng</a></li>
+                                <li><a href="student/bill">Tiền điện nước</a></li>
+                                <li><a href="">Chi Tiêu Ở Bếp</a></li>
+                                <li><a href="">Danh Sách Lỗi Vi Phạm</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
