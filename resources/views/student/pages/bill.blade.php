@@ -15,6 +15,14 @@
                 </span>
             </div>
         </div>
+        <div class="col-sm-3" style="margin-bottom: 50px;">
+            <label for="">Tháng: </label>
+            <select class="form-control" name="month_water">
+                @foreach($months1 as $month1)
+                <option value="{{$month1}}">{{$month1->time}}</option>
+                @endforeach
+            </select>
+        </div>
         <table class="table table-bordered table-striped" id="table_users">
             <thead>
                 <tr>
@@ -29,7 +37,7 @@
             </thead>
             <tbody>
                 @foreach($water as $water)
-                <tr>
+                <tr style="background: @if($room_current->room_id == $water->room_id)  #ffff00 @endif">
                     <td>{{ $stt++ }}</td>
                     <td>{{ $water->room_name }}</td>
                     <td>{{ $water->time }}</td>
@@ -52,6 +60,15 @@
                 </span>
             </div>
         </div>
+        
+        <div class="col-sm-3" style="margin-bottom: 50px;">
+            <label for="">Tháng: </label>
+            <select class="form-control" name="month_electric">
+                @foreach($months1 as $month1)
+                <option value="{{$month1}}">{{$month1->time}}</option>
+                @endforeach
+            </select>
+        </div>
         <table class="table table-bordered table-striped" id="table_users">
             <thead>
                 <tr>
@@ -65,10 +82,9 @@
                 </tr>
             </thead>
             <tbody>
-
-                {{$stt=1}}
+                <p class="hidden"> {{$stt=1}}</p>
                 @foreach($electric as $electric)
-                <tr>
+                <tr style="background: @if($room_current->room_id == $electric->room_id)  #ffff00 @endif">
                     <td>{{ $stt++ }}</td>
                     <td>{{ $electric->room_name }}</td>
                     <td>{{ $electric->time }}</td>

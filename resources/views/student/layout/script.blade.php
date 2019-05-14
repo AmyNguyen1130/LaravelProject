@@ -24,3 +24,7 @@
           }, "slow");
       });
   </script>
+
+  
+	<!-- Control Login/ Signup -->
+	<script src="public/js/action.js"></script>
