@@ -38,21 +38,4 @@
     </div>
 </div>
 
-<script type="javascript">
-    $('#table_users').Tabledit({
-        url: 'process.php',
-        columns: {
-            identifier: [0, 'id'],
-            editable: [
-                [1, 'nickname'],
-                [2, 'full_name'],
-                [3, 'email'],
-                [4, 'phone'],
-                [5, 'address'],
-                [6, 'created_at']
-            ]
-        }
-    });
-</script>
-
 @endsection

@@ -1,0 +1,374 @@
+/* HEADER */
+
+header #banner .list-inline li a {
+    text-decoration: none;
+    color: #333;
+}
+
+header #banner .list-inline li a:hover {
+    color: rgb(236, 166, 14);
+}
+
+header #banner .list-inline li {
+    padding: 0 20px;
+}
+
+header #banner .list-inline li a:hover {
+    cursor: pointer;
+}
+
+header #banner ul {
+    margin-top: 38px;
+    margin-left: 120px;
+}
+
+header #menu-hr .navbar-default .navbar-nav .active a {
+    color: rgb(236, 166, 14);
+    background: rgba(250, 247, 247, 0.966);
+}
+
+.header-center {
+    height: 157px;
+    width: 100%;
+    position: relative;
+}
+
+.header-center .center {
+    height: 100px;
+    line-height: 100%;
+}
+
+#banner {
+    height: 100px;
+    width: 100%;
+    background: #FFFFFF;
+}
+
+#menu-hr {
+    z-index: 1000;
+    clear: both;
+    height: 60px;
+    width: 100%;
+}
+
+header #menu-hr .navbar-default #collapse-menu {
+    display: none;
+}
+
+#menu-hr .navbar {
+    z-index: 999;
+    box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+#menu-hr .navbar a {
+    padding: 17px 18px;
+    height: 55px;
+}
+
+#menu-hr .search-box {
+    padding: 2px 25px;
+}
+
+#menu-hr .navbar-default {
+    background: #FFFFFF;
+    color: #333333;
+}
+
+#menu-hr .navbar li:hover a {
+    color: rgb(236, 166, 14);
+}
+
+#menu-hr .navbar li:hover .dropdown-menu a {
+    color: #333;
+}
+
+#menu-hr .open:hover .user-choice a {
+    background: #FFFFFF;
+}
+
+#menu-hr .user-choice {
+    top: 101%;
+}
+
+#menu-hr .user-choice li a {
+    height: 30px;
+    padding: 5px 18px;
+}
+
+#menu-hr .navbar .dropdown-menu i {
+    padding-right: 3px;
+}
+
+#menu-hr .open .user-choice:hover a {
+    color: #111;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* CONTENT */
+
+/* MODAL LOGIN */
+
+#login-modal {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    display: block;
+    z-index: 1001;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#login-modal .header-modal {
+    text-align: center;
+    margin: 24px 0 10px 0;
+    position: relative;
+}
+
+/* Modal Content/Box */
+
+#login-modal .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto 15% auto;
+    border: 1px solid #888;
+    width: 35%;
+}
+
+#login-modal .form {
+    padding: 30px 60px 80px 60px;
+    background: #22bbea;
+}
+
+#login-modal .close {
+    position: absolute;
+    right: 25px;
+    top: -5px;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+#login-modal .close:hover, #login-modal .close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* Add Zoom Animation */
+
+#login-modal .animate {
+    -webkit-animation: animatezoom 0.8s;
+    animation: animatezoom 0.8s
+}
+
+#login-modal ul .active a {
+    color: rgb(236, 166, 14);
+}
+
+#login-modal ul li {
+    height: 30px;
+    line-height: 30px;
+    width: 40%;
+}
+
+#login-modal ul li a {
+    text-decoration: none;
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
+/* Change styles for span and cancel button on extra small screens */
+
+@media screen and (max-width: 300px) {
+    #login-modal span.psw {
+        display: block;
+        float: none;
+    }
+    #login-modal .cancelbtn {
+        width: 100%;
+    }
+}
+
+/* SIGNUP FORM */
+
+
+
+/* END SIGNUP FORM */
+
+/* END MODAL LOGIN */
+
+#scroll-top {
+    display: none;
+    position: fixed;
+    z-index: 99999;
+    right: 100px;
+    bottom: 70px;
+    padding: 10px;
+    -webkit-border-top-left-radius: 10px;
+    -moz-border-radius-topleft: 10px;
+    border-top-left-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    border-radius: 5px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.4);
+    font-size: 28px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#values .col-sm-4 {
+    height: 300px;
+    text-align: center;
+    line-height: 300px;
+}
+
+/* SOCIAL */
+
+.social a {
+    height: 100%;
+    width: 100%;
+    color: #333333;
+}
+
+.social li {
+    text-align: center;
+    padding: 0.9em 0.5em;
+    background: #FFFFFF;
+    color: #333333;
+    width: 35px;
+    height: 35px;
+    line-height: 20px;
+    margin-left: 5px;
+    border: 2px solid #e6e6e6;
+    border-radius: 10px;
+}
+
+.social li:hover a {
+    color: #FFFFFF;
+}
+
+.facebook:hover {
+    background: #003d99;
+}
+
+.twitter:hover {
+    background: #0099ff;
+}
+
+.youtube:hover {
+    background: #cc0000;
+}
+
+.pinterest:hover {
+    background: #b30000;
+}
+
+.google-plus:hover {
+    background: #ff3333;
+}
+
+/* FOOTER */
+
+.before-footer {
+    height: 20px;
+    background: #22bbea;
+}
+
+.footer {
+    background: #2b2c31;
+}
+
+.footer a {
+    color: #adadad;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #22bbea;
+}
+
+.footer h4 {
+    color: #ffff;
+}
+
+.footer span {
+    color: #adadad;
+}
+
+.footer hr {
+    border: 1px solid #22bbea;
+}
+
+.title {
+    color: #22bbea;
+    font-weight: 5px;
+}
+
+.space-50 {
+    height: 50px;
+}
+
+/* BREAKPOINT */
+
+@media screen and (max-width: 768px) {
+    #scroll-top {
+        right: 45%;
+        bottom: 60px;
+    }
+    #banner {
+        display: none;
+    }
+    header #menu-hr {
+        display: block;
+    }
+    .header-center {
+        height: 52px;
+    }
+    #login-modal .modal-content {
+        margin: 35% auto 35% auto;
+        width: 80%;
+    }
+    #login-modal .form {
+        padding: 30px 30px 80px 30px;
+    }
+    header #menu-hr .navbar-default .navbar-nav .active a {
+        color: rgb(236, 166, 14);
+        background: rgba(250, 247, 247, 0.966);
+    }
+    header #menu-hr .navbar-toggle {
+        z-index: 100;
+    }
+    header #menu-hr .navbar-default #collapse-menu {
+        display: block;
+    }
+    header #menu-hr #collapse-menu li a {
+        color: #333;
+        background: #FFFFFF;
+        width: 140px;
+    }
+    header #menu-hr #collapse-menu li a:hover {
+        cursor: pointer;
+        color: rgb(236, 166, 14);
+    }
+}
