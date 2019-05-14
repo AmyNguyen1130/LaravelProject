@@ -118,7 +118,7 @@ header #menu-hr .navbar-default #collapse-menu {
     position: fixed;
     height: 100%;
     width: 100%;
-    display: block;
+    display: none;
     z-index: 1001;
     background-color: rgba(0, 0, 0, 0.5);
 }

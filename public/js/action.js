@@ -33,6 +33,7 @@ $(document).ready(function () {
             'data': {
                 'email': $('#email').val(),
                 'password': $('#password').val(),
+                'remember': $('#remember').val(),
                 '_token': $(this).data('token')
             },
             'dataType': 'json',
@@ -50,7 +51,7 @@ $(document).ready(function () {
                         $('.errorLogin').show().text(data.message.errorlogin[0]);
                     }
                 } else {
-                    window.location.href = "http://localhost/login-success"
+                    window.location.replace("http://localhost/LaravelProject/");
                 }
             }
         });

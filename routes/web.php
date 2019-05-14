@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cookie;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,16 @@ Route::group(['prefix' => ''], function () {
 			'uses' => 'SignupController@validateStep2'
 		]);
 	
+	});
+
+	Route::get('logout', [
+		'as' => 'logout',
+		'uses' => 'LoginController@logout'
+	]);
+
+	Route::get('testCookie', function(){
+		$user =  Cookie::get('remember');
+		dd($user);
 	});
 
 });
