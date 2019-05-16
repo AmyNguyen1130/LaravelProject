@@ -40,6 +40,8 @@
             </tbody>
         </table>
 
+
+
         <div class="solugan">
             <div class="box-product-head">
                 <span class="box-title text-uppercase">
@@ -49,8 +51,40 @@
 
                 </span>
             </div>
+        </div>
 
-            
+        <div class="col-sm-6 col-sm-offset-3">
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            <form action="student/sendReport" method="POST">
+                <legend></legend>
+                {{ csrf_field() }}
+                <div class="form-group">
+
+                    <label for="room" class="">Phòng</label>
+
+                    <select class="form-control" name="room">
+                        @foreach ($rooms->all() as $room)
+                        <option value="{{$room->id}}">{{$room->name}}</option>
+                        @endforeach
+                    </select>
+                    <p class="text-danger error errorEmail"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="content">Vấn Đề</label>
+                    <textarea name="content" cols="30" rows="7" class="form-control"></textarea>
+                </div>
+
+                <button type="submit" id="btn-report" class="btn btn-primary col-xs-12">GỬI</button>
+            </form>
         </div>
 
     </div>

@@ -24,11 +24,13 @@ class IssueRequest extends FormRequest
     public function rules()
     {
         return [
+            'content'=>'required',
         ];
     }
 
     public function messages(){
         return [
+            'content.required' => 'You have to enter content',
         ];
     }
 }

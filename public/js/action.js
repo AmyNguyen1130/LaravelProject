@@ -56,6 +56,8 @@ $(document).ready(function () {
             }
         });
     })
+
+
 });
 
 // // SIGNUP PROGRESS
@@ -104,4 +106,53 @@ $('#btn-previous').click(function () {
     $('#signup-form-step2').addClass('hide');
     $('#signup-form-step1').addClass('show');
     $('#signup-form-step1').removeClass('hide');
+});
+
+
+// SEND REPORT
+
+// $('#btn-report').click(function (e) {
+//     e.preventDefault();
+//     $.ajaxSetup({
+//         headers: {
+//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         }
+//     });
+//     $.ajax({
+//         'type': 'POST',
+//         'url': 'student/sendReport',
+//         'data': {
+//             'content': $('#content').val(),
+//             'room': $('#room').val()
+//         },
+//         'dataType': 'json',
+//         success: function (data) {
+//             console.log(data);
+//             window.location.replace("http://localhost/LaravelProject/student/issue");
+//         }
+//     });
+// })
+
+$("#month_water").change(function (e) {
+    e.preventDefault();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        'type': 'POST',
+        'url': 'student/getWaterByMonth',
+        'data': {
+            'month_water': $('#month_water').val()
+        },
+        'dataType': 'json',
+        success: function (data) {
+            console.log(data);
+            if(data.error == 'false') {
+                var datatable = $('#table_water').DataTable();
+                $("#table_water").load();
+            }
+        }
+    });
 });

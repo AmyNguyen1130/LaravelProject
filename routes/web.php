@@ -108,6 +108,16 @@ Route::group(['prefix' => 'student/'], function () {
 	Route::get('bill', [
         'as' => 'student.pages.bill',
         'uses' => 'StudentController@getBill'
-    ]);
+	]);
+	
+	Route::post('sendReport', [
+        'as' => 'student.pages.sendReport',
+        'uses' => 'StudentController@sendReport'
+	]);
+
+	Route::post('getWaterByMonth', [
+        'as' => 'student.pages.getWaterByMonth',
+        'uses' => 'StudentController@getWaterByMonth'
+	]);
 
 });

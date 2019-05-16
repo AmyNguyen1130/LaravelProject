@@ -17,13 +17,13 @@
         </div>
         <div class="col-sm-3" style="margin-bottom: 50px;">
             <label for="">Tháng: </label>
-            <select class="form-control" name="month_water">
+            <select class="form-control" id="month_water">
                 @foreach($months1 as $month1)
-                <option value="{{$month1}}">{{$month1->time}}</option>
+                <option value="{{$month1->time}}">{{$month1->time}}</option>
                 @endforeach
             </select>
         </div>
-        <table class="table table-bordered table-striped" id="table_users">
+        <table class="table table-bordered table-striped" id="table_water">
             <thead>
                 <tr>
                     <th>#</th>
@@ -60,12 +60,12 @@
                 </span>
             </div>
         </div>
-        
+
         <div class="col-sm-3" style="margin-bottom: 50px;">
             <label for="">Tháng: </label>
             <select class="form-control" name="month_electric">
                 @foreach($months1 as $month1)
-                <option value="{{$month1}}">{{$month1->time}}</option>
+                <option value="{{$month1->time}}">{{$month1->time}}</option>
                 @endforeach
             </select>
         </div>
