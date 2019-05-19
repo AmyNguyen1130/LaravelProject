@@ -125,13 +125,14 @@
 								<legend></legend>
 
 								<div class="form-group">
-									<input type="email" class="form-control" onclick="$('.errorEmail').fadeOut()" id="email" placeholder="Địa chỉ email" value="{{ Cookie::has('remember') ? Cookie::get('remember_email') : old('email')}}" required>
 									<p class="text-danger error errorEmail"></p>
+									<input type="email" class="form-control" onclick="$('.errorEmail').fadeOut()" id="email" placeholder="Địa chỉ email" value="{{ Cookie::has('remember') ? Cookie::get('remember_email') : old('email')}}" required>
+
 								</div>
 
 								<div class="form-group">
-									<input type="password" class="form-control" onclick="$('.errorPassword').fadeOut()" id="password" placeholder="Mật khẩu" value="{{ Cookie::has('remember') ? Cookie::get('remember_password') : old('password') }}" required>
 									<p class="text-danger error errorPassword"></p>
+									<input type="password" class="form-control" onclick="$('.errorPassword').fadeOut()" id="password" placeholder="Mật khẩu" value="{{ Cookie::has('remember') ? Cookie::get('remember_password') : old('password') }}" required>
 								</div>
 
 								<div class="form-group">
@@ -152,21 +153,29 @@
 							<div class="form">
 
 								<form action="" method="POST" role="form">
-									<div id="progress-bar">
 
-									</div>
 									<legend>Bước 1: Tạo tài khoản</legend>
 
+									<!-- START VALIDATION SIGNUP MESSAGE -->
+
+									<div class="alert alert-danger error errorSignup" style="display: none;">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+										<p style="color:red; display:none;" class="error errorSignup"></p>
+									</div>
+
+									<!-- END VALIDATION SIGNUP MESSAGE -->
+
 									<div class="form-group">
-										<input type="text" class="form-control" id="signup-email" placeholder="Nhập địa chỉ email...">
+										<p class="text-danger error errorSignupEmail"></p>
+										<input type="text" class="form-control" onclick="$('.errorSignupEmail').fadeOut()" id="signup-email" placeholder="Nhập địa chỉ email...">
 									</div>
 
 									<div class="form-group">
-										<input type="password" class="form-control" id="signup-password" placeholder="Nhập mật khẩu...">
+										<p class="text-danger error errorSignupPassword"></p>
+										<input type="password" class="form-control" onclick="$('.errorSignupPassword').fadeOut()" id="signup-password" placeholder="Nhập mật khẩu...">
 									</div>
 
 									<div class="text-center">
-										<!-- <button type="button" class="btn btn-default col-sm-6"> Quay lại </button> -->
 										<button type="button" id="btn-next" class="btn btn-primary col-sm-12"> Tiếp theo </button>
 									</div>
 								</form>
@@ -178,24 +187,37 @@
 							<div class="form">
 
 								<form action="" method="POST" role="form">
-									<div id="progress-bar">
 
-									</div>
 									<legend>Bước 2: Cập nhật thông tin</legend>
 
+									<!-- START VALIDATION SIGNUP MESSAGE -->
+
+									<div class="alert alert-danger error errorSignupStep2" style="display: none;">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+										<p style="color:red; display:none;" class="error errorSignupStep2"></p>
+									</div>
+
+									<!-- END VALIDATION SIGNUP MESSAGE -->
+
 									<div class="form-group">
+									<p class="text-danger error errorSignupName"></p>
 										<input type="text" class="form-control" id="name" placeholder="Họ và tên" required>
 									</div>
 
 									<div class="form-group">
-										<input type="password" class="form-control" id="class" placeholder="Mật khẩu" required>
+										<select class="form-control" id="gender">
+											<option value="Nam">Nam</option>
+											<option value="Nu">Nữ</option>
+										</select>
 									</div>
 
 									<div class="form-group">
+									<p class="text-danger error errorSignupBirthday"></p>
 										<input type="date" class="form-control" id="birthday" placeholder="Ngày sinh" required>
 									</div>
 
 									<div class="form-group">
+									<p class="text-danger error errorSignupPhone"></p>
 										<input type="text" class="form-control" id="phone" placeholder="Số điện thoại" required>
 									</div>
 

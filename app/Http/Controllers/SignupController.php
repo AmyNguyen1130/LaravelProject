@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use App\User;
+use Illuminate\Support\MessageBag;
+use App\Student;
+use App\Educator;
 
 class SignupController extends Controller
 {
@@ -29,8 +35,104 @@ class SignupController extends Controller
             ], 200);
         } else {
             $email = $request->email;
-            $password = $request->password;
+            if (User::where('email', $email)->first()) {
+                $error = new MessageBag(['errorSignup' => 'Địa chỉ email đã tồn tại']);
+                return response()->json([
+                    'error' => true,
+                    'message' => $error,
+                ], 200);
+            } elseif (!str_contains($email, "passerellesnumeriques.org")) {
+                $error = new MessageBag(['errorSignup' => 'Vui lòng sử dụng email được cung cấp bởi Passerelles Numeriques']);
+                return response()->json([
+                    'error' => true,
+                    'message' => $error,
+                ], 200);
+            } else {
+                $student = Student::where('email', $email)->first();
+                return response()->json([
+                    'error' => false,
+                    'student' => $student,
+                ], 200);
+            }
+        }
+    }
+
+    public function postSignup(Request $request)
+    {
+
+        $rules = [
+            'name' => 'required|min:3|regex:/^[a-zA-Z ]*$/',
+            'phone' => 'required|numeric|min:10',
+            'birthday' => 'before:today',
+        ];
+
+        $messages = [
+            'name.required' => 'Tên là trường bắt buộc',
+            'name.min' => 'Tên phải lớn hơn 3 kí tự',
+            'name.regex' => 'Tên không được chứa kí tự đặc biệt hoặc số',
+            'phone.required' => 'Số điện thoại là trường bắt buộc',
+            'phone.numeric' => 'Số điện thoại phải là số từ 0 đến 9',
+            'phone.min' => 'Số điện thoại phải chứa ít nhất 10 số',
+            'birthday.before' => 'Ngày sinh không hợp lệ',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'message' => $validator->errors()
+            ], 200);
+        } else {
+            $email = $request->email;
+            $password = Hash::make($request->password);
+            $name = $request->name;
+            $gender = $request->gender;
+            $birthday = $request->birthday;
+            $phone = $request->phone;
+
             $user = new User();
+            $user->email = $email;
+            $user->password = $password;
+            if (str_contains($email, "student")) {
+                $user->role = "student";
+                $student = Student::where('email', $request->email)->first();
+                $student->name = $name;
+                $student->gender = $gender;
+                $student->birthday = $birthday;
+                $student->phone = $phone;
+                if ($user->save()) {
+                    $student->save();
+                    return response()->json([
+                        'error' => false,
+                    ], 200);
+                } else {
+                    $error = new MessageBag(['errorSignupStep2' => 'Có lỗi xảy ra, Vui lòng thử lại!']);
+                    return response()->json([
+                        'error' => true,
+                        'message' => $error,
+                    ], 200);
+                }
+            } else {
+                $user->role = "educator";
+                $educator = Educator::where('email', $request->email)->first();
+                $educator->name = $name;
+                $educator->gender = $gender;
+                $educator->birthday = $birthday;
+                $educator->phone = $phone;
+                if ($user->save()) {
+                    $educator->save();
+                    return response()->json([
+                        'error' => false,
+                    ], 200);
+                } else {
+                    $error = new MessageBag(['errorSignupStep2' => 'Có lỗi xảy ra, Vui lòng thử lại!']);
+                    return response()->json([
+                        'error' => true,
+                        'message' => $error,
+                    ], 200);
+                }
+            }
         }
     }
 }
