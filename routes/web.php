@@ -121,3 +121,9 @@ Route::group(['prefix' => 'student/'], function () {
 	]);
 
 });
+
+
+Route::get('test', [
+	'as' => 'test',
+	'uses' => 'StudentController@getWaterByMonth'
+]);
