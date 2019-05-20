@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\User;
 use Illuminate\Support\MessageBag;
 use App\Student;
-use App\Educator;
+use Illuminate\Support\Facades\Session;
 
 class SignupController extends Controller
 {
@@ -41,7 +41,7 @@ class SignupController extends Controller
                     'error' => true,
                     'message' => $error,
                 ], 200);
-            } elseif (!str_contains($email, "passerellesnumeriques.org")) {
+            } elseif (!str_contains($email, "student.passerellesnumeriques.org")) {
                 $error = new MessageBag(['errorSignup' => 'Vui lòng sử dụng email được cung cấp bởi Passerelles Numeriques']);
                 return response()->json([
                     'error' => true,
@@ -84,54 +84,28 @@ class SignupController extends Controller
                 'message' => $validator->errors()
             ], 200);
         } else {
-            $email = $request->email;
-            $password = Hash::make($request->password);
             $name = $request->name;
             $gender = $request->gender;
             $birthday = $request->birthday;
             $phone = $request->phone;
 
             $user = new User();
-            $user->email = $email;
-            $user->password = $password;
-            if (str_contains($email, "student")) {
-                $user->role = "student";
-                $student = Student::where('email', $request->email)->first();
-                $student->name = $name;
-                $student->gender = $gender;
-                $student->birthday = $birthday;
-                $student->phone = $phone;
-                if ($user->save()) {
-                    $student->save();
-                    return response()->json([
-                        'error' => false,
-                    ], 200);
-                } else {
-                    $error = new MessageBag(['errorSignupStep2' => 'Có lỗi xảy ra, Vui lòng thử lại!']);
-                    return response()->json([
-                        'error' => true,
-                        'message' => $error,
-                    ], 200);
-                }
-            } else {
-                $user->role = "educator";
-                $educator = Educator::where('email', $request->email)->first();
-                $educator->name = $name;
-                $educator->gender = $gender;
-                $educator->birthday = $birthday;
-                $educator->phone = $phone;
-                if ($user->save()) {
-                    $educator->save();
-                    return response()->json([
-                        'error' => false,
-                    ], 200);
-                } else {
-                    $error = new MessageBag(['errorSignupStep2' => 'Có lỗi xảy ra, Vui lòng thử lại!']);
-                    return response()->json([
-                        'error' => true,
-                        'message' => $error,
-                    ], 200);
-                }
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->role = "student";
+
+            $student = Student::where('email', $request->email)->first();
+            $student->name = $name;
+            $student->gender = $gender;
+            $student->birthday = $birthday;
+            $student->phone = $phone;
+            if ($user->save()) {
+                $student->save();
+                Session::put('user', $user);
+                return response()->json([
+                    'error' => false,
+                    'user' => $user
+                ], 200);
             }
         }
     }

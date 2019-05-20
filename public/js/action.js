@@ -58,7 +58,7 @@ $(document).ready(function () {
                         $('.errorLogin').show().text(data.message.errorlogin[0]);
                     }
                 } else {
-                    window.location.replace("http://localhost/LaravelProject/");
+                    window.location.replace("http://localhost/LaravelProject/" + data.role);
                 }
             }
         });
@@ -150,7 +150,7 @@ $(document).ready(function () {
                         $('.errorSignupStep2').show().text(data.message.errorSignup[0]);
                     }
                 } else {
-                    window.location.replace("http://localhost/LaravelProject/");
+                    window.location.replace("http://localhost/LaravelProject/student");
                 }
             }
         });
