@@ -95,10 +95,35 @@ Route::group(['prefix' => 'admin/'], function () {
 
 Route::group(['prefix' => 'student/'], function () {
 
-	Route::get('', [
-		'as' => 'student.pages.index',
-		function () {
-			return view('student.pages.index');
-		}
+    Route::get('', [
+        'as' => 'student.pages.index',
+        'uses' => 'StudentController@getIndex'
 	]);
+	
+	Route::get('issue', [
+        'as' => 'student.pages.issue',
+        'uses' => 'StudentController@getIssue'
+	]);
+	
+	Route::get('bill', [
+        'as' => 'student.pages.bill',
+        'uses' => 'StudentController@getBill'
+	]);
+	
+	Route::post('sendReport', [
+        'as' => 'student.pages.sendReport',
+        'uses' => 'StudentController@sendReport'
+	]);
+
+	Route::post('getWaterByMonth', [
+        'as' => 'student.pages.getWaterByMonth',
+        'uses' => 'StudentController@getWaterByMonth'
+	]);
+
 });
+
+
+Route::get('test', [
+	'as' => 'test',
+	'uses' => 'StudentController@getWaterByMonth'
+]);

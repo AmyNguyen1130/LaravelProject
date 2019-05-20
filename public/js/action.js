@@ -1,4 +1,4 @@
-// CONTROL LOGIN/ SIGNUP
+// FUNCTIONS
 function loginControl() {
     $('#login-form').addClass('active');
     $('#login-form').addClass('in');
@@ -26,6 +26,7 @@ function moveToStep2(student) {
     $('#phone').val(student.phone);
 }
 
+// LOGIN AJAX
 $(document).ready(function () {
     $('#btn-login').click(function (e) {
         e.preventDefault();
@@ -63,9 +64,11 @@ $(document).ready(function () {
             }
         });
     })
+
+
 });
 
-// // SIGNUP PROGRESS
+// // SIGNUP AJAX
 $(document).ready(function () {
     $('#btn-next').click(function () {
         $.ajaxSetup({
@@ -154,6 +157,33 @@ $(document).ready(function () {
                 }
             }
         });
+    });
+});
 
+// SEND REPORT
+$(document).ready(function () {
+    $("#month_water").change(function (e) {
+        e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            'type': 'POST',
+            'url': 'student/getWaterByMonth',
+            'data': {
+                'month_water': $('#month_water').val()
+            },
+            'dataType': 'json',
+            success: function (data) {
+                console.log(data);
+                $("#table_water tbody").html(data)
+                tableData()
+            },
+            error: function () {
+                console.log('Lỗi')
+            }
+        });
     });
 });
