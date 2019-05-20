@@ -27,4 +27,5 @@
 
   
 	<!-- Control Login/ Signup -->
-	<script src="public/js/action.js"></script>
+    <script src="public/js/action.js"></script>
+    <script src="public/js/actionStudent.js"></script>

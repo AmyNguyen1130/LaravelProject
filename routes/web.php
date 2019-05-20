@@ -35,7 +35,7 @@ Route::group(['prefix' => ''], function () {
 	
 		Route::post('step-2', [
 			'as' => 'signup-step-2',
-			'uses' => 'SignupController@validateStep2'
+			'uses' => 'SignupController@postSignup'
 		]);
 	
 	});

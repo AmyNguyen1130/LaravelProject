@@ -13,8 +13,9 @@
                     </div>
                     <div class="col-sm-4 right">
                         <ul class="list-inline">
-                            <li><a href="#">Đăng nhập</a></li>
-                            <li><a href="#">Đăng ký</a></li>
+                            <li><a class="{{ Session::has('user') ? 'hide' : 'show' }}" onclick="loginControl()">Đăng nhập</a></li>
+                            <li><a class="{{ Session::has('user') ? 'hide' : 'show' }}" onclick="signupControl()">Đăng ký</a></li>
+                            <li><a class="{{ Session::has('user') ? 'show' : 'hide' }}" href="logout">Đăng Xuất</a></li>
                         </ul>
                     </div>
                 </div>
@@ -30,9 +31,10 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <div class="dropdown">
-
-                            </div>
+                            <ul id="collapse-menu" class="nav list-inline">
+                                <li class="text-uppercase {{ Session::has('user') ? 'hide' : 'show' }}"><a onclick="loginControl()">Đăng nhập</a></li>
+                                <li class="text-uppercase {{ Session::has('user') ? 'show' : 'hide' }}"><a href="logout">Đăng Xuất</a></li>
+                            </ul>
                         </div>
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav text-uppercase">
@@ -42,6 +44,7 @@
                                 <li><a href="">Chi Tiêu Ở Bếp</a></li>
                                 <li><a href="">Danh Sách Lỗi Vi Phạm</a></li>
                             </ul>
+
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
                                     <form method="POST" action="search.php" class="navbar-form">
