@@ -120,10 +120,9 @@ Route::group(['prefix' => 'student/'], function () {
         'uses' => 'StudentController@getWaterByMonth'
 	]);
 
+	Route::post('getElectricByMonth', [
+        'as' => 'student.pages.getElectricByMonth',
+        'uses' => 'StudentController@getElectricByMonth'
+	]);
+
 });
-
-
-Route::get('test', [
-	'as' => 'test',
-	'uses' => 'StudentController@getWaterByMonth'
-]);

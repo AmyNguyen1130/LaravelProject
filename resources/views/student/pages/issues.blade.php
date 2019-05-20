@@ -17,7 +17,7 @@
         </div>
         <table class="table table-bordered table-striped" id="table_users">
             <thead>
-                <tr>
+                <tr class="bg-primary">
                     <th>#</th>
                     <th>STUDENT NAME</th>
                     <th>ROOM</th>
@@ -34,7 +34,7 @@
                     <td>{{ $issues->room_name }}</td>
                     <td>{{ $issues->content }}</td>
                     <td></td>
-                    <td>{{ $issues->create_at }}</td>
+                    <td>{{ $issues->created_at}}</td>
                 </tr>
                 @endforeach
             </tbody>
