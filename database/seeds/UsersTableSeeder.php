@@ -25,7 +25,6 @@ class UsersTableSeeder extends Seeder
             ['email' => 'giang.tra@student.passerellesnumeriques.org', 'password' => Hash::make('password'), 'role' => 'student'],
             ['email' => 'cam.ho@student.passerellesnumeriques.org', 'password' => Hash::make('password'), 'role' => 'student'],
             ['email' => 'cuong.pham@student.passerellesnumeriques.org', 'password' => Hash::make('password'), 'role' => 'student'],
-            ['email' => 'tai.tran@student.passerellesnumeriques.org', 'password' => Hash::make('password'), 'role' => 'student'],
             ['email' => 'tuan.nguyen@student.passerellesnumeriques.org', 'password' => Hash::make('password'), 'role' => 'student'],
             ['email' => 'tai.tran@student.passerellesnumeriques.org', 'password' => Hash::make('password'), 'role' => 'student'],
             ['email' => 'tao.ho@student.passerellesnumeriques.org', 'password' => Hash::make('password'), 'role' => 'student'],
