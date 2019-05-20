@@ -13,8 +13,9 @@
                     </div>
                     <div class="col-sm-4 right">
                         <ul class="list-inline">
-                            <li><a href="#">Đăng nhập</a></li>
-                            <li><a href="#">Đăng ký</a></li>
+                            <li><a class="{{ Session::has('user') ? 'hide' : 'show' }}" onclick="loginControl()">Đăng nhập</a></li>
+                            <li><a class="{{ Session::has('user') ? 'hide' : 'show' }}" onclick="signupControl()">Đăng ký</a></li>
+                            <li><a class="{{ Session::has('user') ? 'show' : 'hide' }}" href="logout">Đăng Xuất</a></li>
                         </ul>
                     </div>
                 </div>

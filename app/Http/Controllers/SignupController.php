@@ -60,12 +60,15 @@ class SignupController extends Controller
     public function postSignup(Request $request)
     {
 
+        // Điều kiện cho các input trong form
         $rules = [
             'name' => 'required|min:3|regex:/^[a-zA-Z ]*$/',
             'phone' => 'required|numeric|min:10',
             'birthday' => 'before:today',
+            'address' => 'required',
         ];
 
+        // Những lỗi sẽ xuất ra
         $messages = [
             'name.required' => 'Tên là trường bắt buộc',
             'name.min' => 'Tên phải lớn hơn 3 kí tự',
@@ -74,33 +77,55 @@ class SignupController extends Controller
             'phone.numeric' => 'Số điện thoại phải là số từ 0 đến 9',
             'phone.min' => 'Số điện thoại phải chứa ít nhất 10 số',
             'birthday.before' => 'Ngày sinh không hợp lệ',
+            'address.required' => 'Địa chỉ là trường bắt buộc',
         ];
-
+        // Kiểm tra các trường hợp input không hợp lệ
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
+            // Nếu có lỗi thì trả về lỗi
             return response()->json([
                 'error' => true,
                 'message' => $validator->errors()
             ], 200);
         } else {
+            // Không có lỗi
+            // Lưu thông tin từ form gửi sang
             $name = $request->name;
+            $class = $request->class;
             $gender = $request->gender;
             $birthday = $request->birthday;
+            $room = $request->room;
+            $address = $request->address;
             $phone = $request->phone;
 
+            // Tạo mới user để lưu thông tin
             $user = new User();
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
             $user->role = "student";
+            // Role = student vì chỉ student mới đăng ký ở trang này
 
-            $student = Student::where('email', $request->email)->first();
+            if (Student::where('email', $request->email)->first()) {
+                // Trường hợp sinh viên đã có/được cập nhật thông tin từ trước
+                $student = Student::where('email', $request->email)->first();
+            } else {
+                // Trường hợp sinh viên chưa có/được cập nhật thông tin từ trước
+                $student = new Student();
+                $student->email = $request->email;
+            }
+
             $student->name = $name;
+            $student->class_id = $class;
             $student->gender = $gender;
             $student->birthday = $birthday;
+            $student->room_id = $room;
+            $student->address = $address;
             $student->phone = $phone;
+
             if ($user->save()) {
                 $student->save();
+                // Saved thì đặt cho nó ra Session để cho tình trạng là đã đăng nhập luôn rồi
                 Session::put('user', $user);
                 return response()->json([
                     'error' => false,
@@ -109,4 +134,5 @@ class SignupController extends Controller
             }
         }
     }
+
 }

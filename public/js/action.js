@@ -20,10 +20,12 @@ function signupControl() {
 }
 
 function moveToStep2(student) {
-    $('#name').val(student.name);
-    $('#gender').val(student.gender);
-    $('#birthday').val(student.birthday);
-    $('#phone').val(student.phone);
+    if (student != null) {
+        $('#name').val(student.name);
+        $('#gender').val(student.gender);
+        $('#birthday').val(student.birthday);
+        $('#phone').val(student.phone);
+    }
 }
 
 // LOGIN AJAX
@@ -130,8 +132,11 @@ $(document).ready(function () {
                 'email': $('#signup-email').val(),
                 'password': $('#signup-password').val(),
                 'name': $('#name').val(),
+                'class': $('#class').val(),
                 'gender': $('#gender').val(),
                 'birthday': $('#birthday').val(),
+                'room': $('#room').val(),
+                'address': $('#address').val(),
                 'phone': $('#phone').val(),
                 '_token': $(this).data('token')
             },
@@ -145,6 +150,9 @@ $(document).ready(function () {
                     }
                     if (data.message.birthday != undefined) {
                         $('.errorSignupBirthday').show().text(data.message.birthday[0]);
+                    }
+                    if (data.message.address != undefined) {
+                        $('.errorSignupAddress').show().text(data.message.address[0]);
                     }
                     if (data.message.phone != undefined) {
                         $('.errorSignupPhone').show().text(data.message.phone[0]);

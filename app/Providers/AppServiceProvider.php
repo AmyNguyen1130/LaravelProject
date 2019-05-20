@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Room;
+use App\Classes;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+        $rooms = Room::all();
+        $classes = Classes::all();
+        View::share(['rooms' => $rooms, 'classes' => $classes]);
     }
 }

@@ -200,8 +200,17 @@
 									<!-- END VALIDATION SIGNUP MESSAGE -->
 
 									<div class="form-group">
-									<p class="text-danger error errorSignupName"></p>
-										<input type="text" class="form-control" id="name" placeholder="Họ và tên" required>
+										<p class="text-danger error errorSignupName"></p>
+										<input type="text" class="form-control" id="name" onclick="$('.errorSignupName').fadeOut()" placeholder="Họ và tên" required>
+									</div>
+
+									<div class="form-group">
+										<select class="form-control" id="class">
+											<option disabled>Lớp</option>
+											@foreach($classes as $class)
+											<option value="{{ $class->id }}">{{ $class->name }}</option>
+											@endforeach
+										</select>
 									</div>
 
 									<div class="form-group">
@@ -212,18 +221,32 @@
 									</div>
 
 									<div class="form-group">
-									<p class="text-danger error errorSignupBirthday"></p>
-										<input type="date" class="form-control" id="birthday" placeholder="Ngày sinh" required>
+										<p class="text-danger error errorSignupBirthday"></p>
+										<input type="date" class="form-control" id="birthday" onclick="$('.errorSignupBirthday').fadeOut()" placeholder="Ngày sinh" required>
 									</div>
 
 									<div class="form-group">
-									<p class="text-danger error errorSignupPhone"></p>
-										<input type="text" class="form-control" id="phone" placeholder="Số điện thoại" required>
+										<select class="form-control" id="room">
+											<option disabled>Phòng</option>
+											@foreach($rooms as $room)
+											<option value="{{ $room->id }}">{{ $room->name }}</option>
+											@endforeach
+										</select>
+									</div>
+
+									<div class="form-group">
+										<p class="text-danger error errorSignupAddress"></p>
+										<input type="text" class="form-control" id="address" onclick="$('.errorSignupAddress').fadeOut()" placeholder="Địa chỉ" required>
+									</div>
+
+									<div class="form-group">
+										<p class="text-danger error errorSignupPhone"></p>
+										<input type="text" class="form-control" id="phone" onclick="$('.errorSignupPhone').fadeOut()" placeholder="Số điện thoại" required>
 									</div>
 
 									<div class="text-center">
-										<button type="button" id="btn-previous" class="btn btn-default col-sm-6"> Quay lại </button>
-										<button type="button" id="btn-signup" class="btn btn-primary col-sm-6"> Cập nhật </button>
+										<button type="button" id="btn-previous" class="btn btn-default col-xs-6"> Quay lại </button>
+										<button type="button" id="btn-signup" class="btn btn-primary col-xs-6"> Cập nhật </button>
 									</div>
 								</form>
 
