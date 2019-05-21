@@ -74,7 +74,7 @@ class LoginController extends Controller
 			Session::forget('user');
 			Session::save();
 			if (!Session::has('user')) {
-				return redirect()->back();
+				return redirect()->route('index');
 			}
 		}
 	}
