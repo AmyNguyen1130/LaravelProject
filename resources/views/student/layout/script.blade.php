@@ -3,7 +3,6 @@
   <!-- Bootstrap JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <!-- Scrollable -->
-  <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.0/datatables.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 
   <script>

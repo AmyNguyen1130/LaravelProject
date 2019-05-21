@@ -19,11 +19,11 @@
             <thead>
                 <tr class="bg-primary">
                     <th>#</th>
-                    <th>STUDENT NAME</th>
-                    <th>ROOM</th>
-                    <th>ISSUE</th>
-                    <th>STATUS</th>
-                    <th>CREATED AT</th>
+                    <th>TÊN SINH VIÊN</th>
+                    <th>PHÒNG</th>
+                    <th>VẤN ĐỀ</th>
+                    <th>TÌNH TRẠNG</th>
+                    <th>NGÀY BÁO CÁO</th>
                 </tr>
             </thead>
             <tbody>
@@ -69,9 +69,8 @@
                 <div class="form-group">
 
                     <label for="room" class="">Phòng</label>
-
                     <select class="form-control" name="room">
-                        @foreach ($rooms->all() as $room)
+                        @foreach ($rooms as $room)
                         <option value="{{$room->id}}">{{$room->name}}</option>
                         @endforeach
                     </select>

@@ -41,7 +41,7 @@
                                 <li class="active"><a href="">Trang Chủ</a></li>
                                 <li><a href="student/issue">Báo Cáo Hư Hỏng</a></li>
                                 <li><a href="student/bill">Tiền điện nước</a></li>
-                                <li><a href="">Chi Tiêu Ở Bếp</a></li>
+                                <li><a href="student/getKitchenExpenses">Chi Tiêu Ở Bếp</a></li>
                                 <li><a href="">Danh Sách Lỗi Vi Phạm</a></li>
                             </ul>
 

@@ -22,6 +22,7 @@ class RoomsTableSeeder extends Seeder
 			['name' => '306', 'floor' => 3, 'number_of_members' => 8],
 			['name' => '307', 'floor' => 3, 'number_of_members' => 9],
 			['name' => '308', 'floor' => 3, 'number_of_members' => 8],
+			['name' => 'Bếp', 'floor' => 1, 'number_of_members' => 0],
 		]);
 	}
 }

@@ -8,8 +8,9 @@ use Carbon\Carbon;
 use App\Issue;
 use App\Water;
 use App\Electric;
-use App\room;
+use App\Room;
 use App\Student;
+use App\KitchenExpense;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Http\Requests\IssueRequest;
 
@@ -20,7 +21,7 @@ class StudentController extends Controller
         $student = Student::select('room_id')->where('email', Session('user')->email)->first();
         $room_id = $student->room_id;
         $issues = Issue::select('issues.id', 'students.name as student_name', 'rooms.name as room_name', 'content', 'issues.created_at')->join('students', 'students.id', '=', 'issues.student_id')->join('rooms', 'rooms.id', '=', 'issues.room_id')->where('issues.room_id', $room_id)->get();
-        $rooms = Room::select('id', 'name')->get();
+        $rooms = Room::where('id', $room_id)->orWhere('name', 'Bếp')->get();
         return view('student.pages.issues', compact('issues', 'rooms'));
     }
 
@@ -72,5 +73,14 @@ class StudentController extends Controller
         $issue->student_id = $student->id;
         $issue->save();
         return redirect()->route('student.pages.issue')->with('success', 'Gửi báo cáo hư hỏng thành công');
+    }
+
+    function getKitchenExpenses(){
+        $today = Carbon::now();
+        $today->month; // retrieve the month
+        $today->year;
+        $time = $today->year . "-" . $today->month;
+        $kitchenExpenses = KitchenExpense::select('id', 'time', 'item', 'quantity', 'price')->where('time','like', '%'.$time.'%')->get();
+        return view('student.pages.kitchenExpense', compact('kitchenExpenses'));
     }
 }
