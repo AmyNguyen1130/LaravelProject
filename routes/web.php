@@ -1,8 +1,5 @@
 <?php
-<<<<<<< HEAD
 use Illuminate\Support\Facades\Hash;
-=======
->>>>>>> origin/Ly
 use Illuminate\Support\Facades\Cookie;
 
 /*
@@ -35,19 +32,10 @@ Route::group(['prefix' => ''], function () {
 			'as' => 'signup-step-1',
 			'uses' => 'SignupController@validateStep1'
 		]);
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> origin/Ly
 		Route::post('step-2', [
 			'as' => 'signup-step-2',
 			'uses' => 'SignupController@postSignup'
 		]);
-<<<<<<< HEAD
-	
-=======
->>>>>>> origin/Ly
 	});
 
 	Route::get('logout', [
@@ -55,18 +43,10 @@ Route::group(['prefix' => ''], function () {
 		'uses' => 'LoginController@logout'
 	]);
 
-<<<<<<< HEAD
-	Route::get('testCookie', function(){
-		$user =  Cookie::get('remember');
-		dd($user);
-	});
-
-=======
 	Route::get('testCookie', function () {
 		$user =  Cookie::get('remember');
 		dd($user);
 	});
->>>>>>> origin/Ly
 });
 
 // ADMIN
@@ -92,24 +72,33 @@ Route::group(['prefix' => 'admin/'], function () {
 
 Route::group(['prefix' => 'student/'], function () {
 
+	// Home page
+
 	Route::get('', [
 		'as' => 'student.pages.index',
 		'uses' => 'StudentController@getIndex'
 	]);
+	// 
+
+	// Issue Page
 
 	Route::get('issue', [
 		'as' => 'student.pages.issue',
 		'uses' => 'StudentController@getIssue'
 	]);
 
-	Route::get('bill', [
-		'as' => 'student.pages.bill',
-		'uses' => 'StudentController@getBill'
-	]);
-
 	Route::post('sendReport', [
 		'as' => 'student.pages.sendReport',
 		'uses' => 'StudentController@sendReport'
+	]);
+
+	// 
+
+	// Water, electric page
+
+	Route::get('bill', [
+		'as' => 'student.pages.bill',
+		'uses' => 'StudentController@getBill'
 	]);
 
 	Route::post('getWaterByMonth', [
@@ -121,6 +110,11 @@ Route::group(['prefix' => 'student/'], function () {
 		'as' => 'student.pages.getElectricByMonth',
 		'uses' => 'StudentController@getElectricByMonth'
 	]);
+	
+	// 
+
+	// Kitchen Page
+
 	Route::get('getKitchenExpenses', [
 		'as' => 'student.pages.getKitchenExpenses',
 		'uses' => 'StudentController@getKitchenExpenses'
@@ -129,5 +123,19 @@ Route::group(['prefix' => 'student/'], function () {
 	Route::post('getKitchenExpensesByMonth', [
 		'as' => 'student.pages.getKitchenExpensesByMonth',
 		'uses' => 'StudentController@getKitchenExpensesByMonth'
+	]);
+
+	// 
+
+	// Misconduct page
+
+	Route::get('getMisconduct', [
+		'as' => 'student.pages.getMisconduct',
+		'uses' => 'StudentController@getMisconduct'
+	]);
+
+	Route::post('getMisconductByMonth', [
+		'as' => 'student.pages.getMisconductByMonth',
+		'uses' => 'StudentController@getMisconductByMonth'
 	]);
 });

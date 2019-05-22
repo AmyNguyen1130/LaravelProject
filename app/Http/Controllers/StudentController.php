@@ -11,6 +11,7 @@ use App\Electric;
 use App\Room;
 use App\Student;
 use App\KitchenExpense;
+use App\Misconduct;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Http\Requests\IssueRequest;
 
@@ -72,17 +73,44 @@ class StudentController extends Controller
         return redirect()->route('student.pages.issue')->with('success', 'Gửi báo cáo hư hỏng thành công');
     }
 
-    function getKitchenExpenses(){
+    function getKitchenExpenses()
+    {
         $today = Carbon::now()->format('Y-m');
         $months = KitchenExpense::select('time')->distinct('time')->get();
-        $kitchenExpenses = KitchenExpense::select('id', 'time', 'item', 'quantity', 'price')->where('time','like', '%'.$today.'%')->get();
+        $kitchenExpenses = KitchenExpense::select('id', 'time', 'item', 'quantity', 'price')->where('time', 'like', '%' . $today . '%')->get();
         return view('student.pages.kitchenExpense', compact('kitchenExpenses', 'months'));
     }
 
-    function getKitchenExpensesByMonth(Request $req){
-        $kitchenExpenses = KitchenExpense::select('id', 'time', 'item', 'quantity', 'price')->where('time','like', '%'.$req->month_kitchen.'%')->get();
+    function getKitchenExpensesByMonth(Request $req)
+    {
+        $kitchenExpenses = KitchenExpense::select('id', 'time', 'item', 'quantity', 'price')->where('time', 'like', '%' . $req->month_kitchen . '%')->get();
         return response()->json([
             'kitchenExpenses' => $kitchenExpenses
+        ], 200);
+    }
+
+    function getMisconduct()
+    {
+        $today = Carbon::now()->format('Y-m');
+        $months = Misconduct::select('time')->distinct('time')->get();
+        $misconducts = Misconduct::select('id', 'student_id', 'content', 'time', 'minus')->where('time', 'like', '%' . $today . '%')->where('student_id', Session('user')->id)->get();
+        $sum = 0;
+        foreach ($misconducts as $value) {
+            $sum += $value->minus;
+        }
+        return view('student.pages.misconduct', compact('misconducts', 'months', 'sum'));
+    }
+
+    function getMisconductByMonth(Request $req)
+    {
+        $misconducts = Misconduct::select('id', 'student_id', 'content', 'time', 'minus')->where('time', 'like', $req->month_misconduct . '%')->get();
+        $sum = 0;
+        foreach ($misconducts as $value) {
+            $sum += $value->minus;
+        }
+        return response()->json([
+            'misconducts' => $misconducts,
+            'sum' => $sum,
         ], 200);
     }
 }

@@ -118,3 +118,46 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function () {
+    $('#month_misconduct').change(function (e) {
+        e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            'type': 'POST',
+            'url': 'student/getMisconductByMonth',
+            'data': {
+                'month_misconduct': $('#month_misconduct').val()
+            },
+            'dataType': 'json',
+            success: function (data) {
+                console.log(data);
+                html = '';
+                count = 0;
+                $.each(data.misconducts, function (key, value) {
+                    count++;
+                    html += '<tr>'
+                    html += '<td>' + count + '</td>';
+                    html += '<td>' + value.content + '</td>';
+                    html += '<td>' + value.time + '</td>';
+                    html += '<td>' + value.minus + '</td>';
+                    html += '</tr>';
+                });
+                html += '<tr>'
+                html += '<td>Tổng Tiền</td>';
+                html += '<td></td>';
+                html += '<td></td>';
+                html += '<td>' + data.sum + '</td>';
+                html += '</tr>';
+                $('#table_misconduct tbody').html(html)
+            },
+            error: function () {
+                console.log('Lỗi')
+            }
+        });
+    });
+});
