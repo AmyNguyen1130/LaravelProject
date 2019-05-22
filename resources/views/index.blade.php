@@ -169,12 +169,21 @@
 										<p class="text-danger error errorSignupEmail"></p>
 										<input type="text" class="form-control" onclick="$('.errorSignupEmail').fadeOut()" id="signup-email" placeholder="Nhập địa chỉ email...">
 									</div>
+<<<<<<< HEAD
 
 									<div class="form-group">
 										<p class="text-danger error errorSignupPassword"></p>
 										<input type="password" class="form-control" onclick="$('.errorSignupPassword').fadeOut()" id="signup-password" placeholder="Nhập mật khẩu...">
 									</div>
 
+=======
+
+									<div class="form-group">
+										<p class="text-danger error errorSignupPassword"></p>
+										<input type="password" class="form-control" onclick="$('.errorSignupPassword').fadeOut()" id="signup-password" placeholder="Nhập mật khẩu...">
+									</div>
+
+>>>>>>> origin/Ly
 									<div class="text-center">
 										<button type="button" id="btn-next" class="btn btn-primary col-sm-12"> Tiếp theo </button>
 									</div>
@@ -200,8 +209,22 @@
 									<!-- END VALIDATION SIGNUP MESSAGE -->
 
 									<div class="form-group">
+<<<<<<< HEAD
 									<p class="text-danger error errorSignupName"></p>
 										<input type="text" class="form-control" id="name" placeholder="Họ và tên" required>
+=======
+										<p class="text-danger error errorSignupName"></p>
+										<input type="text" class="form-control" id="name" onclick="$('.errorSignupName').fadeOut()" placeholder="Họ và tên" required>
+									</div>
+
+									<div class="form-group">
+										<select class="form-control" id="class">
+											<option disabled>Lớp</option>
+											@foreach($classes as $class)
+											<option value="{{ $class->id }}">{{ $class->name }}</option>
+											@endforeach
+										</select>
+>>>>>>> origin/Ly
 									</div>
 
 									<div class="form-group">
@@ -212,6 +235,7 @@
 									</div>
 
 									<div class="form-group">
+<<<<<<< HEAD
 									<p class="text-danger error errorSignupBirthday"></p>
 										<input type="date" class="form-control" id="birthday" placeholder="Ngày sinh" required>
 									</div>
@@ -224,6 +248,34 @@
 									<div class="text-center">
 										<button type="button" id="btn-previous" class="btn btn-default col-sm-6"> Quay lại </button>
 										<button type="button" id="btn-signup" class="btn btn-primary col-sm-6"> Cập nhật </button>
+=======
+										<p class="text-danger error errorSignupBirthday"></p>
+										<input type="date" class="form-control" id="birthday" onclick="$('.errorSignupBirthday').fadeOut()" placeholder="Ngày sinh" required>
+									</div>
+
+									<div class="form-group">
+										<select class="form-control" id="room">
+											<option disabled>Phòng</option>
+											@foreach($rooms as $room)
+											<option value="{{ $room->id }}">{{ $room->name }}</option>
+											@endforeach
+										</select>
+									</div>
+
+									<div class="form-group">
+										<p class="text-danger error errorSignupAddress"></p>
+										<input type="text" class="form-control" id="address" onclick="$('.errorSignupAddress').fadeOut()" placeholder="Địa chỉ" required>
+									</div>
+
+									<div class="form-group">
+										<p class="text-danger error errorSignupPhone"></p>
+										<input type="text" class="form-control" id="phone" onclick="$('.errorSignupPhone').fadeOut()" placeholder="Số điện thoại" required>
+									</div>
+
+									<div class="text-center">
+										<button type="button" id="btn-previous" class="btn btn-default col-xs-6"> Quay lại </button>
+										<button type="button" id="btn-signup" class="btn btn-primary col-xs-6"> Cập nhật </button>
+>>>>>>> origin/Ly
 									</div>
 								</form>
 

@@ -379,3 +379,35 @@ header #menu-hr .navbar-default #collapse-menu {
         color: rgb(236, 166, 14);
     }
 }
+
+/* STUDENT */
+
+.box-product-head {
+    height: 31px;
+    border-bottom: 2px solid #22bbea;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.box-product-head .box-title {
+    color: #fff;
+    /*text-transform: uppercase;*/
+    border-bottom: 0px solid #ff3300;
+    font-size: 18px;
+    padding: 10px 20px 8px 15px;
+    background: #22bbea;
+}
+
+.box-product-head .box-title a {
+    color: #ffffff;
+}
+
+.box-product-head>span.af-ter {
+    border: 19px solid #22bbea;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    height: 30px;
+    position: absolute;
+    width: 30px;
+    margin-top: -7px;
+}

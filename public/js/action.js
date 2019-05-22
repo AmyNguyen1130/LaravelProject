@@ -1,4 +1,4 @@
-// CONTROL LOGIN/ SIGNUP
+// FUNCTIONS
 function loginControl() {
     $('#login-form').addClass('active');
     $('#login-form').addClass('in');
@@ -20,12 +20,24 @@ function signupControl() {
 }
 
 function moveToStep2(student) {
+<<<<<<< HEAD
     $('#name').val(student.name);
     $('#gender').val(student.gender);
     $('#birthday').val(student.birthday);
     $('#phone').val(student.phone);
 }
 
+=======
+    if (student != null) {
+        $('#name').val(student.name);
+        $('#gender').val(student.gender);
+        $('#birthday').val(student.birthday);
+        $('#phone').val(student.phone);
+    }
+}
+
+// LOGIN AJAX
+>>>>>>> origin/Ly
 $(document).ready(function () {
     $('#btn-login').click(function (e) {
         e.preventDefault();
@@ -58,11 +70,16 @@ $(document).ready(function () {
                         $('.errorLogin').show().text(data.message.errorlogin[0]);
                     }
                 } else {
+<<<<<<< HEAD
                     window.location.replace("http://localhost/LaravelProject/");
+=======
+                    window.location.replace("http://localhost/LaravelProject/" + data.role);
+>>>>>>> origin/Ly
                 }
             }
         });
     })
+<<<<<<< HEAD
 });
 
 // // SIGNUP PROGRESS
@@ -105,6 +122,54 @@ $(document).ready(function () {
             }
         });
 
+=======
+
+
+});
+
+
+
+// // SIGNUP PROGRESS
+// // SIGNUP AJAX
+$(document).ready(function () {
+    $('#btn-next').click(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            'type': 'POST',
+            'url': 'signup/step-1',
+            'data': {
+                'email': $('#signup-email').val(),
+                'password': $('#signup-password').val(),
+                '_token': $(this).data('token')
+            },
+            'dataType': 'json',
+            success: function (data) {
+                console.log(data);
+                if (data.error == true) {
+                    $('.error').hide();
+                    if (data.message.email != undefined) {
+                        $('.errorSignupEmail').show().text(data.message.email[0]);
+                    }
+                    if (data.message.password != undefined) {
+                        $('.errorSignupPassword').show().text(data.message.password[0]);
+                    }
+                    if (data.message.errorSignup != undefined) {
+                        $('.errorSignup').show().text(data.message.errorSignup[0]);
+                    }
+                } else {
+                    moveToStep2(data.student);
+                    $('#signup-form-step1').removeClass('show');
+                    $('#signup-form-step1').addClass('hide');
+                    $('#signup-form-step2').addClass('show');
+                    $('#signup-form-step2').removeClass('hide');
+                }
+            }
+        });
+>>>>>>> origin/Ly
     });
 
     $('#btn-previous').click(function () {
@@ -127,8 +192,16 @@ $(document).ready(function () {
                 'email': $('#signup-email').val(),
                 'password': $('#signup-password').val(),
                 'name': $('#name').val(),
+<<<<<<< HEAD
                 'gender': $('#gender').val(),
                 'birthday': $('#birthday').val(),
+=======
+                'class': $('#class').val(),
+                'gender': $('#gender').val(),
+                'birthday': $('#birthday').val(),
+                'room': $('#room').val(),
+                'address': $('#address').val(),
+>>>>>>> origin/Ly
                 'phone': $('#phone').val(),
                 '_token': $(this).data('token')
             },
@@ -143,6 +216,12 @@ $(document).ready(function () {
                     if (data.message.birthday != undefined) {
                         $('.errorSignupBirthday').show().text(data.message.birthday[0]);
                     }
+<<<<<<< HEAD
+=======
+                    if (data.message.address != undefined) {
+                        $('.errorSignupAddress').show().text(data.message.address[0]);
+                    }
+>>>>>>> origin/Ly
                     if (data.message.phone != undefined) {
                         $('.errorSignupPhone').show().text(data.message.phone[0]);
                     }
@@ -150,6 +229,7 @@ $(document).ready(function () {
                         $('.errorSignupStep2').show().text(data.message.errorSignup[0]);
                     }
                 } else {
+<<<<<<< HEAD
                     window.location.replace("http://localhost/LaravelProject/");
                 }
             }
@@ -157,3 +237,13 @@ $(document).ready(function () {
 
     });
 });
+=======
+                    window.location.replace("http://localhost/LaravelProject/student");
+                }
+            }
+        });
+    });
+});
+
+// SEND REPORT
+>>>>>>> origin/Ly
