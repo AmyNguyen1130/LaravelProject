@@ -1,4 +1,4 @@
-// VIEW WATER BILL BY MONTH
+// VIEW WATER, ELECTRIC BILL BY MONTH
 
 $(document).ready(function () {
 
@@ -71,6 +71,46 @@ $(document).ready(function () {
                     html += '</tr>';
                 });
                 $('#table_electric tbody').html(html)
+            },
+            error: function () {
+                console.log('Lỗi')
+            }
+        });
+    });
+});
+
+//XEM CHI TIÊU Ở BẾP THEO THÁNG
+
+$(document).ready(function () {
+    $('#month_kitchen').change(function (e) {
+        e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            'type': 'POST',
+            'url': 'student/getKitchenExpensesByMonth',
+            'data': {
+                'month_kitchen': $('#month_kitchen').val()
+            },
+            'dataType': 'json',
+            success: function (data) {
+                console.log(data);
+                html = '';
+                count = 0;
+                $.each(data.kitchenExpenses, function (key, value) {
+                    count++;
+                    html += '<tr>'
+                    html += '<td>' + count + '</td>';
+                    html += '<td>' + value.time + '</td>';
+                    html += '<td>' + value.item + '</td>';
+                    html += '<td>' + value.quantity + '</td>';
+                    html += '<td>' + value.price + '</td>';
+                    html += '</tr>';
+                });
+                $('#table_kitchen tbody').html(html)
             },
             error: function () {
                 console.log('Lỗi')

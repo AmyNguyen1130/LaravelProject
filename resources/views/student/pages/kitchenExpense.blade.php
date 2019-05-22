@@ -15,7 +15,15 @@
                 </span>
             </div>
         </div>
-        <table class="table table-bordered table-striped" id="table_users">
+        <div class="col-sm-3" style="margin-bottom: 50px;">
+            <label for="">Tháng: </label>
+            <select class="form-control" id="month_kitchen">
+                @foreach($months as $month)
+                <option value="{{date('Y-m', strtotime($month->time))}}">{{date('Y-m', strtotime($month->time))}}</option>
+                @endforeach
+            </select>
+        </div>
+        <table class="table table-bordered table-striped" id="table_kitchen">
             <thead>
                 <tr class="bg-primary">
                     <th>#</th>
@@ -31,7 +39,7 @@
                     <td>{{ $kitchenExpense->id }}</td>
                     <td>{{ $kitchenExpense->time }}</td>
                     <td>{{ $kitchenExpense->item }}</td>
-                    <td>{{ $kitchenExpense->quality }}</td>
+                    <td>{{ $kitchenExpense->quantity }}</td>
                     <td>{{ $kitchenExpense->price }}</td>
                 </tr>
                 @endforeach

@@ -105,4 +105,9 @@ Route::group(['prefix' => 'student/'], function () {
 		'as' => 'student.pages.getKitchenExpenses',
 		'uses' => 'StudentController@getKitchenExpenses'
 	]);
+
+	Route::post('getKitchenExpensesByMonth', [
+		'as' => 'student.pages.getKitchenExpensesByMonth',
+		'uses' => 'StudentController@getKitchenExpensesByMonth'
+	]);
 });
