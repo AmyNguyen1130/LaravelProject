@@ -11,6 +11,8 @@ use App\Misconduct;
 use App\Water;
 use App\Educator;
 use App\Classes;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class PagesController extends Controller
 {
@@ -19,14 +21,13 @@ class PagesController extends Controller
     {
         return view('index');
     }
-
     // ADMIN PAGES
 
     // TABLE users
     public function getTableUsers()
     {
         $users = User::all();
-        return view('admin.tables.users.users', compact('users'));
+        return view('admin.tables.users', compact('users'));
     }
 
     public function getEducatorPage()

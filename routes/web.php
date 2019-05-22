@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Cookie;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,103 +14,97 @@
 
 // PAGES
 Route::get('/', [
-    'as' => 'index',
-    'uses' => 'PagesController@getIndex'
+	'as' => 'index',
+	'uses' => 'PagesController@getIndex'
 ]);
 
 Route::group(['prefix' => ''], function () {
 
-    Route::get('products', [
-        'as' => 'products',
-        'uses' => 'PagesController@getProducts'
-    ]);
+	Route::post('login', [
+		'as' => 'login',
+		'uses' => 'LoginController@checkLogin'
+	]);
 
-    Route::get('product-type/{id}', [
-        'as' => 'product-type',
-        'uses' => 'PagesController@getProductType'
-    ]);
+	Route::group(['prefix' => 'signup/'], function () {
 
-    Route::get('product-detail/{id}', [
-        'as' => 'product-detail',
-        'uses' => 'PagesController@getProductDetail'
-    ]);
+		Route::post('step-1', [
+			'as' => 'signup-step-1',
+			'uses' => 'SignupController@validateStep1'
+		]);
 
-    Route::get('contact', [
-        'as' => 'contact',
-        'uses' => 'PagesController@getContact'
-    ]);
+		Route::post('step-2', [
+			'as' => 'signup-step-2',
+			'uses' => 'SignupController@postSignup'
+		]);
+	});
 
-    Route::get('about', [
-        'as' => 'about',
-        'uses' => 'PagesController@getAbout'
-    ]);
+	Route::get('logout', [
+		'as' => 'logout',
+		'uses' => 'LoginController@logout'
+	]);
 
-    // CART
-    Route::get('add-to-cart/{id}', [
-        'as' => 'add-to-cart',
-        'uses' => 'PagesController@getAddToCart'
-    ]);
-
-    Route::get('delete-from-cart/{id}', [
-        'as' => 'delete-from-cart',
-        'uses' => 'PagesController@getDeleteFromCart'
-    ]);
-
-    Route::get('checkout', [
-        'as' => 'checkout',
-        'uses' => 'PagesController@getCheckout'
-    ]);
+	Route::get('testCookie', function () {
+		$user =  Cookie::get('remember');
+		dd($user);
+	});
 });
 
 // ADMIN
 Route::group(['prefix' => 'admin/'], function () {
 
-    Route::get('', [
-        'as' => 'admin.pages.index',
-        function () {
-            return view('admin.pages.index');
-        }
-    ]);
+	Route::get('', [
+		'as' => 'admin.pages.index',
+		function () {
+			return view('admin.pages.index');
+		}
+	]);
 
-    Route::group(['prefix' => 'tables/'], function () {
+	Route::group(['prefix' => 'tables/'], function () {
 
-        Route::get('users', [
-            'as' => 'admin.tables.users',
-            'uses' => 'PagesController@getTableUsers'
-        ]);
-
-        // Route::get('categories', [
-        //     'as' => 'admin.tables.categories',
-        //     'uses' => 'PagesController@getTableCategories'
-        // ]);
-
-        // Route::get('products', [
-        //     'as' => 'admin.tables.products',
-        //     'uses' => 'PagesController@getTableProducts'
-        // ]);
-
-        // Route::get('orders', [
-        //     'as' => 'admin.tables.orders',
-        //     'uses' => 'PagesController@getTableOrders'
-        // ]);
-
-        // Route::get('bills', [
-        //     'as' => 'admin.tables.bills',
-        //     'uses' => 'PagesController@getTableBills'
-        // ]);
-    });
+		Route::get('users', [
+			'as' => 'admin.tables.users',
+			'uses' => 'PagesController@getTableUsers'
+		]);
+	});
 });
 
 //STUDENT
 
 Route::group(['prefix' => 'student/'], function () {
 
-    Route::get('', [
-        'as' => 'student.pages.index',
-        function () {
-            return view('student.pages.index');
-        }
-    ]);
+	Route::get('', [
+		'as' => 'student.pages.index',
+		'uses' => 'StudentController@getIndex'
+	]);
+
+	Route::get('issue', [
+		'as' => 'student.pages.issue',
+		'uses' => 'StudentController@getIssue'
+	]);
+
+	Route::get('bill', [
+		'as' => 'student.pages.bill',
+		'uses' => 'StudentController@getBill'
+	]);
+
+	Route::post('sendReport', [
+		'as' => 'student.pages.sendReport',
+		'uses' => 'StudentController@sendReport'
+	]);
+
+	Route::post('getWaterByMonth', [
+		'as' => 'student.pages.getWaterByMonth',
+		'uses' => 'StudentController@getWaterByMonth'
+	]);
+
+	Route::post('getElectricByMonth', [
+		'as' => 'student.pages.getElectricByMonth',
+		'uses' => 'StudentController@getElectricByMonth'
+	]);
+	Route::get('getKitchenExpenses', [
+		'as' => 'student.pages.getKitchenExpenses',
+		'uses' => 'StudentController@getKitchenExpenses'
+	]);
 });
 
 Route::get('educator', [
