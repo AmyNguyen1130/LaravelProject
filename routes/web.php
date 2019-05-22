@@ -59,7 +59,6 @@ Route::group(['prefix' => ''], function () {
         'as' => 'checkout',
         'uses' => 'PagesController@getCheckout'
     ]);
-    
 });
 
 // ADMIN
@@ -111,9 +110,24 @@ Route::group(['prefix' => 'student/'], function () {
             return view('student.pages.index');
         }
     ]);
-
 });
 
-Route::get('educator', function(){
-    return view('educator');
-});
+Route::get('educator', [
+    'as' => 'edu-page',
+    'uses' => 'PagesController@getEducatorPage'
+]);
+
+Route::get('kitchen', [
+    'as' => 'kitchen-page',
+    'uses' => 'PagesController@getKitchenPage'
+]);
+
+Route::get('Water&Electrics', [
+    'as' => 'water&electrics',
+    'uses' => 'PagesController@getWaterElectrics'
+]);
+
+Route::get('Misconducts', [
+    'as' => 'misconduct',
+    'uses' => 'PagesController@getMisconduct'
+]);

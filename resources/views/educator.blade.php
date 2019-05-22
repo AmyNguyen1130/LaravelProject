@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <base href="{{ asset('') }}">
     <link rel="stylesheet" href="public/css/custom/educator.css">
+    <link rel="stylesheet" href="public/css/custom/index.css">
+    <!-- <link rel="stylesheet" href="public/css/app.css"> -->
     <link href='http://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
@@ -20,8 +22,8 @@
     <div class="container">
         <div class="menu">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#">Thông Tin Phòng</a></li>
-                <li><a href="#" class="menu-con">Tình Trạng Bếp</a></li>
+                <li class="active"><a href="educator.php">Thông Tin Phòng</a></li>
+                <li><a href="{{ rout('kitchen_status')  }}" class="menu-con">Tình Trạng Bếp</a></li>
                 <li><a href="#" class="menu-con">Điện Nước</a></li>
                 <li><a href="#" class="menu-con">Lỗi Vi Phạm</a></li>
             </ul>
@@ -93,33 +95,60 @@
                         <div class="tab-content">
                             <div class="tab-pane active in" id="room-206">
                                 <form method="POST" enctype="multipart/form-data">
-                                <div class="room-info">
-                                    <h3>Thông Tin Phòng</h3>
-                                    <hr width="85%">
-                                    <div class="row">
-                                        <div class="col-md-3 text-center">
-                                            <a class="btn" style="color:coral;">Room ID</a>
+                                    <div class="room-info">
+                                        <h3>Thông Tin Phòng</h3>
+                                        <hr width="85%">
+                                        <div class="row">
+                                            <div class="col-md-3 text-center">
+                                                <a class="btn" style="color:coral;">Room ID</a>
+                                            </div>
+                                            <div class="col-md-3 text-center">
+                                                <a class="btn" style="color:coral;">Name Room</a>
+                                            </div>
+                                            <div class="col-md-3 text-center">
+                                                <a class="btn" style="color:coral;">Floor</a>
+                                            </div>
+                                            <div class="col-md-3 text-center">
+                                                <a class="btn" style="color:coral;">Member</a>
+                                            </div>
                                         </div>
-                                        <div class="col-md-3 text-center">
-                                            <a class="btn" style="color:coral;">Name Room</a>
-                                        </div>
-                                        <div class="col-md-3 text-center">
-                                            <a class="btn" style="color:coral;">Floor</a>
-                                        </div>
-                                        <div class="col-md-3 text-center">
-                                            <a class="btn" style="color:coral;">Member</a>
-                                        </div>
+                                        <hr width="85%">
                                     </div>
-                                    <hr width="85%">
-                                </div>
-                                </form> 
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="before-footer">
+
+        </div>
+        <div class="footer">
+            <div class="container">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                    <h4>GIỚI THIỆU</h4>
+                    <hr>
+                    <p class="title">PASSERELLES NUMERIQUES VIETNAM</p>
+                    <p class="title">Địa chỉ: </p><span>99 Tô Hiến Thành, Sơn Trà, Đà Nẵng</span>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                    <h4>ĐỊA CHỈ LIÊN HỆ</h4>
+                    <hr>
+                    <p class="title">Liên hệ với chúng tôi </p>
+                    <p><a href="#"><span><i class="fa fa-phone"></i></span> 0348 543 343 </a></p>
+                    <p><a href="#"><span><i class="fa fa-envelope-o "></i></span> contactpnv@gmail.com</a></p>
+                    <p><a href="#"><span><i class="fa fa-address-card "></i></span> +84 348 543 343</a></p> <br>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                    <h4>MẠNG XÃ HỘI</h4>
+                    <hr>
+                </div>
+            </div>
+        </div>
     </div>
+
 
 </body>
 
