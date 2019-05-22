@@ -1,4 +1,8 @@
 <?php
+<<<<<<< HEAD
+use Illuminate\Support\Facades\Hash;
+=======
+>>>>>>> origin/Ly
 use Illuminate\Support\Facades\Cookie;
 
 /*
@@ -31,11 +35,19 @@ Route::group(['prefix' => ''], function () {
 			'as' => 'signup-step-1',
 			'uses' => 'SignupController@validateStep1'
 		]);
+<<<<<<< HEAD
+	
+=======
 
+>>>>>>> origin/Ly
 		Route::post('step-2', [
 			'as' => 'signup-step-2',
 			'uses' => 'SignupController@postSignup'
 		]);
+<<<<<<< HEAD
+	
+=======
+>>>>>>> origin/Ly
 	});
 
 	Route::get('logout', [
@@ -43,10 +55,18 @@ Route::group(['prefix' => ''], function () {
 		'uses' => 'LoginController@logout'
 	]);
 
+<<<<<<< HEAD
+	Route::get('testCookie', function(){
+		$user =  Cookie::get('remember');
+		dd($user);
+	});
+
+=======
 	Route::get('testCookie', function () {
 		$user =  Cookie::get('remember');
 		dd($user);
 	});
+>>>>>>> origin/Ly
 });
 
 // ADMIN
