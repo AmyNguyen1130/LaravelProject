@@ -18,7 +18,6 @@ class PagesController extends Controller
     // TABLE users
     public function getTableUsers()
     {
-        $users = User::all();
-        return view('admin.tables.users', compact('users'));
+        return view('admin.tables.users');
     }
 }

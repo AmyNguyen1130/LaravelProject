@@ -41,3 +41,84 @@
 
 <!-- Tabledit JS -->
 <script src="public/js/jquery.tabledit.min.js"></script>
+
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $(window).load(function() {
+        loadData()
+    });
+
+    function loadData() {
+        console.log('loading')
+        $.ajax({
+            url: 'admin/tables/users/load',
+            method: 'GET'
+        }).done(function(data) {
+            console.log('loaded')
+            $('tbody').html(data)
+            tableData()
+        })
+    }
+
+    function tableData() {
+        $('#table_users').Tabledit({
+            url: 'admin/tables/users/CRUD',
+            eventType: 'dblclick',
+            editButton: true,
+            deleteButton: true,
+            hideIdentifier: false,
+            buttons: {
+                edit: {
+                    class: 'btn btn-sm btn-warning',
+                    html: '<span class="glyphicon glyphicon-pencil"></span> Edit',
+                    action: 'edit'
+                },
+                delete: {
+                    class: 'btn btn-sm btn-danger',
+                    html: '<span class="glyphicon glyphicon-trash"></span> Trash',
+                    action: 'delete'
+                },
+                save: {
+                    class: 'btn btn-sm btn-success',
+                    html: 'Save'
+                },
+                restore: {
+                    class: 'btn btn-sm btn-warning',
+                    html: 'Restore',
+                    action: 'restore'
+                },
+                confirm: {
+                    class: 'btn btn-sm btn-default',
+                    html: 'Confirm'
+                }
+            },
+            columns: {
+                identifier: [0, 'id'],
+                editable: [
+                    [1, 'full_name'],
+                    [2, 'email'],
+                    [3, 'role', '{"Admin": "Admin", "Customer": "Customer"}'],
+                ]
+            },
+            onSuccess: function(data, textStatus, jqXHR) {
+                loadData()
+            },
+            onFail: function(jqXHR, textStatus, errorThrown) {
+                console.log('onFail(jqXHR, textStatus, errorThrown)');
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            onAjax: function(action, serialize) {
+                console.log('onAjax(action, serialize)');
+                console.log(action);
+                console.log(serialize);
+            }
+        });
+    }
+</script>

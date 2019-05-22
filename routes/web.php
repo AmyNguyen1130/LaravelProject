@@ -31,12 +31,11 @@ Route::group(['prefix' => ''], function () {
 			'as' => 'signup-step-1',
 			'uses' => 'SignupController@validateStep1'
 		]);
-	
+
 		Route::post('step-2', [
 			'as' => 'signup-step-2',
 			'uses' => 'SignupController@postSignup'
 		]);
-	
 	});
 
 	Route::get('logout', [
@@ -44,11 +43,10 @@ Route::group(['prefix' => ''], function () {
 		'uses' => 'LoginController@logout'
 	]);
 
-	Route::get('testCookie', function(){
+	Route::get('testCookie', function () {
 		$user =  Cookie::get('remember');
 		dd($user);
 	});
-
 });
 
 // ADMIN
@@ -63,11 +61,22 @@ Route::group(['prefix' => 'admin/'], function () {
 
 	Route::group(['prefix' => 'tables/'], function () {
 
-		Route::get('users', [
-			'as' => 'admin.tables.users',
-			'uses' => 'PagesController@getTableUsers'
-		]);
+		Route::group(['prefix' => 'users/'], function () {
+			Route::get('', [
+				'as' => 'admin.tables.users',
+				'uses' => 'PagesController@getTableUsers'
+			]);
 
+			Route::get('load', [
+				'as' => 'admin.tables.users.load',
+				'uses' => 'AdminController@loadData'
+			]);
+
+			Route::post('CRUD', [
+				'as' => 'admin.tables.users.CRUD',
+				'uses' => 'AdminController@CRUDTableUsers'
+			]);
+		});
 	});
 });
 
@@ -75,31 +84,30 @@ Route::group(['prefix' => 'admin/'], function () {
 
 Route::group(['prefix' => 'student/'], function () {
 
-    Route::get('', [
-        'as' => 'student.pages.index',
-        'uses' => 'StudentController@getIndex'
+	Route::get('', [
+		'as' => 'student.pages.index',
+		'uses' => 'StudentController@getIndex'
 	]);
-	
+
 	Route::get('issue', [
-        'as' => 'student.pages.issue',
-        'uses' => 'StudentController@getIssue'
+		'as' => 'student.pages.issue',
+		'uses' => 'StudentController@getIssue'
 	]);
-	
+
 	Route::get('bill', [
-        'as' => 'student.pages.bill',
-        'uses' => 'StudentController@getBill'
+		'as' => 'student.pages.bill',
+		'uses' => 'StudentController@getBill'
 	]);
-	
+
 	Route::post('sendReport', [
-        'as' => 'student.pages.sendReport',
-        'uses' => 'StudentController@sendReport'
+		'as' => 'student.pages.sendReport',
+		'uses' => 'StudentController@sendReport'
 	]);
 
 	Route::post('getWaterByMonth', [
-        'as' => 'student.pages.getWaterByMonth',
-        'uses' => 'StudentController@getWaterByMonth'
+		'as' => 'student.pages.getWaterByMonth',
+		'uses' => 'StudentController@getWaterByMonth'
 	]);
-
 });
 
 
