@@ -3,27 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Electric;
 
-class AdminController extends Controller
+class ManagerController extends Controller
 {
-    // TABLE users
-    public function getTableUsers()
+
+    public function getTableElectrics()
     {
-        return view('admin.tables.users');
+        return view('manager.tables.electrics');
     }
 
-    public function loadData()
+    public function loadDataTableElectrics()
     {
-        $users = User::all();
+        $electrics = Electric::all();
         $data = "";
-        foreach ($users as $user) {
+        foreach ($electrics as $electric) {
             $data .= "
             <tr>
-                <td>" . $user->id . "</td>
-                <td>" . $user->full_name . "</td>
-                <td>" . $user->email . "</td>
-                <td>" . $user->role . "</td>
+                <td>" . $electric->id . "</td>
+                <td>" . $electric->full_name . "</td>
+                <td>" . $electric->email . "</td>
+                <td>" . $electric->role . "</td>
             </tr>
             ";
         }

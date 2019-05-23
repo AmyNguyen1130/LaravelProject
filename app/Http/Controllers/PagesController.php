@@ -15,9 +15,4 @@ class PagesController extends Controller
     }
     // ADMIN PAGES
 
-    // TABLE users
-    public function getTableUsers()
-    {
-        return view('admin.tables.users');
-    }
 }

@@ -1,5 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,6 +13,13 @@ use Illuminate\Support\Facades\Cookie;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('hash/{password}', [
+	'as' => 'hash',
+	function($hash) {
+		return Hash::make($hash);
+	}
+]);
 
 // PAGES
 Route::get('/', [
@@ -55,7 +64,12 @@ Route::group(['prefix' => 'admin/'], function () {
 	Route::get('', [
 		'as' => 'admin.pages.index',
 		function () {
-			return view('admin.pages.index');
+			if(Session::has('user')) {
+				if(Session('user')->role == "admin") {
+					return view('admin.pages.index');
+				}
+			}
+			return redirect()->back();
 		}
 	]);
 
@@ -64,7 +78,7 @@ Route::group(['prefix' => 'admin/'], function () {
 		Route::group(['prefix' => 'users/'], function () {
 			Route::get('', [
 				'as' => 'admin.tables.users',
-				'uses' => 'PagesController@getTableUsers'
+				'uses' => 'AdminController@getTableUsers'
 			]);
 
 			Route::get('load', [
@@ -75,6 +89,42 @@ Route::group(['prefix' => 'admin/'], function () {
 			Route::post('CRUD', [
 				'as' => 'admin.tables.users.CRUD',
 				'uses' => 'AdminController@CRUDTableUsers'
+			]);
+		});
+	});
+});
+
+// MANAGER
+Route::group(['prefix' => 'manager/'], function () {
+
+	Route::get('', [
+		'as' => 'manager.pages.index',
+		function () {
+			if(Session::has('user')) {
+				if(Session('user')->role == "manager") {
+					return view('manager.pages.index');
+				}
+			}
+			return redirect()->back();
+		}
+	]);
+
+	Route::group(['prefix' => 'tables/'], function () {
+
+		Route::group(['prefix' => 'users/'], function () {
+			Route::get('', [
+				'as' => 'manager.tables.users',
+				'uses' => 'ManagerController@getTableElectrics'
+			]);
+
+			Route::get('load', [
+				'as' => 'manager.tables.electrics.load',
+				'uses' => 'ManagerController@loadDataTableElectrics'
+			]);
+
+			Route::post('CRUD', [
+				'as' => 'manager.tables.users.CRUD',
+				'uses' => 'ManagerController@CRUDTableUsers'
 			]);
 		});
 	});
