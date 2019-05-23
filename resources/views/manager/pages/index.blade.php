@@ -1,6 +1,6 @@
-@extends("admin.layouts.master")
+@extends("manager.layouts.master")
 
-@section("admin.admin-content")
+@section("manager.manager-content")
 
 <!-- page content -->
 <div class="right_col" role="main">

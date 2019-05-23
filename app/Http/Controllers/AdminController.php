@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Educator;
 
 class AdminController extends Controller
 {
@@ -13,16 +14,18 @@ class AdminController extends Controller
         return view('admin.tables.users');
     }
 
-    public function loadData()
+    public function loadDataTableUsers()
     {
-        $users = User::all();
+        $users = User::select('users.id', 'name', 'users.email', 'gender', 'phone', 'role')->join('educators', 'users.email', 'educators.email')->where('role', 'educator')->get();
         $data = "";
         foreach ($users as $user) {
             $data .= "
             <tr>
-                <td>" . $user->id . "</td>
-                <td>" . $user->full_name . "</td>
+                <td class='hidden'>" . $user->id . "</td>
+                <td>" . $user->name . "</td>
                 <td>" . $user->email . "</td>
+                <td>" . $user->gender . "</td>
+                <td>" . $user->phone . "</td>
                 <td>" . $user->role . "</td>
             </tr>
             ";
@@ -40,9 +43,21 @@ class AdminController extends Controller
             $user = User::where('id', $input['id'])->first();
             $user->email = $input['email'];
             $user->role = $input['role'];
-            $user->save();
+
+            if ($user->role === 'educator') {
+                $educator = Educator::where('email', $input['email'])->first();
+                $educator->name = $input['name'];
+                $educator->gender = $input['gender'];
+                $educator->phone = $input['phone'];
+                if ($user->save()) {
+                    $educator->save();
+                }
+            }
         } else if ($input['action'] == 'delete') {
-            User::where('id', $input['id'])->delete();
+            $user = User::where('id', $input['id'])->first();
+            $user->deleted = 1;
+            $user->save();
         }
+        echo json_encode($input);
     }
 }

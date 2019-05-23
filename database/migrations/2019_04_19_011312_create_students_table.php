@@ -25,6 +25,7 @@ class CreateStudentsTable extends Migration
             $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
             $table->integer('room_id')->unsigned();
             $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
+            $table->boolean('deleted')->default(0);
             $table->timestamps();
         });
     }

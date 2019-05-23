@@ -83,7 +83,7 @@ Route::group(['prefix' => 'admin/'], function () {
 
 			Route::get('load', [
 				'as' => 'admin.tables.users.load',
-				'uses' => 'AdminController@loadData'
+				'uses' => 'AdminController@loadDataTableUsers'
 			]);
 
 			Route::post('CRUD', [
@@ -111,9 +111,9 @@ Route::group(['prefix' => 'manager/'], function () {
 
 	Route::group(['prefix' => 'tables/'], function () {
 
-		Route::group(['prefix' => 'users/'], function () {
+		Route::group(['prefix' => 'electrics/'], function () {
 			Route::get('', [
-				'as' => 'manager.tables.users',
+				'as' => 'manager.tables.electrics',
 				'uses' => 'ManagerController@getTableElectrics'
 			]);
 
@@ -123,8 +123,8 @@ Route::group(['prefix' => 'manager/'], function () {
 			]);
 
 			Route::post('CRUD', [
-				'as' => 'manager.tables.users.CRUD',
-				'uses' => 'ManagerController@CRUDTableUsers'
+				'as' => 'manager.tables.electrics.CRUD',
+				'uses' => 'ManagerController@CRUDTableElectrics'
 			]);
 		});
 	});

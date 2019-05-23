@@ -37,18 +37,18 @@
     <div class="container body">
         <div class="main_container">
 
-            @include("admin.extends.left-menu")
+            @include("manager.extends.left-menu")
 
-            @include("admin.extends.top-nav")
+            @include("manager.extends.top-nav")
 
-            @yield("admin.admin-content")
+            @yield("manager.manager-content")
 
-            @include("admin.extends.footer")
+            @include("manager.extends.footer")
             
         </div>
     </div>
 
-    @include("admin.extends.scripts")
+    @include("manager.extends.scripts")
 
 </body>
 

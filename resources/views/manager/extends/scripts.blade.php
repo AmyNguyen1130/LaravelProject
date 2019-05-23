@@ -50,7 +50,7 @@
     });
 
     $(window).load(function() {
-        loadData()
+        loadDataTableElectrics()
     });
 
     function loadDataTableElectrics() {
@@ -66,8 +66,8 @@
     }
 
     function tableData() {
-        $('#table_users').Tabledit({
-            url: 'admin/tables/users/CRUD',
+        $('#table_electrics').Tabledit({
+            url: 'manager/tables/electrics/CRUD',
             eventType: 'dblclick',
             editButton: true,
             deleteButton: true,
@@ -100,13 +100,14 @@
             columns: {
                 identifier: [0, 'id'],
                 editable: [
-                    [1, 'full_name'],
-                    [2, 'email'],
-                    [3, 'role', '{"Admin": "Admin", "Customer": "Customer"}'],
+                    [3, 'old_number'],
+                    [4, 'new_number'],
+                    [5, 'price'],
+                    [6, 'status', '{"0": "Chưa nộp", "1": "Đã nộp"}']
                 ]
             },
             onSuccess: function(data, textStatus, jqXHR) {
-                loadData()
+                loadDataTableElectrics()
             },
             onFail: function(jqXHR, textStatus, errorThrown) {
                 console.log('onFail(jqXHR, textStatus, errorThrown)');

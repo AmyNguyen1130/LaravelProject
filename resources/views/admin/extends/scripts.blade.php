@@ -50,10 +50,10 @@
     });
 
     $(window).load(function() {
-        loadData()
+        loadDataTableUsers()
     });
 
-    function loadData() {
+    function loadDataTableUsers() {
         console.log('loading')
         $.ajax({
             url: 'admin/tables/users/load',
@@ -102,11 +102,13 @@
                 editable: [
                     [1, 'full_name'],
                     [2, 'email'],
-                    [3, 'role', '{"Admin": "Admin", "Customer": "Customer"}'],
+                    [3, 'gender', '{"Nam" : "Nam", "Nu" : "Nữ"}'],
+                    [4, 'phone'],
+                    [5, 'role', '{"educator": "Educator", "student": "Student", "manager": "Manager", "admin": "Admin"}'],
                 ]
             },
             onSuccess: function(data, textStatus, jqXHR) {
-                loadData()
+                loadDataTableUsers()
             },
             onFail: function(jqXHR, textStatus, errorThrown) {
                 console.log('onFail(jqXHR, textStatus, errorThrown)');

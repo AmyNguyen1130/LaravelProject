@@ -38,7 +38,7 @@
                     </li>
                     <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="admin/tables/users">Users</a></li>
+                            <li><a href="manager/tables/electrics">Electrics</a></li>
                             <li><a href="admin/tables/categories">Categories</a></li>
                             <li><a href="admin/tables/products">Products</a></li>
                             <li><a href="admin/tables/orders">Orders</a></li>
@@ -112,7 +112,7 @@
             <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="Logout" href="">
+            <a data-toggle="tooltip" data-placement="top" title="Logout" href="logout">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
         </div>

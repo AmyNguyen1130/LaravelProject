@@ -30,10 +30,7 @@ class StudentController extends Controller
 
     function getBill()
     {
-        $today = Carbon::now();
-        $today->month; // retrieve the month
-        $today->year;
-        $time = $today->year . "-" . $today->month;
+        $time = Carbon::now()->format('Y-m');
         $stt = 1;
         $room_current = Student::select('room_id')->where('email', Session('user')->email)->first();
         $months1 = Water::select('time')->distinct('time')->get();
