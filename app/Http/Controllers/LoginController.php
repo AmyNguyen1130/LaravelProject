@@ -49,7 +49,7 @@ class LoginController extends Controller
 					Session::put('user', $user);
 					return response()->json([
 						'error' => false,
-						'role' => $user->role,
+						'role' => $user->role
 					], 200);
 				} else {
 					$message = new MessageBag(['errorlogin' => 'Địa chỉ email hoặc mật khẩu không chính xác']);

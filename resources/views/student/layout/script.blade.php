@@ -3,6 +3,8 @@
   <!-- Bootstrap JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <!-- Scrollable -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+
   <script>
       $(window).scroll(function(event) {
           if ($(document).scrollTop() > $("#menu-hr").scrollTop() + 100) {
@@ -27,4 +29,5 @@
 
   
 	<!-- Control Login/ Signup -->
-	<script src="public/js/action.js"></script>
+    <script src="public/js/action.js"></script>
+    <script src="public/js/actionStudent.js"></script>

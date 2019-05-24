@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Datatables;
 use Carbon\Carbon;
 use App\Issue;
 use App\Water;
 use App\Electric;
-use App\room;
+use App\Room;
 use App\Student;
+use App\KitchenExpense;
+use App\Misconduct;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Http\Requests\IssueRequest;
 
@@ -18,8 +21,8 @@ class StudentController extends Controller
     {
         $student = Student::select('room_id')->where('email', Session('user')->email)->first();
         $room_id = $student->room_id;
-        $issues = Issue::select('issues.id', 'students.name as student_name', 'rooms.name as room_name', 'content')->join('students', 'students.id', '=', 'issues.student_id')->join('rooms', 'rooms.id', '=', 'issues.room_id')->where('issues.room_id', $room_id)->get();
-        $rooms = Room::select('id', 'name')->get();
+        $issues = Issue::select('issues.id', 'students.name as student_name', 'rooms.name as room_name', 'content', 'issues.created_at')->join('students', 'students.id', '=', 'issues.student_id')->join('rooms', 'rooms.id', '=', 'issues.room_id')->where('issues.room_id', $room_id)->get();
+        $rooms = Room::where('id', $room_id)->orWhere('name', 'Bếp')->get();
         return view('student.pages.issues', compact('issues', 'rooms'));
     }
 
@@ -42,32 +45,20 @@ class StudentController extends Controller
     function getWaterByMonth(Request $req)
     {
         $waters = Water::select('waters.id', 'rooms.name as room_name', 'rooms.id as room_id', 'waters.time', 'waters.old_number', 'waters.new_number', 'waters.price', 'waters.status')->join('rooms', 'rooms.id', '=', 'waters.room_id')->where('waters.time', $req->month_water)->get();
-        // $electric = Electric::select('electrics.id', 'rooms.name as room_name','rooms.id as room_id', 'time', 'old_number', 'new_number', 'price', 'status')->join('rooms', 'rooms.id', '=', 'electrics.room_id')->where('electrics.time', '2019-5')->get();
-        // $months1 = Water::select('time')->distinct('time')->get();$room_current = Student::select('room_id')->where('email',Session('user')->email)->first();
         $room_current = Student::select('room_id')->where('email', Session('user')->email)->first();
-        $stt = 1;
-        // $status = 1;
-        // $months1 = Water::select('time')->distinct('time')->get();
-        // return view('student.pages.bill', compact('water', 'stt', 'electric', 'room_current', 'months1', 'status'));
-        $data = "";
-        foreach ($waters as $water) {
-            $data += "
-            
-            // <tr style='background:" . ($room_current->room_id == $water->room_id) ? "#ffff00" : "" . "'>
-            //     <td>" . $stt++ . "</td>
-            //     <td>" . $water->room_name . "</td>
-            //     <td>" . $water->time . "</td>
-            //     <td>" . $water->old_number . "</td>
-            //     <td>" . $water->new_number . "</td>
-            //     <td>" . number_format($water->price) . "</td>
-            //     <td>" . ($water->status == 1) ? "Đã Nộp" : "Chưa Nộp" . "</td>
-            // </tr>
-
-            ";
-        }
-        //return view('student/getWaterByMonth', compact('data'));
         return response()->json([
-            $data
+            'waters' => $waters,
+            'room_current' => $room_current
+        ], 200);
+    }
+
+    function getElectricByMonth(Request $req)
+    {
+        $electric = Electric::select('electrics.id', 'rooms.name as room_name', 'rooms.id as room_id', 'time', 'old_number', 'new_number', 'price', 'status')->join('rooms', 'rooms.id', '=', 'electrics.room_id')->where('electrics.time', $req->month_electric)->get();
+        $room_current = Student::select('room_id')->where('email', Session('user')->email)->first();
+        return response()->json([
+            'electric' => $electric,
+            'room_current' => $room_current
         ], 200);
     }
 
@@ -80,5 +71,46 @@ class StudentController extends Controller
         $issue->student_id = $student->id;
         $issue->save();
         return redirect()->route('student.pages.issue')->with('success', 'Gửi báo cáo hư hỏng thành công');
+    }
+
+    function getKitchenExpenses()
+    {
+        $today = Carbon::now()->format('Y-m');
+        $months = KitchenExpense::select('time')->distinct('time')->get();
+        $kitchenExpenses = KitchenExpense::select('id', 'time', 'item', 'quantity', 'price')->where('time', 'like', '%' . $today . '%')->get();
+        return view('student.pages.kitchenExpense', compact('kitchenExpenses', 'months'));
+    }
+
+    function getKitchenExpensesByMonth(Request $req)
+    {
+        $kitchenExpenses = KitchenExpense::select('id', 'time', 'item', 'quantity', 'price')->where('time', 'like', '%' . $req->month_kitchen . '%')->get();
+        return response()->json([
+            'kitchenExpenses' => $kitchenExpenses
+        ], 200);
+    }
+
+    function getMisconduct()
+    {
+        $today = Carbon::now()->format('Y-m');
+        $months = Misconduct::select('time')->distinct('time')->get();
+        $misconducts = Misconduct::select('id', 'student_id', 'content', 'time', 'minus')->where('time', 'like', '%' . $today . '%')->where('student_id', Session('user')->id)->get();
+        $sum = 0;
+        foreach ($misconducts as $value) {
+            $sum += $value->minus;
+        }
+        return view('student.pages.misconduct', compact('misconducts', 'months', 'sum'));
+    }
+
+    function getMisconductByMonth(Request $req)
+    {
+        $misconducts = Misconduct::select('id', 'student_id', 'content', 'time', 'minus')->where('time', 'like', $req->month_misconduct . '%')->get();
+        $sum = 0;
+        foreach ($misconducts as $value) {
+            $sum += $value->minus;
+        }
+        return response()->json([
+            'misconducts' => $misconducts,
+            'sum' => $sum,
+        ], 200);
     }
 }

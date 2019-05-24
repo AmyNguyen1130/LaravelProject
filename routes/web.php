@@ -1,6 +1,6 @@
 <?php
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 
 /*
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Session;
 
 Route::get('hash/{password}', [
 	'as' => 'hash',
-	function($hash) {
+	function ($hash) {
 		return Hash::make($hash);
 	}
 ]);
@@ -40,7 +40,6 @@ Route::group(['prefix' => ''], function () {
 			'as' => 'signup-step-1',
 			'uses' => 'SignupController@validateStep1'
 		]);
-
 		Route::post('step-2', [
 			'as' => 'signup-step-2',
 			'uses' => 'SignupController@postSignup'
@@ -64,8 +63,8 @@ Route::group(['prefix' => 'admin/'], function () {
 	Route::get('', [
 		'as' => 'admin.pages.index',
 		function () {
-			if(Session::has('user')) {
-				if(Session('user')->role == "admin") {
+			if (Session::has('user')) {
+				if (Session('user')->role == "admin") {
 					return view('admin.pages.index');
 				}
 			}
@@ -100,8 +99,8 @@ Route::group(['prefix' => 'manager/'], function () {
 	Route::get('', [
 		'as' => 'manager.pages.index',
 		function () {
-			if(Session::has('user')) {
-				if(Session('user')->role == "manager") {
+			if (Session::has('user')) {
+				if (Session('user')->role == "manager") {
 					return view('manager.pages.index');
 				}
 			}
@@ -134,6 +133,8 @@ Route::group(['prefix' => 'manager/'], function () {
 
 Route::group(['prefix' => 'student/'], function () {
 
+	// Home page
+
 	Route::get('', [
 		'as' => 'student.pages.index',
 		'uses' => 'StudentController@getIndex'
@@ -144,24 +145,55 @@ Route::group(['prefix' => 'student/'], function () {
 		'uses' => 'StudentController@getIssue'
 	]);
 
-	Route::get('bill', [
-		'as' => 'student.pages.bill',
-		'uses' => 'StudentController@getBill'
-	]);
-
 	Route::post('sendReport', [
 		'as' => 'student.pages.sendReport',
 		'uses' => 'StudentController@sendReport'
+	]);
+
+	// 
+
+	// Water, electric page
+
+	Route::get('bill', [
+		'as' => 'student.pages.bill',
+		'uses' => 'StudentController@getBill'
 	]);
 
 	Route::post('getWaterByMonth', [
 		'as' => 'student.pages.getWaterByMonth',
 		'uses' => 'StudentController@getWaterByMonth'
 	]);
+
+	Route::post('getElectricByMonth', [
+		'as' => 'student.pages.getElectricByMonth',
+		'uses' => 'StudentController@getElectricByMonth'
+	]);
+
+	// 
+
+	// Kitchen Page
+
+	Route::get('getKitchenExpenses', [
+		'as' => 'student.pages.getKitchenExpenses',
+		'uses' => 'StudentController@getKitchenExpenses'
+	]);
+
+	Route::post('getKitchenExpensesByMonth', [
+		'as' => 'student.pages.getKitchenExpensesByMonth',
+		'uses' => 'StudentController@getKitchenExpensesByMonth'
+	]);
+
+	// 
+
+	// Misconduct page
+
+	Route::get('getMisconduct', [
+		'as' => 'student.pages.getMisconduct',
+		'uses' => 'StudentController@getMisconduct'
+	]);
+
+	Route::post('getMisconductByMonth', [
+		'as' => 'student.pages.getMisconductByMonth',
+		'uses' => 'StudentController@getMisconductByMonth'
+	]);
 });
-
-
-Route::get('test', [
-	'as' => 'test',
-	'uses' => 'StudentController@getWaterByMonth'
-]);
