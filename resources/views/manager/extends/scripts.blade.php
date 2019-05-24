@@ -74,13 +74,13 @@
             hideIdentifier: false,
             buttons: {
                 edit: {
-                    class: 'btn btn-sm btn-warning',
-                    html: '<span class="glyphicon glyphicon-pencil"></span> Edit',
+                    class: 'btn btn-sm btn-default',
+                    html: '<span class="glyphicon glyphicon-pencil"></span>',
                     action: 'edit'
                 },
                 delete: {
-                    class: 'btn btn-sm btn-danger',
-                    html: '<span class="glyphicon glyphicon-trash"></span> Trash',
+                    class: 'btn btn-sm btn-default',
+                    html: '<span class="glyphicon glyphicon-trash"></span>',
                     action: 'delete'
                 },
                 save: {
