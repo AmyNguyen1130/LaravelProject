@@ -33,12 +33,12 @@ class StudentController extends Controller
 
     function getBill()
     {
-        $today = Carbon::now()->format('Y-m');
+        $time = Carbon::now()->format('Y-m');
         $stt = 1;
         $room_current = Student::select('room_id')->where('email', Session('user')->email)->first();
         $months1 = Water::select('time')->distinct('time')->get();
-        $water = Water::select('waters.id', 'rooms.name as room_name', 'rooms.id as room_id', 'time', 'old_number', 'new_number', 'price', 'status')->join('rooms', 'rooms.id', '=', 'waters.room_id')->where('waters.time', $today)->get();
-        $electric = Electric::select('electrics.id', 'rooms.name as room_name', 'rooms.id as room_id', 'time', 'old_number', 'new_number', 'price', 'status')->join('rooms', 'rooms.id', '=', 'electrics.room_id')->where('electrics.time', $today)->get();
+        $water = Water::select('waters.id', 'rooms.name as room_name', 'rooms.id as room_id', 'time', 'old_number', 'new_number', 'price', 'status')->join('rooms', 'rooms.id', '=', 'waters.room_id')->where('waters.time', $time)->get();
+        $electric = Electric::select('electrics.id', 'rooms.name as room_name', 'rooms.id as room_id', 'time', 'old_number', 'new_number', 'price', 'status')->join('rooms', 'rooms.id', '=', 'electrics.room_id')->where('electrics.time', $time)->get();
         return view('student.pages.bill', compact('water', 'time', 'stt', 'electric', 'room_current', 'months1'));
     }
 

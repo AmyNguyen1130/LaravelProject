@@ -21,7 +21,8 @@ class CreateWatersTable extends Migration
             $table->integer('old_number');
             $table->integer('new_number');
             $table->integer('price');
-            $table->boolean('status');
+            $table->boolean('status')->default(0);
+            $table->boolean('deleted')->default(0);
             $table->timestamps();
         });
     }

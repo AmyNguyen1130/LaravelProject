@@ -2,36 +2,31 @@
 
 @section("admin.admin-content")
 
-<div class="right_col" role="main">
+<div class="right_col" role="main" onload="loadDataTableUsers()">
 
     <div class="content">
+
+        <div class="form-group">
+            <select class="form-control" id="role">
+                <option value="educator" selected>Educators</option>
+                <option value="student">Students</option>
+                <option value="manager">Managers</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
 
         <table class="table table-bordered table-striped" id="table_users">
             <thead>
                 <tr>
-                    <th>#</th>
                     <th>FULLNAME</th>
                     <th>EMAIL</th>
+                    <th>GENDER</th>
                     <th>PHONE</th>
-                    <th>ADDRESS</th>
-                    <th>CREATED AT</th>
-                    <th>MANIPULATION</th>
+                    <th>ROLE</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($users as $user)
-                <tr>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->full_name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->phone }}</td>
-                    <td>{{ $user->address }}</td>
-                    <td>{{ $user->created_at }}</td>
-                    <td>
 
-                    </td>
-                </tr>
-                @endforeach
             </tbody>
         </table>
 

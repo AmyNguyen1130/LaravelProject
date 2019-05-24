@@ -20,6 +20,7 @@ class CreateMisconductsTable extends Migration
             $table->text('content');
             $table->date('time');
             $table->integer('minus');
+            $table->boolean('deleted')->default(0);
             $table->timestamps();
         });
     }

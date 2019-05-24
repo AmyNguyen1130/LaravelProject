@@ -38,7 +38,7 @@
                     </li>
                     <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="admin/tables/users">Users</a></li>
+                            <li><a href="manager/tables/electrics">Electrics</a></li>
                             <li><a href="admin/tables/categories">Categories</a></li>
                             <li><a href="admin/tables/products">Products</a></li>
                             <li><a href="admin/tables/orders">Orders</a></li>
