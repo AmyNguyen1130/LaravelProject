@@ -17,18 +17,26 @@ class ManagerController extends Controller
     public function loadDataTableElectrics()
     {
         $current_time = Carbon::now()->format('Y-m');
-        $electrics = Electric::select('electrics.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name')->join('rooms', 'electrics.room_id', 'rooms.id')->where('time', $current_time)->get();
+        $electrics = Electric::select('electrics.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'electrics.deleted')->join('rooms', 'electrics.room_id', 'rooms.id')->where('time', $current_time)->get();
         $data = "";
         foreach ($electrics as $electric) {
+
+            // DÙNG ĐỂ HIỂN THỊ RA HTML
+            $status = ($electric->status == 1) ? "Đã nộp" : "Chưa nộp";
+            $is_active = ($electric->deleted == 0) ? "False" : "True";
+            $isDeleted = ($electric->deleted == 1) ? "background: #f44242; color: #FFFFFF;" : "";
+            $isPaied = ($electric->status == 0) ? "background: #f49d41; color: #FFFFFF;" : "";
+            //
             $data .= "
-            <tr>
+            <tr style='" . $isPaied . '' . $isDeleted . "'>
                 <td class='hidden'>" . $electric->id . "</td>
                 <td>" . $electric->room_name . "</td>
                 <td>" . $electric->time . "</td>
                 <td>" . $electric->old_number . "</td>
                 <td>" . $electric->new_number . "</td>
                 <td>" . $electric->price . "</td>
-                <td>" . $electric->status . "</td>
+                <td>" . $status . "</td>
+                <td>" . $is_active . "</td>
             </tr>
             ";
         }
@@ -47,6 +55,7 @@ class ManagerController extends Controller
             $electric->new_number = $input['new_number'];
             $electric->price = $input['price'];
             $electric->status = $input['status'];
+            $electric->deleted = $input['deleted'];
             $electric->save();
         } else if ($input['action'] == 'delete') {
             $electric = Electric::where('id', $input['id'])->first();

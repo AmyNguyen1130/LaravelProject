@@ -15,6 +15,7 @@
                     <th>NEW NUMBER</th>
                     <th>PRICE</th>
                     <th>STATUS</th>
+                    <th>DELETED</th>
                 </tr>
             </thead>
             <tbody>

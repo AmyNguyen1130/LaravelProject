@@ -89,6 +89,11 @@ Route::group(['prefix' => 'admin/'], function () {
 				'as' => 'admin.tables.users.CRUD',
 				'uses' => 'AdminController@CRUDTableUsers'
 			]);
+
+			Route::post('role', [
+				'as' => 'admin.tables.users.role',
+				'uses' => 'AdminController@getDataTableUsersByRole'
+			]);
 		});
 	});
 });

@@ -8,7 +8,7 @@
 
         <div class="form-group">
             <select class="form-control" id="role">
-                <option value="educator" selected>Educators</option>
+                <option value="educator">Educators</option>
                 <option value="student">Students</option>
                 <option value="manager">Managers</option>
                 <option value="admin">Admin</option>
@@ -23,6 +23,7 @@
                     <th>GENDER</th>
                     <th>PHONE</th>
                     <th>ROLE</th>
+                    <th>DELETED</th>
                 </tr>
             </thead>
             <tbody>
