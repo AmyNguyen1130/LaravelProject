@@ -12,7 +12,11 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            ['email' => 'phuong.tran@student.passerellesnumeriques.org', 'password' => Hash::make('password'), 'role' => 'educator'],
+            ['email' => 'admin@gmail.com', 'password' => Hash::make('abcd@1234'), 'role' => 'admin'],
+            ['email' => 'manager@gmail.com', 'password' => Hash::make('abcd@1234'), 'role' => 'manager'],
+            ['email' => 'nguyen.tran@passerellesnumeriques.org', 'password' => Hash::make('password'), 'role' => 'educator'],
+            ['email' => 'loan.thi.kieu.vu@passerellesnumeriques.org', 'password' => Hash::make('password'), 'role' => 'educator'],
+            ['email' => 'phuong.dang@passerellesnumeriques.org', 'password' => Hash::make('password'), 'role' => 'educator'],
             ['email' => 'ngoctai.dev@gmail.com', 'password' => Hash::make('password'), 'role' => 'educator'],
             ['email' => 'quyet.y@student.passerellesnumeriques.org', 'password' => Hash::make('password'), 'role' => 'student'],
             ['email' => 'dieu.quach@student.passerellesnumeriques.org', 'password' => Hash::make('password'), 'role' => 'student'],

@@ -22,6 +22,7 @@ class CreateElectricsTable extends Migration
             $table->integer('new_number');
             $table->integer('price');
             $table->boolean('status');
+            $table->boolean('deleted')->default(0);
             $table->timestamps();
         });
     }

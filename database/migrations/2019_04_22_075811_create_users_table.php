@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('email', 100)->unique();
             $table->string('password', 255);
             $table->string('role', 10);
+            $table->boolean('deleted')->default(0);
             $table->timestamps();
         });
     }

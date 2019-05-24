@@ -50,13 +50,13 @@
     });
 
     $(window).load(function() {
-        loadDataTableUsers()
+        loadDataTableElectrics()
     });
 
-    function loadDataTableUsers() {
+    function loadDataTableElectrics() {
         console.log('loading')
         $.ajax({
-            url: 'admin/tables/users/load',
+            url: 'manager/tables/electrics/load',
             method: 'GET'
         }).done(function(data) {
             console.log('loaded')
@@ -66,8 +66,8 @@
     }
 
     function tableData() {
-        $('#table_users').Tabledit({
-            url: 'admin/tables/users/CRUD',
+        $('#table_electrics').Tabledit({
+            url: 'manager/tables/electrics/CRUD',
             eventType: 'dblclick',
             editButton: true,
             deleteButton: true,
@@ -100,15 +100,14 @@
             columns: {
                 identifier: [0, 'id'],
                 editable: [
-                    [1, 'full_name'],
-                    [2, 'email'],
-                    [3, 'gender', '{"Nam" : "Nam", "Nu" : "Nữ"}'],
-                    [4, 'phone'],
-                    [5, 'role', '{"educator": "Educator", "student": "Student", "manager": "Manager", "admin": "Admin"}'],
+                    [3, 'old_number'],
+                    [4, 'new_number'],
+                    [5, 'price'],
+                    [6, 'status', '{"0": "Chưa nộp", "1": "Đã nộp"}']
                 ]
             },
             onSuccess: function(data, textStatus, jqXHR) {
-                loadDataTableUsers()
+                loadDataTableElectrics()
             },
             onFail: function(jqXHR, textStatus, errorThrown) {
                 console.log('onFail(jqXHR, textStatus, errorThrown)');

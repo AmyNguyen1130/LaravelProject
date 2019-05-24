@@ -1,9 +1,7 @@
 <?php
-<<<<<<< HEAD
 use Illuminate\Support\Facades\Hash;
-=======
->>>>>>> origin/Ly
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +13,13 @@ use Illuminate\Support\Facades\Cookie;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('hash/{password}', [
+	'as' => 'hash',
+	function ($hash) {
+		return Hash::make($hash);
+	}
+]);
 
 // PAGES
 Route::get('/', [
@@ -35,19 +40,11 @@ Route::group(['prefix' => ''], function () {
 			'as' => 'signup-step-1',
 			'uses' => 'SignupController@validateStep1'
 		]);
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> origin/Ly
 		Route::post('step-2', [
 			'as' => 'signup-step-2',
 			'uses' => 'SignupController@postSignup'
 		]);
-<<<<<<< HEAD
-	
-=======
->>>>>>> origin/Ly
 	});
 
 	Route::get('logout', [
@@ -55,74 +52,120 @@ Route::group(['prefix' => ''], function () {
 		'uses' => 'LoginController@logout'
 	]);
 
-<<<<<<< HEAD
-	Route::get('testCookie', function(){
-		$user =  Cookie::get('remember');
-		dd($user);
+	// ADMIN
+	Route::group(['prefix' => 'admin/'], function () {
+
+		Route::get('', [
+			'as' => 'admin.pages.index',
+			function () {
+				if (Session::has('user')) {
+					if (Session('user')->role == "admin") {
+						return view('admin.pages.index');
+					}
+				}
+				return redirect()->back();
+			}
+		]);
+
+		Route::group(['prefix' => 'tables/'], function () {
+
+			Route::group(['prefix' => 'users/'], function () {
+				Route::get('', [
+					'as' => 'admin.tables.users',
+					'uses' => 'AdminController@getTableUsers'
+				]);
+
+				Route::get('load', [
+					'as' => 'admin.tables.users.load',
+					'uses' => 'AdminController@loadDataTableUsers'
+				]);
+
+				Route::post('CRUD', [
+					'as' => 'admin.tables.users.CRUD',
+					'uses' => 'AdminController@CRUDTableUsers'
+				]);
+			});
+		});
 	});
 
-=======
-	Route::get('testCookie', function () {
-		$user =  Cookie::get('remember');
-		dd($user);
+	// MANAGER
+	Route::group(['prefix' => 'manager/'], function () {
+
+		Route::get('', [
+			'as' => 'manager.pages.index',
+			function () {
+				if (Session::has('user')) {
+					if (Session('user')->role == "manager") {
+						return view('manager.pages.index');
+					}
+				}
+				return redirect()->back();
+			}
+		]);
+
+		Route::group(['prefix' => 'tables/'], function () {
+
+			Route::group(['prefix' => 'electrics/'], function () {
+				Route::get('', [
+					'as' => 'manager.tables.electrics',
+					'uses' => 'ManagerController@getTableElectrics'
+				]);
+
+				Route::get('load', [
+					'as' => 'manager.tables.electrics.load',
+					'uses' => 'ManagerController@loadDataTableElectrics'
+				]);
+
+				Route::post('CRUD', [
+					'as' => 'manager.tables.electrics.CRUD',
+					'uses' => 'ManagerController@CRUDTableElectrics'
+				]);
+			});
+		});
 	});
->>>>>>> origin/Ly
-});
 
-// ADMIN
-Route::group(['prefix' => 'admin/'], function () {
+	//STUDENT
 
-	Route::get('', [
-		'as' => 'admin.pages.index',
-		function () {
-			return view('admin.pages.index');
-		}
-	]);
+	Route::group(['prefix' => 'student/'], function () {
 
-	Route::group(['prefix' => 'tables/'], function () {
+		Route::get('', [
+			'as' => 'student.pages.index',
+			'uses' => 'StudentController@getIndex'
+		]);
 
-		Route::get('users', [
-			'as' => 'admin.tables.users',
-			'uses' => 'PagesController@getTableUsers'
+		Route::get('issue', [
+			'as' => 'student.pages.issue',
+			'uses' => 'StudentController@getIssue'
+		]);
+
+		Route::get('bill', [
+			'as' => 'student.pages.bill',
+			'uses' => 'StudentController@getBill'
+		]);
+
+		Route::post('sendReport', [
+			'as' => 'student.pages.sendReport',
+			'uses' => 'StudentController@sendReport'
+		]);
+
+		Route::post('getWaterByMonth', [
+			'as' => 'student.pages.getWaterByMonth',
+			'uses' => 'StudentController@getWaterByMonth'
+		]);
+
+		Route::post('getElectricByMonth', [
+			'as' => 'student.pages.getElectricByMonth',
+			'uses' => 'StudentController@getElectricByMonth'
+		]);
+		Route::get('getKitchenExpenses', [
+			'as' => 'student.pages.getKitchenExpenses',
+			'uses' => 'StudentController@getKitchenExpenses'
 		]);
 	});
 });
 
-//STUDENT
 
-Route::group(['prefix' => 'student/'], function () {
-
-	Route::get('', [
-		'as' => 'student.pages.index',
-		'uses' => 'StudentController@getIndex'
-	]);
-
-	Route::get('issue', [
-		'as' => 'student.pages.issue',
-		'uses' => 'StudentController@getIssue'
-	]);
-
-	Route::get('bill', [
-		'as' => 'student.pages.bill',
-		'uses' => 'StudentController@getBill'
-	]);
-
-	Route::post('sendReport', [
-		'as' => 'student.pages.sendReport',
-		'uses' => 'StudentController@sendReport'
-	]);
-
-	Route::post('getWaterByMonth', [
-		'as' => 'student.pages.getWaterByMonth',
-		'uses' => 'StudentController@getWaterByMonth'
-	]);
-
-	Route::post('getElectricByMonth', [
-		'as' => 'student.pages.getElectricByMonth',
-		'uses' => 'StudentController@getElectricByMonth'
-	]);
-	Route::get('getKitchenExpenses', [
-		'as' => 'student.pages.getKitchenExpenses',
-		'uses' => 'StudentController@getKitchenExpenses'
-	]);
-});
+Route::get('test', [
+	'as' => 'test',
+	'uses' => 'StudentController@getWaterByMonth'
+]);
