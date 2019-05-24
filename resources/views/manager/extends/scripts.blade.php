@@ -50,24 +50,47 @@
     });
 
     $(window).load(function() {
-        loadDataTableElectrics()
+        var table = $(location).attr("href").split("/").pop();
+        var identifier_field;
+        var editable_field;
+        console.log('table ' + table);
+        if (table == 'electrics') {
+            identifier_field = [0, 'id'];
+            editable_field = [
+                [3, 'old_number'],
+                [4, 'new_number'],
+                [5, 'price'],
+                [6, 'status', '{"0": "Chưa nộp", "1": "Đã nộp"}']
+            ];
+            loadDataTable(table, identifier_field, editable_field)
+        } else if (table == 'users') {
+            identifier_field = [0, 'id'];
+            editable_field = [
+                [1, 'full_name'],
+                [2, 'email'],
+                [3, 'gender', '{"Nam" : "Nam", "Nu" : "Nữ"}'],
+                [4, 'phone'],
+                [5, 'role', '{"educator": "Educator", "student": "Student", "manager": "Manager", "admin": "Admin"}'],
+            ];
+            loadDataTable(table, identifier_field, editable_field)
+        }
     });
 
-    function loadDataTableElectrics() {
-        console.log('loading')
+    function loadDataTable(table, identifier_field, editable_field) {
+        console.log('loading table ' + table)
         $.ajax({
-            url: 'manager/tables/electrics/load',
+            url: 'manager/tables/' + table + '/load',
             method: 'GET'
         }).done(function(data) {
-            console.log('loaded')
+            console.log('table ' + table + ' loaded')
             $('tbody').html(data)
-            tableData()
+            tableData(table, identifier_field, editable_field)
         })
     }
 
-    function tableData() {
-        $('#table_electrics').Tabledit({
-            url: 'manager/tables/electrics/CRUD',
+    function tableData(table, identifier_field, editable_field) {
+        $('#table_' + table).Tabledit({
+            url: 'manager/tables/' + table + '/CRUD',
             eventType: 'dblclick',
             editButton: true,
             deleteButton: true,
@@ -98,16 +121,11 @@
                 }
             },
             columns: {
-                identifier: [0, 'id'],
-                editable: [
-                    [3, 'old_number'],
-                    [4, 'new_number'],
-                    [5, 'price'],
-                    [6, 'status', '{"0": "Chưa nộp", "1": "Đã nộp"}']
-                ]
+                identifier: identifier_field,
+                editable: editable_field
             },
             onSuccess: function(data, textStatus, jqXHR) {
-                loadDataTableElectrics()
+                loadDataTable(table, identifier_field, editable_field)
             },
             onFail: function(jqXHR, textStatus, errorThrown) {
                 console.log('onFail(jqXHR, textStatus, errorThrown)');
