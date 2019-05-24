@@ -49,11 +49,7 @@ class LoginController extends Controller
 					Session::put('user', $user);
 					return response()->json([
 						'error' => false,
-<<<<<<< HEAD
-						'message' => "Đăng nhập thành công"
-=======
 						'role' => $user->role,
->>>>>>> origin/Ly
 					], 200);
 				} else {
 					$message = new MessageBag(['errorlogin' => 'Địa chỉ email hoặc mật khẩu không chính xác']);
@@ -78,11 +74,7 @@ class LoginController extends Controller
 			Session::forget('user');
 			Session::save();
 			if (!Session::has('user')) {
-<<<<<<< HEAD
-				return redirect()->back();
-=======
 				return redirect()->route('index');
->>>>>>> origin/Ly
 			}
 		}
 	}
