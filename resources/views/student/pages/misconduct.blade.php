@@ -15,13 +15,24 @@
                 </span>
             </div>
         </div>
-        <div class="col-sm-3" style="margin-bottom: 50px;">
-            <label for="">Tháng: </label>
-            <select class="form-control" id="month_misconduct">
+        <div class="col-sm-2" style="margin-bottom: 50px;">
+            <label for="">Năm: </label>
+            <select class="form-control" id="year_misconduct">
                 @for( $year = 2017; $year <= 2019; $year++)
-                    @for($month=01; $month<=12; $month++)
-                        <option value="{{$year}}-{{$month}}">{{$year}}-{{$month}}</option>
-                    @endfor
+                 <option value="{{$year}}">{{$year}}</option>
+                @endfor
+            </select>
+            
+        </div>
+        <div class="col-sm-2">
+        <label for="">Tháng: </label>
+            <select class="form-control" id="month_misconduct">
+                @for( $month = 1; $month <= 12; $month++)
+                @if( $month < 10){
+                    <option value="0{{$month}}">0{{$month}}</option>
+                }
+                @else <option value="{{$month}}">{{$month}}</option>
+                @endif
                 @endfor
             </select>
         </div>

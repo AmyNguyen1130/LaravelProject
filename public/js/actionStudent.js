@@ -13,7 +13,8 @@ $(document).ready(function () {
             'type': 'POST',
             'url': 'student/getWaterByMonth',
             'data': {
-                'month_water': $('#month_water').val()
+                'month_water': $('#month_water').val(),
+                'year_water': $('#year_water').val()
             },
             'dataType': 'json',
             success: function (data) {
@@ -51,7 +52,8 @@ $(document).ready(function () {
             'type': 'POST',
             'url': 'student/getElectricByMonth',
             'data': {
-                'month_electric': $('#month_electric').val()
+                'month_electric': $('#month_electric').val(),
+                'year_electric': $('#year_electric').val()
             },
             'dataType': 'json',
             success: function (data) {
@@ -93,7 +95,8 @@ $(document).ready(function () {
             'type': 'POST',
             'url': 'student/getKitchenExpensesByMonth',
             'data': {
-                'month_kitchen': $('#month_kitchen').val()
+                'month_kitchen': $('#month_kitchen').val(),
+                'year_kitchen': $('#year_kitchen').val()
             },
             'dataType': 'json',
             success: function (data) {
@@ -107,9 +110,17 @@ $(document).ready(function () {
                     html += '<td>' + value.time + '</td>';
                     html += '<td>' + value.item + '</td>';
                     html += '<td>' + value.quantity + '</td>';
-                    html += '<td>' + value.price + '</td>';
+                    html += '<td>' + numeral(value.price) + '</td>';
                     html += '</tr>';
                 });
+
+                html += '<tr>'
+                html += '<td>Tổng Tiền</td>';
+                html += '<td></td>';
+                html += '<td></td>';
+                html += '<td></td>';
+                html += '<td>' + data.sum + '</td>';
+                html += '</tr>';
                 $('#table_kitchen tbody').html(html)
             },
             error: function () {
@@ -131,6 +142,7 @@ $(document).ready(function () {
             'type': 'POST',
             'url': 'student/getMisconductByMonth',
             'data': {
+                'year_misconduct': $('#year_misconduct').val(),
                 'month_misconduct': $('#month_misconduct').val()
             },
             'dataType': 'json',
