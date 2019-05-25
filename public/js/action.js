@@ -28,7 +28,45 @@ function moveToStep2(student) {
     }
 }
 
+
 // LOGIN AJAX
+function login() {
+    $.ajax({
+        'type': 'POST',
+        'url': 'login',
+        'data': {
+            'email': $('#email').val(),
+            'password': $('#password').val(),
+            'remember': $('#remember').val(),
+            '_token': $(this).data('token')
+        },
+        'dataType': 'json',
+        success: function (data) {
+            console.log(data);
+            if (data.error == true) {
+                $('.error').hide();
+                if (data.message.email != undefined) {
+                    $('.errorEmail').show().text(data.message.email[0]);
+                }
+                if (data.message.password != undefined) {
+                    $('.errorPassword').show().text(data.message.password[0]);
+                }
+                if (data.message.errorlogin != undefined) {
+                    $('.errorLogin').show().text(data.message.errorlogin[0]);
+                }
+            } else {
+                window.location.replace("http://localhost/LaravelProject/" + data.role);
+            }
+        }
+    });
+}
+
+// addEventListener('keydown', function (event) {
+//     if (event.keyCode == 13) {
+//         console.log("Bắt event nhấn enter");
+//     }
+// });
+
 $(document).ready(function () {
     $('#btn-login').click(function (e) {
         e.preventDefault();
@@ -37,37 +75,8 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $.ajax({
-            'type': 'POST',
-            'url': 'login',
-            'data': {
-                'email': $('#email').val(),
-                'password': $('#password').val(),
-                'remember': $('#remember').val(),
-                '_token': $(this).data('token')
-            },
-            'dataType': 'json',
-            success: function (data) {
-                console.log(data);
-                if (data.error == true) {
-                    $('.error').hide();
-                    if (data.message.email != undefined) {
-                        $('.errorEmail').show().text(data.message.email[0]);
-                    }
-                    if (data.message.password != undefined) {
-                        $('.errorPassword').show().text(data.message.password[0]);
-                    }
-                    if (data.message.errorlogin != undefined) {
-                        $('.errorLogin').show().text(data.message.errorlogin[0]);
-                    }
-                } else {
-                    window.location.replace("http://localhost/LaravelProject/" + data.role);
-                }
-            }
-        });
+        login();
     })
-
-
 });
 
 

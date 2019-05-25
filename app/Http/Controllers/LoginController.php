@@ -6,10 +6,8 @@ use Illuminate\Http\Request;
 
 use Validator;
 use Illuminate\Support\MessageBag;
-use App\User;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -39,30 +37,23 @@ class LoginController extends Controller
 		} else {
 			$email = $request->email;
 			$password = $request->password;
-			if ($user = User::where('email', $email)->first()) {
-				if (Hash::check($password, $user->password)) {
-					if (isset($request->remember)) {
-						Cookie::queue('remember', 'true', 43200); // 30days
-						Cookie::queue('remember_email', $user->email, 43200); // 30days
-						Cookie::queue('remember_password', $request->password, 43200); // 30days
-					}
-					Session::put('user', $user);
-					return response()->json([
-						'error' => false,
-						'role' => $user->role
-					], 200);
-				} else {
-					$message = new MessageBag(['errorlogin' => 'Địa chỉ email hoặc mật khẩu không chính xác']);
-					return response()->json([
-						'error' => true,
-						'message' => $message
-					], 200);
+
+			if (Auth::attempt(['email' => $email, 'password' => $password])) {
+				if (isset($request->remember)) {
+					Cookie::queue('remember', 'true', 43200); // 30days
+					Cookie::queue('remember_email', $email, 43200); // 30days
+					Cookie::queue('remember_password', $password, 43200); // 30days
 				}
+				return response()->json([
+					'error' => false,
+					'user' => Auth::user(),
+					'role' => Auth::user()->role,
+				], 200);
 			} else {
-				$errors = new MessageBag(['errorlogin' => 'Địa chỉ email chưa tồn tại']);
+				$message = new MessageBag(['errorlogin' => 'Địa chỉ email hoặc mật khẩu không chính xác']);
 				return response()->json([
 					'error' => true,
-					'message' => $errors
+					'message' => $message
 				], 200);
 			}
 		}
@@ -70,10 +61,9 @@ class LoginController extends Controller
 
 	public function logout()
 	{
-		if (Session::has('user')) {
-			Session::forget('user');
-			Session::save();
-			if (!Session::has('user')) {
+		if (Auth::check()) {
+			Auth::logout();
+			if (!Auth::check()) {
 				return redirect()->route('index');
 			}
 		}

@@ -50,21 +50,16 @@ Route::group(['prefix' => ''], function () {
 		'as' => 'logout',
 		'uses' => 'LoginController@logout'
 	]);
-
-	Route::get('testCookie', function () {
-		$user =  Cookie::get('remember');
-		dd($user);
-	});
 });
 
 // ADMIN
-Route::group(['prefix' => 'admin/'], function () {
+Route::group(['prefix' => 'admin/', 'middleware' => 'is_admin'], function () {
 
 	Route::get('', [
 		'as' => 'admin.pages.index',
 		function () {
-			if (Session::has('user')) {
-				if (Session('user')->role == "admin") {
+			if (Auth::check()) {
+				if (Auth::user()->role == "admin") {
 					return view('admin.pages.index');
 				}
 			}
@@ -99,13 +94,13 @@ Route::group(['prefix' => 'admin/'], function () {
 });
 
 // MANAGER
-Route::group(['prefix' => 'manager/'], function () {
+Route::group(['prefix' => 'manager/', 'middleware' => 'is_manager'], function () {
 
 	Route::get('', [
 		'as' => 'manager.pages.index',
 		function () {
-			if (Session::has('user')) {
-				if (Session('user')->role == "manager") {
+			if (Auth::check()) {
+				if (Auth::user()->role == "manager") {
 					return view('manager.pages.index');
 				}
 			}
@@ -130,13 +125,19 @@ Route::group(['prefix' => 'manager/'], function () {
 				'as' => 'manager.tables.electrics.CRUD',
 				'uses' => 'ManagerController@CRUDTableElectrics'
 			]);
+
+			// Upload excel file and insert to DB
+			Route::post('import', [
+				'as' => 'manager.tables.electrics.import',
+				'uses' => 'ExcelController@importElectrics'
+			]);
 		});
 	});
 });
 
 //STUDENT
 
-Route::group(['prefix' => 'student/'], function () {
+Route::group(['prefix' => 'student/', 'middleware' => 'is_student'], function () {
 
 	// Home page
 
@@ -202,3 +203,17 @@ Route::group(['prefix' => 'student/'], function () {
 		'uses' => 'StudentController@getMisconductByMonth'
 	]);
 });
+
+
+// TEST
+Route::get('testlogin', [
+	'as' => 'testlogin',
+	function () {
+		return view('test');
+	}
+]);
+
+Route::post('testlogin', [
+	'as' => 'testlogin',
+	'uses' => 'LoginController@testLogin'
+]);

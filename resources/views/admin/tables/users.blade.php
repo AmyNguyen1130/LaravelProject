@@ -15,21 +15,30 @@
             </select>
         </div>
 
-        <table class="table table-bordered table-striped" id="table_users">
-            <thead>
-                <tr>
-                    <th>FULLNAME</th>
-                    <th>EMAIL</th>
-                    <th>GENDER</th>
-                    <th>PHONE</th>
-                    <th>ROLE</th>
-                    <th>DELETED</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">User Data</h3>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped" id="table_users">
+                        <thead>
+                            <tr>
+                                <th>FULLNAME</th>
+                                <th>EMAIL</th>
+                                <th>GENDER</th>
+                                <th>PHONE</th>
+                                <th>ROLE</th>
+                                <th>DELETED</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-            </tbody>
-        </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>
