@@ -15,12 +15,25 @@
                 </span>
             </div>
         </div>
-        <div class="col-sm-3" style="margin-bottom: 50px;">
-            <label for="">Tháng: </label>
+        <div class="col-sm-2" style="margin-bottom: 50px;">
+            <label for="">Năm: </label>
+            <select class="form-control" id="year_kitchen">
+                @for( $year = 2017; $year <= 2019; $year++)
+                 <option value="{{$year}}">{{$year}}</option>
+                @endfor
+            </select>
+            
+        </div>
+        <div class="col-sm-2">
+        <label for="">Tháng: </label>
             <select class="form-control" id="month_kitchen">
-                @foreach($months as $month)
-                <option value="{{date('Y-m', strtotime($month->time))}}">{{date('Y-m', strtotime($month->time))}}</option>
-                @endforeach
+                @for( $month = 1; $month <= 12; $month++)
+                @if( $month < 10){
+                    <option value="0{{$month}}">0{{$month}}</option>
+                }
+                @else <option value="{{$month}}">{{$month}}</option>
+                @endif
+                @endfor
             </select>
         </div>
         <table class="table table-bordered table-striped" id="table_kitchen">
@@ -40,9 +53,16 @@
                     <td>{{ $kitchenExpense->time }}</td>
                     <td>{{ $kitchenExpense->item }}</td>
                     <td>{{ $kitchenExpense->quantity }}</td>
-                    <td>{{ $kitchenExpense->price }}</td>
+                    <td>{{ number_format($kitchenExpense->price) }}</td>
                 </tr>
                 @endforeach
+                <tr>
+                    <td>Tổng Tiền</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{number_format($sum)}}</td>
+                </tr>
             </tbody>
         </table>
 

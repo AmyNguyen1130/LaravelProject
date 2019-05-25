@@ -15,12 +15,25 @@
                 </span>
             </div>
         </div>
-        <div class="col-sm-3" style="margin-bottom: 50px;">
-            <label for="">Tháng: </label>
+        <div class="col-sm-2" style="margin-bottom: 50px;">
+            <label for="">Năm: </label>
+            <select class="form-control" id="year_water">
+                @for( $year = 2017; $year <= 2019; $year++)
+                 <option value="{{$year}}">{{$year}}</option>
+                @endfor
+            </select>
+            
+        </div>
+        <div class="col-sm-2">
+        <label for="">Tháng: </label>
             <select class="form-control" id="month_water">
-                @foreach($months1 as $month1)
-                <option value="{{$month1->time}}">{{$month1->time}}</option>
-                @endforeach
+                @for( $month = 1; $month <= 12; $month++)
+                @if( $month < 10){
+                    <option value="0{{$month}}">0{{$month}}</option>
+                }
+                @else <option value="{{$month}}">{{$month}}</option>
+                @endif
+                @endfor
             </select>
         </div>
         <table class="table table-bordered table-striped" id="table_water">
@@ -61,12 +74,25 @@
             </div>
         </div>
 
-        <div class="col-sm-3" style="margin-bottom: 50px;">
-            <label for="">Tháng: </label>
+        <div class="col-sm-2" style="margin-bottom: 50px;">
+            <label for="">Năm: </label>
+            <select class="form-control" id="year_electric">
+                @for( $year = 2017; $year <= 2019; $year++)
+                 <option value="{{$year}}">{{$year}}</option>
+                @endfor
+            </select>
+            
+        </div>
+        <div class="col-sm-2">
+        <label for="">Tháng: </label>
             <select class="form-control" id="month_electric">
-                @foreach($months1 as $month1)
-                <option value="{{$month1->time}}">{{$month1->time}}</option>
-                @endforeach
+                @for( $month = 1; $month <= 12; $month++)
+                @if( $month < 10){
+                    <option value="0{{$month}}">0{{$month}}</option>
+                }
+                @else <option value="{{$month}}">{{$month}}</option>
+                @endif
+                @endfor
             </select>
         </div>
         <table class="table table-bordered table-striped" id="table_electric">
