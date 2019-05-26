@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Room;
 use App\Classes;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,8 +27,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $rooms = Room::all();
-        $classes = Classes::all();
-        View::share(['rooms' => $rooms, 'classes' => $classes]);
+        if (Schema::hasTable('rooms') && Schema::hasTable('classes')) {
+            $rooms = Room::all();
+            $classes = Classes::all();
+            View::share(['rooms' => $rooms, 'classes' => $classes]);
+        }
     }
 }

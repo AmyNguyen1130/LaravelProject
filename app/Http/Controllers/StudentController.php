@@ -14,12 +14,13 @@ use App\KitchenExpense;
 use App\Misconduct;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Http\Requests\IssueRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
     function getIssue()
     {
-        $student = Student::select('room_id')->where('email', Session('user')->email)->first();
+        $student = Student::select('room_id')->where('email', Auth::user()->email)->first();
         $room_id = $student->room_id;
         $issues = Issue::select('issues.id', 'students.name as student_name', 'rooms.name as room_name', 'content', 'issues.created_at')->join('students', 'students.id', '=', 'issues.student_id')->join('rooms', 'rooms.id', '=', 'issues.room_id')->where('issues.room_id', $room_id)->get();
         $rooms = Room::where('id', $room_id)->orWhere('name', 'Bếp')->get();
@@ -35,7 +36,7 @@ class StudentController extends Controller
     {
         $time = Carbon::now()->format('Y-m');
         $stt = 1;
-        $room_current = Student::select('room_id')->where('email', Session('user')->email)->first();
+        $room_current = Student::select('room_id')->where('email', Auth::user()->email)->first();
         $months1 = Water::select('time')->distinct('time')->get();
         $water = Water::select('waters.id', 'rooms.name as room_name', 'rooms.id as room_id', 'time', 'old_number', 'new_number', 'price', 'status')->join('rooms', 'rooms.id', '=', 'waters.room_id')->where('waters.time', $time)->get();
         $electric = Electric::select('electrics.id', 'rooms.name as room_name', 'rooms.id as room_id', 'time', 'old_number', 'new_number', 'price', 'status')->join('rooms', 'rooms.id', '=', 'electrics.room_id')->where('electrics.time', $time)->get();
@@ -46,7 +47,7 @@ class StudentController extends Controller
     {
         $time = $req->year_water .'-'.$req->month_water;
         $waters = Water::select('waters.id', 'rooms.name as room_name', 'rooms.id as room_id', 'waters.time', 'waters.old_number', 'waters.new_number', 'waters.price', 'waters.status')->join('rooms', 'rooms.id', '=', 'waters.room_id')->where('waters.time', $time)->get();
-        $room_current = Student::select('room_id')->where('email', Session('user')->email)->first();
+        $room_current = Student::select('room_id')->where('email', Auth::user()->email)->first();
         return response()->json([
             'waters' => $waters,
             'room_current' => $room_current
@@ -57,7 +58,7 @@ class StudentController extends Controller
     {
         $time = $req->year_electric .'-'.$req->month_electric;
         $electric = Electric::select('electrics.id', 'rooms.name as room_name', 'rooms.id as room_id', 'time', 'old_number', 'new_number', 'price', 'status')->join('rooms', 'rooms.id', '=', 'electrics.room_id')->where('electrics.time', $time)->get();
-        $room_current = Student::select('room_id')->where('email', Session('user')->email)->first();
+        $room_current = Student::select('room_id')->where('email', Auth::user()->email)->first();
         return response()->json([
             'electric' => $electric,
             'room_current' => $room_current
@@ -67,7 +68,7 @@ class StudentController extends Controller
     function sendReport(IssueRequest $req)
     {
         $issue = new Issue();
-        $student = Student::where('email', Session('user')->email)->first();
+        $student = Student::where('email', Auth::user()->email)->first();
         $issue->content = $req->content;
         $issue->room_id = $req->room;
         $issue->student_id = $student->id;
@@ -105,7 +106,7 @@ class StudentController extends Controller
     {
         $today = Carbon::now()->format('Y-m');
         $months = Misconduct::select('time')->distinct('time')->get();
-        $misconducts = Misconduct::select('id', 'student_id', 'content', 'time', 'minus')->where('time', 'like', '%' . $today . '%')->where('student_id', Session('user')->id)->get();
+        $misconducts = Misconduct::select('id', 'student_id', 'content', 'time', 'minus')->where('time', 'like', '%' . $today . '%')->where('student_id', Auth::user()->id)->get();
         $sum = 0;
         foreach ($misconducts as $value) {
             $sum += $value->minus;

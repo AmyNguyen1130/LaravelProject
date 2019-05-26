@@ -18,22 +18,27 @@
         <div class="col-sm-2" style="margin-bottom: 50px;">
             <label for="">Năm: </label>
             <select class="form-control" id="year_water">
-                @for( $year = 2017; $year <= 2019; $year++)
-                 <option value="{{$year}}">{{$year}}</option>
-                @endfor
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
             </select>
-            
+
         </div>
         <div class="col-sm-2">
-        <label for="">Tháng: </label>
+            <label for="">Tháng: </label>
             <select class="form-control" id="month_water">
-                @for( $month = 1; $month <= 12; $month++)
-                @if( $month < 10){
-                    <option value="0{{$month}}">0{{$month}}</option>
-                }
-                @else <option value="{{$month}}">{{$month}}</option>
-                @endif
-                @endfor
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
             </select>
         </div>
         <table class="table table-bordered table-striped" id="table_water">
@@ -77,22 +82,27 @@
         <div class="col-sm-2" style="margin-bottom: 50px;">
             <label for="">Năm: </label>
             <select class="form-control" id="year_electric">
-                @for( $year = 2017; $year <= 2019; $year++)
-                 <option value="{{$year}}">{{$year}}</option>
-                @endfor
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
             </select>
-            
+
         </div>
         <div class="col-sm-2">
-        <label for="">Tháng: </label>
+            <label for="">Tháng: </label>
             <select class="form-control" id="month_electric">
-                @for( $month = 1; $month <= 12; $month++)
-                @if( $month < 10){
-                    <option value="0{{$month}}">0{{$month}}</option>
-                }
-                @else <option value="{{$month}}">{{$month}}</option>
-                @endif
-                @endfor
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
             </select>
         </div>
         <table class="table table-bordered table-striped" id="table_electric">

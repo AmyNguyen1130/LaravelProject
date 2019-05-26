@@ -28,13 +28,12 @@ class ExcelController extends Controller
                     'price'  => $row['price'],
                     'status'   => $row['status']
                 );
-                if (!empty($insert_data)) {
-                    DB::table('electrics')->insert($insert_data);
-                }
+            }
+            if (!empty($insert_data)) {
+                DB::table('electrics')->insert($insert_data);
             }
         }
 
-        return redirect()->back();
-        // return back()->with('success', 'Excel Data Imported successfully.');
+        return redirect()->back()->with('success', 'Import dữ liệu thành công!');
     }
 }
