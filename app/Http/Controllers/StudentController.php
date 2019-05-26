@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Datatables;
 use Carbon\Carbon;
 use App\Issue;
 use App\Water;
@@ -12,7 +11,6 @@ use App\Room;
 use App\Student;
 use App\KitchenExpense;
 use App\Misconduct;
-use Symfony\Component\HttpFoundation\Session\Session;
 use App\Http\Requests\IssueRequest;
 use Illuminate\Support\Facades\Auth;
 

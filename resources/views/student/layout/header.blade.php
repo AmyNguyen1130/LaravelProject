@@ -13,9 +13,9 @@
                     </div>
                     <div class="col-sm-4 right">
                         <ul class="list-inline">
-                            <li><a class="{{ Session::has('user') ? 'hide' : 'show' }}" onclick="loginControl()">Đăng nhập</a></li>
-                            <li><a class="{{ Session::has('user') ? 'hide' : 'show' }}" onclick="signupControl()">Đăng ký</a></li>
-                            <li><a class="{{ Session::has('user') ? 'show' : 'hide' }}" href="logout">Đăng Xuất</a></li>
+                            <li><a class="{{ Auth::check() ? 'hide' : 'show' }}" onclick="loginControl()">Đăng nhập</a></li>
+                            <li><a class="{{ Auth::check() ? 'hide' : 'show' }}" onclick="signupControl()">Đăng ký</a></li>
+                            <li><a class="{{ Auth::check() ? 'show' : 'hide' }}" href="logout">Đăng Xuất</a></li>
                         </ul>
                     </div>
                 </div>
@@ -32,8 +32,8 @@
                                 <span class="icon-bar"></span>
                             </button>
                             <ul id="collapse-menu" class="nav list-inline">
-                                <li class="text-uppercase {{ Session::has('user') ? 'hide' : 'show' }}"><a onclick="loginControl()">Đăng nhập</a></li>
-                                <li class="text-uppercase {{ Session::has('user') ? 'show' : 'hide' }}"><a href="logout">Đăng Xuất</a></li>
+                                <li class="text-uppercase {{ Auth::check() ? 'hide' : 'show' }}"><a onclick="loginControl()">Đăng nhập</a></li>
+                                <li class="text-uppercase {{ Auth::check() ? 'show' : 'hide' }}"><a href="logout">Đăng Xuất</a></li>
                             </ul>
                         </div>
                         <div class="collapse navbar-collapse" id="myNavbar">
