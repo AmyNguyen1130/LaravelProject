@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Electric;
 use Carbon\Carbon;
+use DB;
+use Illuminate\Support\Facades\Validator;
 
 class ManagerController extends Controller
 {
@@ -16,8 +18,9 @@ class ManagerController extends Controller
 
     public function loadDataTableElectrics()
     {
-        $current_time = Carbon::now()->format('Y-m');
-        $electrics = Electric::select('electrics.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'electrics.deleted')->join('rooms', 'electrics.room_id', 'rooms.id')->where('time', $current_time)->get();
+        $today = Carbon::now();
+        $last_month = $today->year . '-' . ((($today->month - 1) > 9) ? ($today->month - 1) : ("0" . ($today->month - 1)));
+        $electrics = Electric::select('electrics.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'electrics.deleted')->join('rooms', 'electrics.room_id', 'rooms.id')->where('time', $last_month)->get();
         $data = "";
         foreach ($electrics as $electric) {
 

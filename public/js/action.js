@@ -19,6 +19,77 @@ function signupControl() {
     $('#login-modal').show();
 }
 
+// INSERT NEW RECORD TABLE ELECTRICS
+function changeMonthByYear() {
+    var today = new Date();
+    var months = "<option selected disabled>Tháng</option>";
+    if (today.getFullYear() == $('#insert_year').val()) {
+        var today = new Date();
+        for (var month = 1; month <= today.getMonth(); month++) {
+            months += "<option value='" + month + "'>" + month + "</option>/n"
+        }
+    } else {
+        for (var month = 1; month <= 12; month++) {
+            months += "<option value='" + month + "'>" + month + "</option>/n"
+        }
+    }
+    $('#insert_month').html(months);
+}
+
+function getOldNumberByRoomId() {
+    var today = new Date();
+    var old_time = today.getFullYear() + "-" + (((today.getMonth() - 1) > 9) ? (today.getMonth() - 1) : ("0" + (today.getMonth() - 1)));
+    $.ajax({
+        'type': 'POST',
+        'url': 'manager/tables/electrics/getOldNumber',
+        'data': {
+            'room_id': $('#insert_room_id').val(),
+            'time': old_time,
+        },
+        'dataType': 'json',
+        success: function (data) {
+            $('#insert_old_number').val(data)
+        }
+    });
+}
+
+function insertIntoElectricsTable() {
+    $.ajax({
+        'type': 'POST',
+        'url': 'manager/tables/electrics/insert',
+        'data': {
+            'room_id': $('#insert_room_id').val(),
+            'year': $('#insert_year').val(),
+            'month': $('#insert_month').val(),
+            'old_number': $('#insert_old_number').val(),
+            'new_number': $('#insert_new_number').val(),
+            'price': $('#insert_price').val(),
+            'status': $('#insert_status').val()
+        },
+        'dataType': 'json',
+        success: function (data) {
+            console.log(data);
+        }
+    });
+}
+
+$(document).ready(function () {
+
+    $('#insert_year').change(function () {
+        changeMonthByYear();
+    });
+
+    $('#insert_room_id').change(function () {
+        getOldNumberByRoomId();
+    });
+
+    $('#save_new_electric').click(function () {
+        insertIntoElectricsTable();
+    });
+});
+
+// END CODE INSERT NEW RECORD
+
 function moveToStep2(student) {
     if (student != null) {
         $('#name').val(student.name);
@@ -67,6 +138,8 @@ function login() {
 //     }
 // });
 
+
+// LOGIN
 $(document).ready(function () {
     $('#btn-login').click(function (e) {
         e.preventDefault();
@@ -76,13 +149,13 @@ $(document).ready(function () {
             }
         });
         login();
-    })
+    });
 });
 
 
 
-// // SIGNUP PROGRESS
-// // SIGNUP AJAX
+// SIGNUP PROGRESS
+// SIGNUP AJAX
 $(document).ready(function () {
     $('#btn-next').click(function () {
         $.ajaxSetup({
@@ -179,4 +252,3 @@ $(document).ready(function () {
     });
 });
 
-// SEND REPORT

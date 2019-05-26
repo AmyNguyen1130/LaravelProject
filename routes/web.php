@@ -131,6 +131,17 @@ Route::group(['prefix' => 'manager/', 'middleware' => 'is_manager'], function ()
 				'as' => 'manager.tables.electrics.import',
 				'uses' => 'ExcelController@importElectrics'
 			]);
+
+			// INSERT NEW RECORD
+			Route::post('insert', [
+				'as' => 'manager.tables.electrics.insert',
+				'uses' => 'ElectricController@insertNewRocord'
+			]);
+
+			Route::post('getOldNumber', [
+				'as' => 'manager.tables.electrics.getOldNumber',
+				'uses' => 'ElectricController@getOldNumber'
+			]);
 		});
 	});
 });
