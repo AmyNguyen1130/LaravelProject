@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Resources\User as UserResource;
-use App\User as AppUser;
+use App\User;
 
 class UserController extends Controller
 {
@@ -15,8 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = AppUser::paginate(10);
-        return UserResource::collection($users);
+        return UserResource::collection(User::all());
     }
 
     /**

@@ -23,3 +23,10 @@ Route::get('user/{id}', 'UserController@show');
 Route::post('user', 'UserController@store');
 Route::put('users', 'UserController@store');
 Route::delete('users', 'UserController@destroy');
+
+
+Route::get('students', 'StudentController@index');
+Route::get('student/{id}', 'StudentController@show');
+Route::post('student', 'StudentController@store');
+Route::put('students', 'StudentController@store');
+Route::delete('students', 'StudentController@destroy');

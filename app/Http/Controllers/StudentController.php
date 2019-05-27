@@ -13,9 +13,87 @@ use App\KitchenExpense;
 use App\Misconduct;
 use App\Http\Requests\IssueRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\Student as StudentResource;
 
 class StudentController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return StudentResource::collection(Student::all());
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        return new StudentResource(Student::findOrFail($id));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+
     function getIssue()
     {
         $student = Student::select('room_id')->where('email', Auth::user()->email)->first();
@@ -43,7 +121,7 @@ class StudentController extends Controller
 
     function getWaterByMonth(Request $req)
     {
-        $time = $req->year_water .'-'.$req->month_water;
+        $time = $req->year_water . '-' . $req->month_water;
         $waters = Water::select('waters.id', 'rooms.name as room_name', 'rooms.id as room_id', 'waters.time', 'waters.old_number', 'waters.new_number', 'waters.price', 'waters.status')->join('rooms', 'rooms.id', '=', 'waters.room_id')->where('waters.time', $time)->get();
         $room_current = Student::select('room_id')->where('email', Auth::user()->email)->first();
         return response()->json([
@@ -54,7 +132,7 @@ class StudentController extends Controller
 
     function getElectricByMonth(Request $req)
     {
-        $time = $req->year_electric .'-'.$req->month_electric;
+        $time = $req->year_electric . '-' . $req->month_electric;
         $electric = Electric::select('electrics.id', 'rooms.name as room_name', 'rooms.id as room_id', 'time', 'old_number', 'new_number', 'price', 'status')->join('rooms', 'rooms.id', '=', 'electrics.room_id')->where('electrics.time', $time)->get();
         $room_current = Student::select('room_id')->where('email', Auth::user()->email)->first();
         return response()->json([
@@ -88,7 +166,7 @@ class StudentController extends Controller
 
     function getKitchenExpensesByMonth(Request $req)
     {
-        $time = $req->year_kitchen .'-'.$req->month_kitchen;
+        $time = $req->year_kitchen . '-' . $req->month_kitchen;
         $sum = 0;
         $kitchenExpenses = KitchenExpense::select('id', 'time', 'item', 'quantity', 'price')->where('time', 'like', '%' . $time . '%')->get();
         foreach ($kitchenExpenses as $value) {
@@ -114,8 +192,8 @@ class StudentController extends Controller
 
     function getMisconductByMonth(Request $req)
     {
-        $time = $req->year_misconduct .'-'.$req->month_misconduct;
-        $misconducts = Misconduct::select('id', 'student_id', 'content', 'time', 'minus')->where('time', 'like',  $time. '%')->get();
+        $time = $req->year_misconduct . '-' . $req->month_misconduct;
+        $misconducts = Misconduct::select('id', 'student_id', 'content', 'time', 'minus')->where('time', 'like',  $time . '%')->get();
         $sum = 0;
         foreach ($misconducts as $value) {
             $sum += $value->minus;

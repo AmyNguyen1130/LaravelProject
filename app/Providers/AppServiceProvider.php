@@ -7,6 +7,7 @@ use App\Room;
 use App\Classes;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Http\Resources\Json\Resource;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Resource::withoutWrapping();
         Schema::defaultStringLength(255);
         if (Schema::hasTable('rooms') && Schema::hasTable('classes')) {
             $rooms = Room::all();
