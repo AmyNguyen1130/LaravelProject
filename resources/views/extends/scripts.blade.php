@@ -38,7 +38,6 @@
 
 <!-- Custom Theme Scripts -->
 <script src="public/admin/build/js/custom.min.js"></script>
-<script src="public/js/admin.js"></script>
 <script src="public/js/action.js"></script>
 
 <!-- Tabledit JS -->
