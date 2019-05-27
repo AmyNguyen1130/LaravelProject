@@ -149,6 +149,11 @@ Route::group(['prefix' => 'manager/', 'middleware' => 'is_manager'], function ()
 				'as' => 'manager.tables.electrics.filterYear',
 				'uses' => 'ElectricController@filterByYear'
 			]);
+
+			Route::post('filterMonth', [
+				'as' => 'manager.tables.electrics.filterMonth',
+				'uses' => 'ElectricController@filterByMonth'
+			]);
 		});
 
 		// BILL WATER
