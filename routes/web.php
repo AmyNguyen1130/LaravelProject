@@ -257,17 +257,3 @@ Route::group(['prefix' => 'student/', 'middleware' => 'is_student'], function ()
 		'uses' => 'StudentController@getMisconductByMonth'
 	]);
 });
-
-
-// TEST
-Route::get('testlogin', [
-	'as' => 'testlogin',
-	function () {
-		return view('test');
-	}
-]);
-
-Route::post('testlogin', [
-	'as' => 'testlogin',
-	'uses' => 'LoginController@testLogin'
-]);
