@@ -20,10 +20,10 @@ function signupControl() {
 }
 
 // INSERT NEW RECORD TABLE ELECTRICS
-function changeMonthByYear() {
+function changeMonthByYear(year_selector, month_selector) {
     var today = new Date();
     var months = "<option selected disabled>Tháng</option>";
-    if (today.getFullYear() == $('#insert_year').val()) {
+    if (today.getFullYear() == year_selector.val()) {
         var today = new Date();
         for (var month = 1; month <= today.getMonth(); month++) {
             months += "<option value='" + month + "'>" + month + "</option>/n"
@@ -33,7 +33,7 @@ function changeMonthByYear() {
             months += "<option value='" + month + "'>" + month + "</option>/n"
         }
     }
-    $('#insert_month').html(months);
+    month_selector.html(months);
 }
 
 function getOldNumberByRoomId() {
@@ -96,7 +96,11 @@ function insertIntoWatersTable() {
 $(document).ready(function () {
 
     $('#insert_year').change(function () {
-        changeMonthByYear();
+        changeMonthByYear($('#insert_year'), $('#insert_month'));
+    });
+
+    $('#filter_year').change(function () {
+        changeMonthByYear($('#filter_year'), $('#filter_month'));
     });
 
     $('#insert_room_id').change(function () {

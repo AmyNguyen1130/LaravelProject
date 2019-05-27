@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Educator;
+use App\Student;
 
 class AdminController extends Controller
 {
@@ -57,7 +58,6 @@ class AdminController extends Controller
             $old_email = $user->email;
 
             $user->email = $input['email'];
-            $user->role = $input['role'];
             $user->deleted = $input['deleted'];
 
             if ($user->role === 'educator') {
@@ -68,6 +68,15 @@ class AdminController extends Controller
                 $educator->phone = $input['phone'];
                 if ($user->save()) {
                     $educator->save();
+                }
+            } else if ($user->role === 'student') {
+                $student = Student::where('email', $old_email)->first();
+                $student->name = $input['full_name'];
+                $student->email = $input['email'];
+                $student->gender = $input['gender'];
+                $student->phone = $input['phone'];
+                if ($user->save()) {
+                    $student->save();
                 }
             }
 

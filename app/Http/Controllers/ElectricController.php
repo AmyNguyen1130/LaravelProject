@@ -106,8 +106,65 @@ class ElectricController extends Controller
 
     public function filterByMonth(Request $req)
     {
-        $time = $req->filter_year . "-" .$req->filter_month;
+        $time = $req->filter_year . (($req->filter_month > 9) ? "-" : "-0") . $req->filter_month;
         $electrics = Electric::select('electrics.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'electrics.deleted')->join('rooms', 'electrics.room_id', 'rooms.id')->where('time', $time)->get();
+        $data = "";
+        foreach ($electrics as $electric) {
+
+            // DÙNG ĐỂ HIỂN THỊ RA HTML
+            $status = ($electric->status == 1) ? "Đã nộp" : "Chưa nộp";
+            $is_active = ($electric->deleted == 0) ? "False" : "True";
+            $isDeleted = ($electric->deleted == 1) ? "background: #f44242; color: #FFFFFF;" : "";
+            $isPaied = ($electric->status == 0) ? "background: #f49d41; color: #FFFFFF;" : "";
+            //
+            $data .= "
+            <tr style='" . $isPaied . '' . $isDeleted . "'>
+                <td class='hidden'>" . $electric->id . "</td>
+                <td>" . $electric->room_name . "</td>
+                <td>" . $electric->time . "</td>
+                <td>" . $electric->old_number . "</td>
+                <td>" . $electric->new_number . "</td>
+                <td>" . $electric->price . "</td>
+                <td>" . $status . "</td>
+                <td>" . $is_active . "</td>
+            </tr>
+            ";
+        }
+        return response()->json($data);
+    }
+
+    public function filterByRoom(Request $req)
+    {
+        $time = $req->filter_year . (($req->filter_month > 9) ? "-" : "-0") . $req->filter_month;
+        $electrics = Electric::select('electrics.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'electrics.deleted')->join('rooms', 'electrics.room_id', 'rooms.id')->where('time', $time)->where('room_id', $req->filter_room_id)->get();
+        $data = "";
+        foreach ($electrics as $electric) {
+
+            // DÙNG ĐỂ HIỂN THỊ RA HTML
+            $status = ($electric->status == 1) ? "Đã nộp" : "Chưa nộp";
+            $is_active = ($electric->deleted == 0) ? "False" : "True";
+            $isDeleted = ($electric->deleted == 1) ? "background: #f44242; color: #FFFFFF;" : "";
+            $isPaied = ($electric->status == 0) ? "background: #f49d41; color: #FFFFFF;" : "";
+            //
+            $data .= "
+            <tr style='" . $isPaied . '' . $isDeleted . "'>
+                <td class='hidden'>" . $electric->id . "</td>
+                <td>" . $electric->room_name . "</td>
+                <td>" . $electric->time . "</td>
+                <td>" . $electric->old_number . "</td>
+                <td>" . $electric->new_number . "</td>
+                <td>" . $electric->price . "</td>
+                <td>" . $status . "</td>
+                <td>" . $is_active . "</td>
+            </tr>
+            ";
+        }
+        return response()->json($data);
+    }
+
+    public function filterByStatus(Request $req)
+    {
+        $electrics = Electric::select('electrics.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'electrics.deleted')->join('rooms', 'electrics.room_id', 'rooms.id')->where('status', $req->filter_status)->get();
         $data = "";
         foreach ($electrics as $electric) {
 

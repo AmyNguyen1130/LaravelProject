@@ -200,7 +200,7 @@
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="col-xs-6 col-sm-2">
                             <div class="form-group">
                                 <select class="form-control" id="filter_status">
