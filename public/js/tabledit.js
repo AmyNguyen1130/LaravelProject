@@ -16,7 +16,7 @@ $(window).load(function () {
     var editable_field;
     console.log('role ' + role);
     console.log('table ' + table);
-    if (table == 'electrics') {
+    if (table == 'electrics' || table == 'waters') {
         identifier_field = [0, 'id'];
         editable_field = [
             [3, 'old_number'],
@@ -50,7 +50,7 @@ function loadDataTable(role, table, identifier_field, editable_field) {
         console.log('table ' + table + ' loaded')
         $('tbody').html(data)
         tableData(role, table, identifier_field, editable_field)
-        console.clear()
+        //console.clear()
     })
 }
 

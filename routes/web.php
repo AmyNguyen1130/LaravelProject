@@ -110,6 +110,8 @@ Route::group(['prefix' => 'manager/', 'middleware' => 'is_manager'], function ()
 
 	Route::group(['prefix' => 'tables/'], function () {
 
+		// BILL ELECTRIC
+
 		Route::group(['prefix' => 'electrics/'], function () {
 			Route::get('', [
 				'as' => 'manager.tables.electrics',
@@ -141,6 +143,47 @@ Route::group(['prefix' => 'manager/', 'middleware' => 'is_manager'], function ()
 			Route::post('getOldNumber', [
 				'as' => 'manager.tables.electrics.getOldNumber',
 				'uses' => 'ElectricController@getOldNumber'
+			]);
+
+			Route::post('filterYear', [
+				'as' => 'manager.tables.electrics.filterYear',
+				'uses' => 'ElectricController@filterByYear'
+			]);
+		});
+
+		// BILL WATER
+
+		Route::group(['prefix' => 'waters/'], function () {
+			Route::get('', [
+				'as' => 'manager.tables.waters',
+				'uses' => 'ManagerController@getTableWaters'
+			]);
+
+			Route::get('load', [
+				'as' => 'manager.tables.waters.load',
+				'uses' => 'ManagerController@loadDataTableWaters'
+			]);
+
+			Route::post('CRUD', [
+				'as' => 'manager.tables.waters.CRUD',
+				'uses' => 'ManagerController@CRUDTableWaters'
+			]);
+
+			// Upload excel file and insert to DB
+			Route::post('import', [
+				'as' => 'manager.tables.waters.import',
+				'uses' => 'ExcelController@importWaters'
+			]);
+
+			// INSERT NEW RECORD
+			Route::post('insert', [
+				'as' => 'manager.tables.waters.insert',
+				'uses' => 'WaterController@insertNewRocord'
+			]);
+
+			Route::post('getOldNumber', [
+				'as' => 'manager.tables.waters.getOldNumber',
+				'uses' => 'WaterController@getOldNumber'
 			]);
 		});
 	});

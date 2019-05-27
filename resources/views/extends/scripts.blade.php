@@ -44,3 +44,4 @@
 <!-- Tabledit JS -->
 <script src="public/js/jquery.tabledit.min.js"></script>
 <script src="public/js/tabledit.js"></script>
+<script src="public/js/filter.js"></script>

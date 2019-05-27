@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Electric;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
+use app\Water;
 
-class ElectricController extends Controller
+class WaterController extends Controller
 {
     public function insertNewRocord(Request $data)
     {
@@ -59,7 +57,7 @@ class ElectricController extends Controller
                 'status' => $data->status,
             );
 
-            if (DB::table('electrics')->insert($insert_data)) {
+            if (DB::table('waters')->insert($insert_data)) {
                 return response()->json('Insert thành công');
             } else {
                 return response()->json('Insert thất bại');
@@ -69,39 +67,12 @@ class ElectricController extends Controller
 
     public function getOldNumber(Request $data)
     {
-        $electric = Electric::select('new_number')->where([
+        $water = Water::select('new_number')->where([
             ['room_id', $data->room_id],
             ['time', $data->time]
         ])->first();
-        return response()->json($electric->new_number);
-    }
-
-    public function filterByYear(Request $req)
-    {
-        return response()->json($req->all());
-        $electrics = Electric::select('electrics.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'electrics.deleted')->join('rooms', 'electrics.room_id', 'rooms.id')->where('time', like,  $req->filter_year . '%')->get();
-        $data = "";
-        foreach ($electrics as $electric) {
-
-            // DÙNG ĐỂ HIỂN THỊ RA HTML
-            $status = ($electric->status == 1) ? "Đã nộp" : "Chưa nộp";
-            $is_active = ($electric->deleted == 0) ? "False" : "True";
-            $isDeleted = ($electric->deleted == 1) ? "background: #f44242; color: #FFFFFF;" : "";
-            $isPaied = ($electric->status == 0) ? "background: #f49d41; color: #FFFFFF;" : "";
-            //
-            $data .= "
-            <tr style='" . $isPaied . '' . $isDeleted . "'>
-                <td class='hidden'>" . $electric->id . "</td>
-                <td>" . $electric->room_name . "</td>
-                <td>" . $electric->time . "</td>
-                <td>" . $electric->old_number . "</td>
-                <td>" . $electric->new_number . "</td>
-                <td>" . $electric->price . "</td>
-                <td>" . $status . "</td>
-                <td>" . $is_active . "</td>
-            </tr>
-            ";
-        }
-        return response()->json($data);
+        return response()->json($water->new_number);
     }
 }
+
+

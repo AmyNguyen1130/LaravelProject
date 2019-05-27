@@ -73,6 +73,26 @@ function insertIntoElectricsTable() {
     });
 }
 
+function insertIntoWatersTable() {
+    $.ajax({
+        'type': 'POST',
+        'url': 'manager/tables/waters/insert',
+        'data': {
+            'room_id': $('#insert_room_id').val(),
+            'year': $('#insert_year').val(),
+            'month': $('#insert_month').val(),
+            'old_number': $('#insert_old_number').val(),
+            'new_number': $('#insert_new_number').val(),
+            'price': $('#insert_price').val(),
+            'status': $('#insert_status').val()
+        },
+        'dataType': 'json',
+        success: function (data) {
+            console.log(data);
+        }
+    });
+}
+
 $(document).ready(function () {
 
     $('#insert_year').change(function () {
@@ -86,6 +106,11 @@ $(document).ready(function () {
     $('#save_new_electric').click(function () {
         insertIntoElectricsTable();
     });
+
+    $('#save_new_water').click(function () {
+        insertIntoWatersTable();
+    });
+
 });
 
 // END CODE INSERT NEW RECORD
