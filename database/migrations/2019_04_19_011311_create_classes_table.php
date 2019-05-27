@@ -19,6 +19,7 @@ class CreateClassesTable extends Migration
             $table->integer('educator_id')->unsigned();
             $table->foreign('educator_id')->references('id')->on('educators')->onDelete('cascade');
             $table->integer('number_of_students');
+            $table->boolean('deleted')->default(0);
             $table->timestamps();
         });
     }

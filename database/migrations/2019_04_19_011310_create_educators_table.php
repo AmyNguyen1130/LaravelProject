@@ -22,6 +22,7 @@ class CreateEducatorsTable extends Migration
             $table->string('address');
             $table->string('phone');
             $table->string('qualification'); 
+            $table->boolean('deleted')->default(0);
             $table->timestamps();
         });
     }

@@ -20,6 +20,7 @@ class CreateIssuesTable extends Migration
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->integer('room_id')->unsigned();
             $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
+            $table->boolean('deleted')->default(0);
             $table->timestamps();
         });
     }

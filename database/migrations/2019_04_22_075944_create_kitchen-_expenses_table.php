@@ -19,6 +19,7 @@ class CreateKitchenExpensesTable extends Migration
             $table->string('item', 100);
             $table->integer('quantity');
             $table->integer('price');
+            $table->boolean('deleted')->default(0);
             $table->timestamps();
         });
     }

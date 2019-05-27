@@ -84,6 +84,9 @@ Route::group(['prefix' => ''], function () {
 					'as' => 'admin.tables.users.CRUD',
 					'uses' => 'AdminController@CRUDTableUsers'
 				]);
+				
+
+
 			});
 		});
 	});

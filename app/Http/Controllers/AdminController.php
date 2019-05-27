@@ -33,6 +33,8 @@ class AdminController extends Controller
         return response()->json($data);
     }
 
+ 
+
     public function CRUDTableUsers()
     {
         header('Content-Type: application/json');

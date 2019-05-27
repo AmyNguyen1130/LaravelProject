@@ -18,6 +18,7 @@ class CreateRoomsTable extends Migration
             $table->string('name');
             $table->integer('floor');
             $table->integer('number_of_members');
+            $table->boolean('deleted')->default(0);
             $table->timestamps();
         });
     }
