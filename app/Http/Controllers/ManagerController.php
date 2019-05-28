@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Electric;
 use Carbon\Carbon;
-use DB;
-use Illuminate\Support\Facades\Validator;
 use App\Water;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
 
 class ManagerController extends Controller
 {
@@ -132,7 +132,7 @@ class ManagerController extends Controller
     {
         $today = Carbon::now();
         $last_month = $today->year . '-' . ((($today->month - 1) > 9) ? ($today->month - 1) : ("0" . ($today->month - 1)));
-        
+
         $waters = Water::select('waters.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'waters.deleted')->join('rooms', 'waters.room_id', 'rooms.id')->where('time', $last_month)->get();
         $htmlWaters = "";
         foreach ($waters as $water) {
@@ -189,7 +189,7 @@ class ManagerController extends Controller
 
     public function loadDataFilterToSendBill(Request $req)
     {
-        $time = $req->sendbill_year . "-" .$req->sendbill_month;
+        $time = $req->sendbill_year . "-" . $req->sendbill_month;
         $waters = Water::select('waters.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'waters.deleted')->join('rooms', 'waters.room_id', 'rooms.id')->where('time', $time)->get();
         $htmlWaters = "";
         foreach ($waters as $water) {
@@ -241,8 +241,42 @@ class ManagerController extends Controller
         return response()->json([
             'htmlWaters' => $htmlWaters,
             'htmlElectrics' => $htmlElectrics,
-            'time' =>$time,
+            'time' => $time,
         ], 200);
     }
-    
+
+    function sendBill(Request $request)
+    {
+        $this->validate($request, [
+            'year'     =>  'required',
+            'month'  =>  'required',
+            'date' =>  'required',
+            'time' =>  'required'
+        ]);
+
+        $bill_month = $request->year . "-" . $request->month;
+        $deadline = $request->time . " (" . $request->date . ")";
+
+        $waters = Water::select('waters.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'waters.deleted')->join('rooms', 'waters.room_id', 'rooms.id')->where('time', $bill_month)->get();
+        $electrics = Electric::select('electrics.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'electrics.deleted')->join('rooms', 'electrics.room_id', 'rooms.id')->where('time', $bill_month)->get();
+
+        $data = array(
+            'bill_month'       => $bill_month,
+            'waters'      =>  $waters,
+            'electrics'   =>   $electrics,
+            'deadline'    => $deadline
+        );
+
+        $listEmail = array(
+            'tai.tran@student.passerellesnumeriques.org',
+            'ly.doan@student.passerellesnumeriques.org'
+        );
+
+        foreach ($listEmail as $email) {
+            // echo $email;
+            Mail::to($email)->send(new SendMail($data));
+        }
+
+        return back()->with('success', 'Gửi email thông báo thành công');
+    }
 }

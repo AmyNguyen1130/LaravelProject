@@ -99,21 +99,18 @@ Route::group(['prefix' => 'manager/', 'middleware' => 'is_manager'], function ()
 	Route::get('', [
 		'as' => 'manager.pages.index',
 		function () {
-			if (Auth::check()) {
-				if (Auth::user()->role == "manager") {
-					return view('manager.pages.index');
-				}
-			}
-			return redirect()->back();
+			return view('manager.pages.index');
 		}
 	]);
 
 	Route::get('sendbill', [
 		'as' => 'manager.pages.sendbill',
-		function() {
+		function () {
 			return view('manager.pages.sendbill');
 		}
 	]);
+
+	Route::post('sendbill/send', 'ManagerController@sendBill');
 
 	Route::get('sendbill/loadData', [
 		'as' => 'manager.pages.sendbill.loadData',
@@ -306,5 +303,3 @@ Route::group(['prefix' => 'student/', 'middleware' => 'is_student'], function ()
 Route::get('viewemail', function () {
 	return view('emailTemp');
 });
-//Route::get('sendBill', 'SendEmailController@index');
-Route::post('sendemail/send', 'SendEmailController@send');

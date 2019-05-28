@@ -5,7 +5,6 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SendMail extends Mailable
 {
@@ -28,7 +27,7 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->from('manager@gmail.com')->subject('New Customer Equiry')->view('emailTemp')->with('data', $this->data);
+        return $this->from('dormmanagementlaravel@gmail.com')->subject('[Dormitory] [Electricity and Water Bills] [' . $this->data['bill_month'] . ']')->view('emailTemp')->with('data', $this->data);
     }
 }
 

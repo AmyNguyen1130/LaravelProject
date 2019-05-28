@@ -1,62 +1,65 @@
 <p>Chào các bạn,</p>
-<p>Đến hẹn lại lên, chúng ta lại chào đón một tháng mới rồi. Các bạn đã sẵn sàng nộp tiền điện chưa?</p>
-<p>Dù các bạn có sẵn sàng hay chưa thì chúng ta cũng phải nộp tiền điện tháng trước rồi.</p>
-<p>Các bạn xem thông tin chi tiết bên dưới và đừng quên nộp tiền cho mình vào <span style="color: red"><strong>8PM (05/06/2019)</strong></span> nhé.</p>
+Đến hẹn lại lên, chúng ta lại chào đón một tháng mới rồi. Các bạn đã sẵn sàng nộp tiền điện chưa?<br>
+Dù đã sẵn sàng hay chưa thì mình cũng phải thông báo để các bạn nộp tiền điện tháng trước.<br>
+<p>Các bạn xem thông tin chi tiết bên dưới và đừng quên nộp tiền cho mình vào <span style="color: red"><strong>{{ $data['deadline'] }}</strong></span> nhé.</p>
+
+<h4>TIỀN ĐIỆN:</h4>
 
 <div class="table-responsive">
-    <table style="border: 0.5px solid #111">
+    <table>
 
-        <thead>
+        <thead style="background: #ffd0d0">
             <tr>
-                <th style="border: 0.5px solid #111; min-height: 20px">Phòng</th>
-                <th style="border: 0.5px solid #111; min-height: 20px">Thời gian</th>
-                <th style="border: 0.5px solid #111; min-height: 20px">Chỉ số cũ</th>
-                <th style="border: 0.5px solid #111; min-height: 20px">Chỉ số mới</th>
-                <th style="border: 0.5px solid #111; min-height: 20px">Thành tiền</th>
-                <th style="border: 0.5px solid #111; min-height: 20px">Tình trạng</th>
+                <th style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">Phòng</th>
+                <th style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">Thời gian</th>
+                <th style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">Chỉ số cũ</th>
+                <th style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">Chỉ số mới</th>
+                <th style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">Thành tiền</th>
+                <th style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">Tình trạng</th>
             </tr>
         </thead>
         <tbody>
+            @foreach($data['electrics'] as $electric)
             <tr>
-                <td style="border: 0.5px solid #111;">206</td>
-                <td style="border: 0.5px solid #111;">2019-05</td>
-                <td style="border: 0.5px solid #111;">255</td>
-                <td style="border: 0.5px solid #111;">345</td>
-                <td style="border: 0.5px solid #111;">87000</td>
-                <td style="border: 0.5px solid #111;">Chưa nộp</td>
+                <td style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">{{ $electric->room_name }}</td>
+                <td style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">{{ $electric->time }}</td>
+                <td style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">{{ $electric->old_number }}</td>
+                <td style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">{{ $electric->new_number }}</td>
+                <td style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">{{ $electric->price }}</td>
+                <td style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">{{ $electric->status }}</td>
             </tr>
+            @endforeach
+        </tbody>
+
+    </table>
+</div>
+
+<h4>TIỀN NƯỚC:</h4>
+
+<div class="table-responsive">
+    <table>
+
+        <thead style="background: #ffd0d0">
             <tr>
-                <td style="border: 0.5px solid #111;">206</td>
-                <td style="border: 0.5px solid #111;">2019-05</td>
-                <td style="border: 0.5px solid #111;">255</td>
-                <td style="border: 0.5px solid #111;">345</td>
-                <td style="border: 0.5px solid #111;">87000</td>
-                <td style="border: 0.5px solid #111;">Chưa nộp</td>
+                <th style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">Phòng</th>
+                <th style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">Thời gian</th>
+                <th style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">Chỉ số cũ</th>
+                <th style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">Chỉ số mới</th>
+                <th style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">Thành tiền</th>
+                <th style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">Tình trạng</th>
             </tr>
+        </thead>
+        <tbody>
+            @foreach($data['waters'] as $water)
             <tr>
-                <td style="border: 0.5px solid #111;">206</td>
-                <td style="border: 0.5px solid #111;">2019-05</td>
-                <td style="border: 0.5px solid #111;">255</td>
-                <td style="border: 0.5px solid #111;">345</td>
-                <td style="border: 0.5px solid #111;">87000</td>
-                <td style="border: 0.5px solid #111;">Chưa nộp</td>
+                <td style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">{{ $water->room_name }}</td>
+                <td style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">{{ $water->time }}</td>
+                <td style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">{{ $water->old_number }}</td>
+                <td style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">{{ $water->new_number }}</td>
+                <td style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">{{ $water->price }}</td>
+                <td style="width: 12%; border-bottom: 1px solid #ffd0d0; text-align: center">{{ $water->status }}</td>
             </tr>
-            <tr>
-                <td style="border: 0.5px solid #111;">206</td>
-                <td style="border: 0.5px solid #111;">2019-05</td>
-                <td style="border: 0.5px solid #111;">255</td>
-                <td style="border: 0.5px solid #111;">345</td>
-                <td style="border: 0.5px solid #111;">87000</td>
-                <td style="border: 0.5px solid #111;">Chưa nộp</td>
-            </tr>
-            <tr>
-                <td style="border: 0.5px solid #111;">206</td>
-                <td style="border: 0.5px solid #111;">2019-05</td>
-                <td style="border: 0.5px solid #111;">255</td>
-                <td style="border: 0.5px solid #111;">345</td>
-                <td style="border: 0.5px solid #111;">87000</td>
-                <td style="border: 0.5px solid #111;">Chưa nộp</td>
-            </tr>
+            @endforeach
         </tbody>
 
     </table>
@@ -65,3 +68,6 @@
 <br>
 <p>Các bạn vui lòng nộp đúng hạn nhé. Cảm ơn các bạn rất nhiều.</p>
 <p>Chúc các bạn tháng mới vui vẻ.</p>
+
+Best regards,<br>
+Trần Văn Tài
