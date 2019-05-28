@@ -16,7 +16,7 @@ var identifier_field;
 var editable_field;
 console.log('role ' + role);
 console.log('table ' + table);
-if (table == 'electrics') {
+if (table == 'electrics' || table == 'waters') {
     identifier_field = [0, 'id'];
     editable_field = [
         [3, 'old_number'],
@@ -25,6 +25,7 @@ if (table == 'electrics') {
         [6, 'status', '{"0": "Chưa nộp", "1": "Đã nộp"}'],
         [7, 'deleted', '{"0": "False", "1": "True"}'],
     ];
+    loadDataTable(role, table, identifier_field, editable_field)
 } else if (table == 'users') {
     identifier_field = [0, 'id'];
     editable_field = [
@@ -35,7 +36,9 @@ if (table == 'electrics') {
         [5, 'role', '{"educator": "Educator", "student": "Student", "manager": "Manager", "admin": "Admin"}'],
         [6, 'deleted', '{"0": "Alive", "1": "Died"}'],
     ];
+    loadDataTable(role, table, identifier_field, editable_field)
 }
+
 // END LẤY DỮ LIỆU
 
 function loadDataTable(role, table, identifier_field, editable_field) {
@@ -100,6 +103,49 @@ function tableData(role, table, identifier_field, editable_field) {
             console.log('onAjax(action, serialize)');
             console.log(action);
             console.log(serialize);
+        }
+    });
+}
+
+
+// LỌC TIỀN ĐIỆN
+
+$('#filter_year').change(function () {
+    loadDataTableFilter('filterYear', table, identifier_field, editable_field)
+});
+
+$('#filter_month').change(function () {
+    loadDataTableFilter('filterMonth', table, identifier_field, editable_field)
+});
+
+$('#filter_room_id').change(function () {
+    loadDataTableFilter('filterRoom', table, identifier_field, editable_field)
+});
+
+$('#filter_status').change(function () {
+    loadDataTableFilter('filterStatus', table, identifier_field, editable_field)
+});
+
+function loadDataTableFilter(method, table, identifier_field, editable_field) {
+    console.log('loading table ' + table)
+    $.ajax({
+        'type': 'POST',
+        'url': 'manager/tables/' + table + '/' + method,
+        'data': {
+            'filter_year': $('#filter_year').val(),
+            'filter_month': $('#filter_month').val(),
+            'filter_room_id': $('#filter_room_id').val(),
+            'filter_status': $('#filter_status').val()
+        },
+        'dataType': 'json',
+        success: function (data) {
+            console.log('loaded table ' + table)
+            $('tbody').html(data)
+            console.log(data)
+            tableData("manager", table, identifier_field, editable_field)
+        },
+        error: function () {
+            console.log('Có lỗi xảy ra!')
         }
     });
 }
