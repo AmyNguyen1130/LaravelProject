@@ -110,7 +110,7 @@ $(document).ready(function () {
                     html += '<td>' + value.time + '</td>';
                     html += '<td>' + value.item + '</td>';
                     html += '<td>' + value.quantity + '</td>';
-                    html += '<td>' + numeral(value.price) + '</td>';
+                    html += '<td>' + value.price + '</td>';
                     html += '</tr>';
                 });
 

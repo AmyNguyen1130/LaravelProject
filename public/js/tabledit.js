@@ -1,10 +1,4 @@
 
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-
 // LẤY DỮ LIỆU ĐỂ DÙNG CHO TABLEDIT
 var table = $(location).attr("href").split("/").pop();
 

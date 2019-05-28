@@ -32,12 +32,13 @@ class StudentController extends Controller
 
     function getBill()
     {
-        $time = Carbon::now()->format('Y-m');
+        $today = Carbon::now();
+        $last_month = $today->year . '-' . ((($today->month - 1) > 9) ? ($today->month - 1) : ("0" . ($today->month - 1)));
         $stt = 1;
         $room_current = Student::select('room_id')->where('email', Auth::user()->email)->first();
         $months1 = Water::select('time')->distinct('time')->get();
-        $water = Water::select('waters.id', 'rooms.name as room_name', 'rooms.id as room_id', 'time', 'old_number', 'new_number', 'price', 'status')->join('rooms', 'rooms.id', '=', 'waters.room_id')->where('waters.time', $time)->get();
-        $electric = Electric::select('electrics.id', 'rooms.name as room_name', 'rooms.id as room_id', 'time', 'old_number', 'new_number', 'price', 'status')->join('rooms', 'rooms.id', '=', 'electrics.room_id')->where('electrics.time', $time)->get();
+        $water = Water::select('waters.id', 'rooms.name as room_name', 'rooms.id as room_id', 'time', 'old_number', 'new_number', 'price', 'status')->join('rooms', 'rooms.id', '=', 'waters.room_id')->where('waters.time', $last_month)->get();
+        $electric = Electric::select('electrics.id', 'rooms.name as room_name', 'rooms.id as room_id', 'time', 'old_number', 'new_number', 'price', 'status')->join('rooms', 'rooms.id', '=', 'electrics.room_id')->where('electrics.time', $last_month)->get();
         return view('student.pages.bill', compact('water', 'time', 'stt', 'electric', 'room_current', 'months1'));
     }
 
@@ -76,10 +77,11 @@ class StudentController extends Controller
 
     function getKitchenExpenses()
     {
-        $today = Carbon::now()->format('Y-m');
+        $today = Carbon::now();
+        $last_month = $today->year . '-' . ((($today->month - 1) > 9) ? ($today->month - 1) : ("0" . ($today->month - 1)));
         $sum = 0;
         $months = KitchenExpense::select('time')->distinct('time')->get();
-        $kitchenExpenses = KitchenExpense::select('id', 'time', 'item', 'quantity', 'price')->where('time', 'like', '%' . $today . '%')->get();
+        $kitchenExpenses = KitchenExpense::select('id', 'time', 'item', 'quantity', 'price')->where('time', 'like', '%' . $last_month . '%')->get();
         foreach ($kitchenExpenses as $value) {
             $sum += $value->price;
         }
@@ -102,9 +104,10 @@ class StudentController extends Controller
 
     function getMisconduct()
     {
-        $today = Carbon::now()->format('Y-m');
+        $today = Carbon::now();
+        $last_month = $today->year . '-' . ((($today->month - 1) > 9) ? ($today->month - 1) : ("0" . ($today->month - 1)));
         $months = Misconduct::select('time')->distinct('time')->get();
-        $misconducts = Misconduct::select('id', 'student_id', 'content', 'time', 'minus')->where('time', 'like', '%' . $today . '%')->where('student_id', Auth::user()->id)->get();
+        $misconducts = Misconduct::select('id', 'student_id', 'content', 'time', 'minus')->where('time', 'like', '%' . $last_month . '%')->where('student_id', Auth::user()->id)->get();
         $sum = 0;
         foreach ($misconducts as $value) {
             $sum += $value->minus;
