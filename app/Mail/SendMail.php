@@ -28,7 +28,7 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->from('manager@gmail.com')->subject('New Customer Equiry')->view('emailTemp')->with('data', $this->data);
+        return $this->from('dormmanagementlaravel@gmail.com')->subject('[Dormitory] Electricity and Water Bills')->view('emailTemp')->with('data', $this->data);
     }
 }
 
