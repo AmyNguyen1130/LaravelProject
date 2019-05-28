@@ -110,9 +110,19 @@ Route::group(['prefix' => 'manager/', 'middleware' => 'is_manager'], function ()
 
 	Route::get('sendbill', [
 		'as' => 'manager.pages.sendbill',
-		function () {
+		function() {
 			return view('manager.pages.sendbill');
 		}
+	]);
+
+	Route::get('sendbill/loadData', [
+		'as' => 'manager.pages.sendbill.loadData',
+		'uses' => 'ManagerController@loadDataToSendBill'
+	]);
+
+	Route::post('filterBeforeSend', [
+		'as' => 'manager.pages.filterBeforeSend',
+		'uses' => 'ManagerController@loadDataFilterToSendBill'
 	]);
 
 	Route::group(['prefix' => 'tables/'], function () {
@@ -296,5 +306,5 @@ Route::group(['prefix' => 'student/', 'middleware' => 'is_student'], function ()
 Route::get('viewemail', function () {
 	return view('emailTemp');
 });
-Route::get('sendemail', 'SendEmailController@index');
+//Route::get('sendBill', 'SendEmailController@index');
 Route::post('sendemail/send', 'SendEmailController@send');

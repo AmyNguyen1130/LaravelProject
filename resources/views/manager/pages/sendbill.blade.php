@@ -2,7 +2,7 @@
 
 @section("manager.manager-content")
 
-<div class="right_col" role="main" onload="loadElectricData(); loadWaterData()">
+<div class="right_col" role="main" onload="loadDataToSendBill()">
 
     <div style="margin-top: 60px">
 
