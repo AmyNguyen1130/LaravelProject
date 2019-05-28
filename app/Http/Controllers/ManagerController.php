@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Electric;
 use Carbon\Carbon;
-use DB;
-use Illuminate\Support\Facades\Validator;
 use App\Water;
 
 class ManagerController extends Controller
