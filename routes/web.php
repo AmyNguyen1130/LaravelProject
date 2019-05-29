@@ -286,20 +286,3 @@ Route::group(['prefix' => 'student/', 'middleware' => 'is_student'], function ()
 		'uses' => 'StudentController@getMisconductByMonth'
 	]);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Route::get('viewemail', function () {
-	return view('emailTemp');
-});

@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'dormmanagementlaravel@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Dorm Management'),
+        'address' => env('MAIL_FROM_ADDRESS', 'ewd.notification@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'Bills Manager'),
     ],
 
     /*

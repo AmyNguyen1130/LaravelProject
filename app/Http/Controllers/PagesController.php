@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\User;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
-    // PAGES
     public function getIndex()
     {
+        if (Auth::check()) {
+            return redirect(Auth::user()->role);
+        }
         return view('index');
     }
-    // ADMIN PAGES
-
 }

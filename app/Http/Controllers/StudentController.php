@@ -36,10 +36,9 @@ class StudentController extends Controller
         $last_month = $today->year . '-' . ((($today->month - 1) > 9) ? ($today->month - 1) : ("0" . ($today->month - 1)));
         $stt = 1;
         $room_current = Student::select('room_id')->where('email', Auth::user()->email)->first();
-        $months1 = Water::select('time')->distinct('time')->get();
         $water = Water::select('waters.id', 'rooms.name as room_name', 'rooms.id as room_id', 'time', 'old_number', 'new_number', 'price', 'status')->join('rooms', 'rooms.id', '=', 'waters.room_id')->where('waters.time', $last_month)->get();
         $electric = Electric::select('electrics.id', 'rooms.name as room_name', 'rooms.id as room_id', 'time', 'old_number', 'new_number', 'price', 'status')->join('rooms', 'rooms.id', '=', 'electrics.room_id')->where('electrics.time', $last_month)->get();
-        return view('student.pages.bill', compact('water', 'time', 'stt', 'electric', 'room_current', 'months1'));
+        return view('student.pages.bill', compact('water', 'stt', 'electric', 'room_current'));
     }
 
     function getWaterByMonth(Request $req)

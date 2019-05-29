@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Water;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
+use App\Student;
 
 class ManagerController extends Controller
 {
@@ -267,15 +268,26 @@ class ManagerController extends Controller
             'deadline'    => $deadline
         );
 
+        // ĐOẠN NÀY DÙNG ĐỂ TEST SEND MAIL
         $listEmail = array(
             'tai.tran@student.passerellesnumeriques.org',
-            'ly.doan@student.passerellesnumeriques.org'
+            // 'ly.doan@student.passerellesnumeriques.org',
+            // 'phuong.tran@student.passerellesnumeriques.org',
+            // 'quyet.y@student.passerellesnumeriques.org',
         );
 
         foreach ($listEmail as $email) {
-            // echo $email;
             Mail::to($email)->send(new SendMail($data));
         }
+        // 
+
+        /* ĐOẠN NÀY LÀ ĐỂ DÙNG THẬT
+        $students = Student::all();
+
+        foreach ($students as $student) {
+            Mail::to($student->email)->send(new SendMail($data));
+        }
+        */
 
         return back()->with('success', 'Gửi email thông báo thành công');
     }
