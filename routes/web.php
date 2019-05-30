@@ -322,3 +322,58 @@ Route::group(['prefix' => 'student/', 'middleware' => 'is_student'], function ()
 		'uses' => 'StudentController@getMisconductByMonth'
 	]);
 });
+
+
+// EDUCATOR
+Route::group(['prefix' => 'educator/', 'middleware' => 'is_educator'], function () {
+
+	Route::get('', [
+		'as' => 'educator.pages.index',
+		function () {
+			return view('educator.pages.index');
+		}
+	]);
+
+	Route::group(['prefix' => 'tables/'], function () {
+
+		Route::group(['prefix' => 'rooms/'], function () {
+			Route::get('', [
+				'as' => 'educator.tables.rooms',
+				function() {
+					return view('educator.tables.rooms');
+				}
+			]);
+
+			Route::get('load', [
+				'as' => 'educator.tables.users.load',
+				'uses' => 'EducatorController@loadDataInfoOfRooms'
+			]);
+
+			Route::post('CRUD', [
+				'as' => 'admin.tables.users.CRUD',
+				'uses' => 'AdminController@CRUDTableUsers'
+			]);
+
+		});
+
+		Route::group(['prefix' => 'misconducts/'], function () {
+			Route::get('', [
+				'as' => 'educator.tables.misconducts',
+				function() {
+					return view('educator.tables.misconducts');
+				}
+			]);
+
+			Route::get('load', [
+				'as' => 'educator.tables.misconducts.load',
+				'uses' => 'EducatorController@loadDataTableMisconducts'
+			]);
+
+			Route::post('CRUD', [
+				'as' => 'educator.tables.misconducts.CRUD',
+				'uses' => 'EducatorController@CRUDTableMisconducts'
+			]);
+
+		});
+	});
+});

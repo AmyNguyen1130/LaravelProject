@@ -19,7 +19,6 @@ if (table == 'electrics' || table == 'waters') {
         [6, 'status', '{"0": "Chưa nộp", "1": "Đã nộp"}'],
         [7, 'deleted', '{"0": "False", "1": "True"}'],
     ];
-    loadDataTable(role, table, identifier_field, editable_field)
 } else if (table == 'users') {
     identifier_field = [0, 'id'];
     editable_field = [
@@ -30,7 +29,14 @@ if (table == 'electrics' || table == 'waters') {
         [5, 'role', '{"educator": "Educator", "student": "Student", "manager": "Manager", "admin": "Admin"}'],
         [6, 'deleted', '{"0": "Alive", "1": "Died"}'],
     ];
-    loadDataTable(role, table, identifier_field, editable_field)
+} else if (table == 'misconducts') {
+    identifier_field = [0, 'id'];
+    editable_field = [
+        [2, 'content'],
+        [3, 'time'],
+        [4, 'minus'],
+        [5, 'deleted', '{"0": "false", "1": "true"}'],
+    ];
 }
 
 // END LẤY DỮ LIỆU
@@ -145,7 +151,7 @@ function loadDataTableFilter(method, table, identifier_field, editable_field) {
 }
 
 $(window).load(function () {
-    if (table == 'users' || table == 'electrics' || table == 'waters') {
+    if (table == 'users' || table == 'electrics' || table == 'waters' || table == 'misconducts') {
         loadDataTable(role, table, identifier_field, editable_field);
     }
 });

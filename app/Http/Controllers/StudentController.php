@@ -181,21 +181,22 @@ class StudentController extends Controller
 
     function getMisconduct()
     {
-        $today = Carbon::now();
-        $last_month = $today->year . '-' . ((($today->month - 1) > 9) ? ($today->month - 1) : ("0" . ($today->month - 1)));
-        $months = Misconduct::select('time')->distinct('time')->get();
-        $misconducts = Misconduct::select('id', 'student_id', 'content', 'time', 'minus')->where('time', 'like', '%' . $last_month . '%')->where('student_id', Auth::user()->id)->get();
+        $misconducts = Misconduct::select('id', 'student_id', 'content', 'time', 'minus')->where([['student_id', Auth::user()->id], ['deleted', '0']])->get();
         $sum = 0;
         foreach ($misconducts as $value) {
             $sum += $value->minus;
         }
-        return view('student.pages.misconduct', compact('misconducts', 'months', 'sum'));
+        return view('student.pages.misconduct', compact('misconducts', 'sum'));
     }
 
     function getMisconductByMonth(Request $req)
     {
         $time = $req->year_misconduct . '-' . $req->month_misconduct;
-        $misconducts = Misconduct::select('id', 'student_id', 'content', 'time', 'minus')->where('time', 'like',  $time . '%')->get();
+        $misconducts = Misconduct::select('id', 'student_id', 'content', 'time', 'minus')->where([
+            ['time', 'like', '%' . $time . '%'],
+            ['student_id', Auth::user()->id],
+            ['deleted', '0']
+        ])->get();
         $sum = 0;
         foreach ($misconducts as $value) {
             $sum += $value->minus;
