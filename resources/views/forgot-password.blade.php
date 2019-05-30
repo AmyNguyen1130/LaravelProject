@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Đổi mật khấu | Dorm Management</title>
+    <title>Quên mật khấu | Dorm Management</title>
     <base href="{{ asset('') }}">
 
     <!-- Bootstrap CSS -->
@@ -41,19 +41,14 @@
 
                     <!-- END VALIDATION LOGIN MESSAGE -->
 
-                    <form action="" method="POST" role="form">
+                    <form action="send-verify-code" method="POST" role="form">
+
+                        {{ csrf_field() }}
 
                         <div class="col-xs-12">
                             <div class="form-group">
                                 <p class="text-danger error errorEmail"></p>
-                                <input type="email" class="form-control" id="email" placeholder="Nhập email của bạn">
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <p class="text-danger error errorPassword"></p>
-                                <input type="text" class="form-control" id="password" placeholder="Nhập mật khẩu cũ của bạn">
+                                <input type="email" class="form-control" name="email" placeholder="Nhập email của bạn">
                             </div>
                         </div>
 
@@ -74,7 +69,7 @@
                         </div>
 
                         <div class="col-xs-12">
-                            <button type="button" id="btn-getcode" onclick="getVirifyCode()" class="btn btn-primary col-xs-12 text-uppercase">Lấy mã xác nhận</button>
+                            <button type="submit" id="btn-getcode" onclick="getVirifyCode()" class="btn btn-primary col-xs-12 text-uppercase">Lấy mã xác nhận</button>
                         </div>
                     </form>
                 </div>
@@ -101,8 +96,7 @@
                 url: 'send-verify-code',
                 method: 'POST',
                 data: {
-                    'email': $('#email').val(),
-                    'password': $('#password').val()
+                    'email': $('#email').val()
                 },
                 dataType: 'json',
                 success: function(data) {

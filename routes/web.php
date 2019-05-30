@@ -51,19 +51,28 @@ Route::group(['prefix' => ''], function () {
 		'uses' => 'LoginController@logout'
 	]);
 
-	Route::get('change-password', function() {
-		return view('change-password');
+	// QUÊN MẬT KHẨU
+
+	Route::get('email-code', function() {
+		return view('verifycode');
 	});
 
 	Route::get('getCode', [
 		'as' => 'getCode',
-		'uses' => 'ResetPasswordController@rendVerifyCode'
+		'uses' => 'ResetPasswordController@renderVerifyCode'
 	]);
+
+	//
+
+	Route::get('forgot-password', function() {
+		return view('forgot-password');
+	});
 
 	Route::post('send-verify-code', [
 		'as' => 'send-verify-code',
 		'uses' => 'ResetPasswordController@sendVerifyCode'
 	]);
+	// END QUÊN MẬT KHẨU
 });
 
 // ADMIN

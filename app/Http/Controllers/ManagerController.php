@@ -201,17 +201,17 @@ class ManagerController extends Controller
             $isPaied = ($water->status == 0) ? "background: #f49d41; color: #FFFFFF;" : "";
             //
             $htmlWaters .= "
-                <tr style='" . $isPaied . '' . $isDeleted . "'>
-                    <td class='hidden'>" . $water->id . "</td>
-                    <td>" . $water->room_name . "</td>
-                    <td>" . $water->time . "</td>
-                    <td>" . $water->old_number . "</td>
-                    <td>" . $water->new_number . "</td>
-                    <td>" . $water->price . "</td>
-                    <td>" . $status . "</td>
-                    <td>" . $is_active . "</td>
-                </tr>
-                ";
+            <tr style='" . $isPaied . '' . $isDeleted . "'>
+            <td class='hidden'>" . $water->id . "</td>
+            <td>" . $water->room_name . "</td>
+            <td>" . $water->time . "</td>
+            <td>" . $water->old_number . "</td>
+            <td>" . $water->new_number . "</td>
+            <td>" . $water->price . "</td>
+            <td>" . $status . "</td>
+            <td>" . $is_active . "</td>
+            </tr>
+            ";
         }
 
         $electrics = Electric::select('electrics.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'electrics.deleted')->join('rooms', 'electrics.room_id', 'rooms.id')->where('time', $time)->get();
@@ -226,14 +226,14 @@ class ManagerController extends Controller
             //
             $htmlElectrics .= "
             <tr style='" . $isPaied . '' . $isDeleted . "'>
-                <td class='hidden'>" . $electric->id . "</td>
-                <td>" . $electric->room_name . "</td>
-                <td>" . $electric->time . "</td>
-                <td>" . $electric->old_number . "</td>
-                <td>" . $electric->new_number . "</td>
-                <td>" . $electric->price . "</td>
-                <td>" . $status . "</td>
-                <td>" . $is_active . "</td>
+            <td class='hidden'>" . $electric->id . "</td>
+            <td>" . $electric->room_name . "</td>
+            <td>" . $electric->time . "</td>
+            <td>" . $electric->old_number . "</td>
+            <td>" . $electric->new_number . "</td>
+            <td>" . $electric->price . "</td>
+            <td>" . $status . "</td>
+            <td>" . $is_active . "</td>
             </tr>
             ";
         }
@@ -242,7 +242,7 @@ class ManagerController extends Controller
             'htmlWaters' => $htmlWaters,
             'htmlElectrics' => $htmlElectrics,
             'time' => $time,
-        ], 200);
+        ]);
     }
 
     function sendBill(Request $request)
@@ -276,7 +276,7 @@ class ManagerController extends Controller
         );
 
         foreach ($listEmail as $email) {
-            Mail::to($email)->send(new SendMail($data));
+            Mail::to($email)->send(new SendMail($data, '[Dormitory] [Electricity and Water Bills] [' . $data['bill_month'] . ']', 'sendbill'));
         }
         // 
 
@@ -284,7 +284,7 @@ class ManagerController extends Controller
         $students = Student::all();
 
         foreach ($students as $student) {
-            Mail::to($student->email)->send(new SendMail($data));
+            Mail::to($student->email)->send(new SendMail($data, '[Dormitory] [Electricity and Water Bills] [' . $data['bill_month'] . ']', 'sendbill'));
         }
         */
 

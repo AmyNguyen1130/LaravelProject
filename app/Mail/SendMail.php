@@ -10,18 +10,18 @@ class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $data;
-    public $mailto;
     public $subject;
+    public $emailtemp;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data, $mailto, $subject)
+    public function __construct($data, $subject, $emailtemp)
     {
         $this->data = $data;
-        $this->mailto = $mailto;
         $this->subject = $subject;
+        $this->emailtemp = $emailtemp;
     }
 
     /**
@@ -31,8 +31,7 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->from('ewd.notification@gmail.com')->subject('[Dormitory] [Electricity and Water Bills] [' . $this->data['bill_month'] . ']')->view('emailTemp')->with('data', $this->data);
+        return $this->from('ewd.notification@gmail.com')->subject($this->subject)->view($this->emailtemp)->with('data', $this->data);
+        // return $this->from('ewd.notification@gmail.com')->subject('[Dormitory] [Electricity and Water Bills] [' . $this->data['bill_month'] . ']')->view('emailTemp')->with('data', $this->data);
     }
 }
-
-
