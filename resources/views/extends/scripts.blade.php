@@ -39,7 +39,9 @@
 <!-- Custom Theme Scripts -->
 <script src="public/admin/build/js/custom.min.js"></script>
 <script src="public/js/action.js"></script>
+<script src="public/js/sendbill.js"></script>
 
 <!-- Tabledit JS -->
 <script src="public/js/jquery.tabledit.min.js"></script>
 <script src="public/js/tabledit.js"></script>
+<script src="public/js/sendbill.js"></script>

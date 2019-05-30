@@ -38,11 +38,11 @@
                         </div>
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav text-uppercase">
-                                <li class="active"><a href="student/">Trang Chủ</a></li>
-                                <li><a href="student/issue">Báo Cáo Hư Hỏng</a></li>
-                                <li><a href="student/bill">Tiền điện nước</a></li>
-                                <li><a href="student/getKitchenExpenses">Chi Tiêu Ở Bếp</a></li>
-                                <li><a href="student/getMisconduct">Danh Sách Lỗi Vi Phạm</a></li>
+                                <li  class=" {{Request::is('student') ? 'active' : ''}}"><a href="student">Trang Chủ</a></li>
+                                <li class=" {{Request::is('student/issue') ? 'active' : ''}}"><a href="student/issue">Báo Cáo Hư Hỏng</a></li>
+                                <li class=" {{Request::is('student/waterElectricBill') ? 'active' : ''}}"><a href="student/waterElectricBill">Tiền điện nước</a></li>
+                                <li class=" {{Request::is('student/kitchenExpenses') ? 'active' : ''}}"><a href="student/kitchenExpenses">Chi Tiêu Ở Bếp</a></li>
+                                <li class=" {{Request::is('student/misconduct') ? 'active' : ''}}"><a href="student/misconduct">Danh Sách Lỗi Vi Phạm</a></li>
                             </ul>
 
                             <ul class="nav navbar-nav navbar-right">
