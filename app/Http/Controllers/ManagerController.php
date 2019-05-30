@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Electric;
 use Carbon\Carbon;
 use App\Water;
@@ -247,7 +248,7 @@ class ManagerController extends Controller
 
     function sendBill(Request $request)
     {
-        $this->validate($request->all(), [
+        $this->validate($request, [
             'year'     =>  'required',
             'month'  =>  'required',
             'date' =>  'required',
@@ -261,7 +262,7 @@ class ManagerController extends Controller
         $electrics = Electric::select('electrics.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'electrics.deleted')->join('rooms', 'electrics.room_id', 'rooms.id')->where('time', $bill_month)->get();
 
         $data = array(
-            'bill_month'       => $bill_month,
+            'bill_month'  => $bill_month,
             'waters'      =>  $waters,
             'electrics'   =>   $electrics,
             'deadline'    => $deadline

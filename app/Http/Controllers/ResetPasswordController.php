@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
 use App\Educator;
 use App\Student;
+use Illuminate\Support\MessageBag;
 
 class ResetPasswordController extends Controller
 {
@@ -65,10 +66,10 @@ class ResetPasswordController extends Controller
 
                 Mail::to($user->email)->send(new SendMail($data, '[RESET PASSWORD] [VERIFY CODE]', 'verifycode'));
                 return response()->json([
-                    $request->all()
+                    'Send verify code success!'
                 ], 200);
             } else {
-                $message = new MessageBag(['errorlogin' => 'Địa chỉ email hoặc mật khẩu không chính xác']);
+                $message = new MessageBag(['errorlogin' => 'Địa chỉ email không chính xác']);
                 return response()->json([
                     'error' => true,
                     'message' => $message
