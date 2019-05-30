@@ -45,7 +45,10 @@ class ElectricController extends Controller
         $validator = Validator::make($data->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json([
+                'error' => true,
+                'message' => $validator->errors()
+            ], 200);
         } else {
             $month = ($data->month > 9) ? $data->month : '0' . $data->month;
             $time = $data->year . '-' . $month;
@@ -60,7 +63,10 @@ class ElectricController extends Controller
             );
 
             if (DB::table('electrics')->insert($insert_data)) {
-                return response()->json('Insert thành công');
+                return response()->json([
+                    'error' => false,
+                    'message' => "Insert thành công"
+                ], 200);
             } else {
                 return response()->json('Insert thất bại');
             }
