@@ -53,7 +53,7 @@ Route::group(['prefix' => ''], function () {
 
 	// QUÊN MẬT KHẨU
 
-	Route::get('email-code', function() {
+	Route::get('email-code', function () {
 		return view('verifycode');
 	});
 
@@ -64,13 +64,26 @@ Route::group(['prefix' => ''], function () {
 
 	//
 
-	Route::get('forgot-password', function() {
+	Route::get('forgot-password', function () {
+		Cookie::queue(
+			Cookie::forget('verifyCode')
+		);
 		return view('forgot-password');
 	});
 
 	Route::post('send-verify-code', [
 		'as' => 'send-verify-code',
 		'uses' => 'ResetPasswordController@sendVerifyCode'
+	]);
+
+	Route::post('reset-password', [
+		'as' => 'reset-password',
+		'uses' => 'ResetPasswordController@resetPassword'
+	]);
+
+	Route::post('verify-code', [
+		'as' => 'verify-code',
+		'uses' => 'ResetPasswordController@verifyCode'
 	]);
 	// END QUÊN MẬT KHẨU
 });

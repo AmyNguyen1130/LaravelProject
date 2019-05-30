@@ -16,7 +16,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="public/css/custom/style.css">
+    <style>
+        #change-password-form {
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
 
 </head>
 
@@ -24,7 +31,7 @@
 
     <div id="change-password-form" class="row">
 
-        <div class="col-sm-offset-4 col-sm-4 col-xs-offset-1 col-xs-10">
+        <div class="col-xs-offset-1 col-xs-10">
 
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -32,46 +39,104 @@
                 </div>
                 <div class="panel-body">
 
-                    <!-- START VALIDATION LOGIN MESSAGE -->
+                    <div id="get-code" style="display: {{ Cookie::get('verifyCode') == 'verified' ? 'none' : 'block' }}">
+                        <!-- START VALIDATION GETCODE MESSAGE -->
 
-                    <div class="alert alert-danger error errorLogin" style="display: none;">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <p style="color:red; display:none;" class="error errorLogin"></p>
+                        <div class="col-xs-12">
+                            <div class="alert alert-success error getCodeSuccess" style="display: none;">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <p style="color: #ffffff; display:none;" class="error getCodeSuccess"></p>
+                            </div>
+                            <div class="alert alert-danger error getCodeError" style="display: none;">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <p style="color:red; display:none;" class="error getCodeError"></p>
+                            </div>
+                            <div class="alert alert-danger error emailError" style="display: none;">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <p style="color:red; display:none;" class="error emailError"></p>
+                            </div>
+                        </div>
+
+                        <!-- END VALIDATION GETCODE MESSAGE -->
+
+                        <!-- START VALIDATION VERIFY CODE MESSAGE -->
+
+                        <div class="col-xs-12">
+                            <div class="alert alert-danger error verifyCodeMessage" style="display: none;">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <p style="color: red; display:none;" class="error verifyCodeMessage"></p>
+                            </div>
+                        </div>
+
+                        <!-- END VALIDATION GETCODE MESSAGE -->
+
+                        <form action="send-verify-code" method="POST" role="form">
+
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" onclick="$('.emailError').fadeOut()" id="email" placeholder="Nhập email của bạn">
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" style="display: none" onkeyup="$('.error').fadeOut()" id="verify-code" minlength="6" maxlength="6" placeholder="Nhập mã xác nhận">
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <button type="button" onclick="verifyCode()" class="btn btn-primary col-xs-12 text-uppercase" style="display: none" id="btn-verify" disabled>Xác nhận</button>
+                                </div>
+                            </div>
+
+                            <div style="display: none" id="time-regetcode" class="col-xs-12">
+                                <p>Chờ <span id="countdown-timer"></span>s nữa để lấy lại mã.</p>
+                            </div>
+
+                            <div class="col-xs-12">
+                                <button type="button" id="btn-getcode" onclick="getVirifyCode()" class="btn btn-primary col-xs-12 text-uppercase">Lấy mã xác nhận</button>
+                            </div>
+                        </form>
                     </div>
 
-                    <!-- END VALIDATION LOGIN MESSAGE -->
+                    <div id="reset-password" style="display: {{ (Cookie::has('verifyCode') && Cookie::get('verifyCode') == 'verified') ? 'block' : 'none' }}">
 
-                    <form action="send-verify-code" method="POST" role="form">
-
-                        {{ csrf_field() }}
+                        <!-- START VALIDATION RESET PASSWORD MESSAGE -->
 
                         <div class="col-xs-12">
-                            <div class="form-group">
-                                <p class="text-danger error errorEmail"></p>
-                                <input type="email" class="form-control" name="email" placeholder="Nhập email của bạn">
+                            <div class="alert alert-danger error resetPasswordMessage" style="display: none;">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <p style="color: red; display:none;" class="error resetPasswordMessage"></p>
                             </div>
                         </div>
 
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" style="display: none" id="verify-code" minlength="6" maxlength="6" placeholder="Nhập mã xác nhận">
+                        <!-- END VALIDATION RESET PASSWORD MESSAGE -->
+
+                        <form action="reset-password" method="POST" role="form">
+
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <input type="password" class="form-control" onkeyup="$('.error').fadeOut()" id="new-password" placeholder="Nhập mật khẩu mới">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <button type="button" class="btn btn-primary col-xs-12 text-uppercase" style="display: none" id="btn-verify">Xác nhận</button>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <input type="password" class="form-control" onkeyup="$('.error').fadeOut()" id="new-password-repeat" placeholder="Nhập lại mật khẩu">
+                                </div>
                             </div>
-                        </div>
 
-                        <div style="display: none" id="time-regetcode" class="col-xs-12">
-                            <p>Chờ <span id="countdown-timer"></span>s nữa để lấy lại mã.</p>
-                        </div>
+                            <div class="col-xs-6">
+                                <a href="" class="btn btn-default col-xs-12 text-uppercase">Hủy</a>
+                            </div>
 
-                        <div class="col-xs-12">
-                            <button type="submit" id="btn-getcode" onclick="getVirifyCode()" class="btn btn-primary col-xs-12 text-uppercase">Lấy mã xác nhận</button>
-                        </div>
-                    </form>
+                            <div class="col-xs-6">
+                                <button type="button" id="reset" onclick="resetPassword()" class="btn btn-primary col-xs-12 text-uppercase">Thay Đổi</button>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
             </div>
 
@@ -91,6 +156,10 @@
             }
         });
 
+        $('#verify-code').keyup(function() {
+            checkCodeLength()
+        });
+
         function getVirifyCode() {
             $.ajax({
                 url: 'send-verify-code',
@@ -100,8 +169,17 @@
                 },
                 dataType: 'json',
                 success: function(data) {
-                    console.log(data)
-                    afterSendVirifyCode()
+                    $('.error').hide();
+                    if (data.is_valid == false) {
+                        if (data.message.email != undefined) {
+                            $('.emailError').show().text(data.message.email[0]);
+                        }
+                    } else if (data.error == true) {
+                        $('.emailError').show().text(data.message);
+                    } else {
+                        $('.getCodeSuccess').show().text(data.message);
+                        afterSendVirifyCode();
+                    }
                 }
             })
         }
@@ -128,6 +206,76 @@
                     $('#btn-getcode').prop('disabled', false);
                     $('#time-regetcode').fadeOut();
                 }
+            }
+        }
+
+        function checkCodeLength() {
+            if ($('#verify-code').val().length == 6) {
+                $('#btn-verify').attr('disabled', false);
+                verifyCode();
+            } else {
+                $('#btn-verify').attr('disabled', true);
+            }
+        }
+
+        function verifyCode() {
+            $.ajax({
+                url: 'verify-code',
+                method: 'POST',
+                data: {
+                    'code': $('#verify-code').val()
+                },
+                dataType: 'json',
+                success: function(data) {
+                    $('.error').hide();
+                    if (data.error == true) {
+                        $('.verifyCodeMessage').show().text(data.message);
+                    } else {
+                        $('#get-code').hide();
+                        $('#reset-password').fadeIn();
+                    }
+                }
+            })
+        }
+
+        function checkPassword() {
+            if ($('#new-password').val().length >= 8 && $('#new-password-repeat').val().length >= 8) {
+                if ($('#new-password').val() === $('#new-password-repeat').val()) {
+                    $('#reset').attr('disabled', false);
+                    return true;
+                } else {
+                    $('.resetPasswordMessage').show().text("Mật khẩu không khớp, vui lòng nhập lại");
+                    $('#new-password-repeat').focus();
+                    return false;
+                }
+            } else {
+                $('.resetPasswordMessage').show().text("Mật khẩu phải chứa ít nhất 8 kí tự");
+            }
+        }
+
+        function resetPassword() {
+            if (checkPassword()) {
+                $.ajax({
+                    url: 'reset-password',
+                    method: 'POST',
+                    data: {
+                        'email': $('#email').val(),
+                        'password': $('#new-password').val(),
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        $('.error').hide();
+                        if (data.error == true) {
+                            $('.resetPasswordMessage').show().text(data.message);
+                            setTimeout(function() {
+                                window.location.replace('');
+                            }, 2000);
+                        } else {
+                            $('.resetPasswordMessage').show().text(data.message);
+                        }
+                    }
+                })
             }
         }
     </script>
