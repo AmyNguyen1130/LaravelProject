@@ -15,7 +15,6 @@
                         <ul class="list-inline">
                             <li><a class="{{ Auth::check() ? 'hide' : 'show' }}" onclick="loginControl()">Đăng nhập</a></li>
                             <li><a class="{{ Auth::check() ? 'hide' : 'show' }}" onclick="signupControl()">Đăng ký</a></li>
-                            <li><a class="{{ Auth::check() ? 'show' : 'hide' }}" href="logout">Đăng Xuất</a></li>
                         </ul>
                     </div>
                 </div>
@@ -33,21 +32,27 @@
                             </button>
                             <ul id="collapse-menu" class="nav list-inline">
                                 <li class="text-uppercase {{ Auth::check() ? 'hide' : 'show' }}"><a onclick="loginControl()">Đăng nhập</a></li>
-                                <li class="text-uppercase {{ Auth::check() ? 'show' : 'hide' }}"><a href="logout">Đăng Xuất</a></li>
                             </ul>
                         </div>
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav text-uppercase">
-                                <li  class=" {{Request::is('student') ? 'active' : ''}}"><a href="student">Trang Chủ</a></li>
-                                <li class=" {{Request::is('student/issue') ? 'active' : ''}}"><a href="student/issue">Báo Cáo Hư Hỏng</a></li>
-                                <li class=" {{Request::is('student/waterElectricBill') ? 'active' : ''}}"><a href="student/waterElectricBill">Tiền điện nước</a></li>
-                                <li class=" {{Request::is('student/kitchenExpenses') ? 'active' : ''}}"><a href="student/kitchenExpenses">Chi Tiêu Ở Bếp</a></li>
-                                <li class=" {{Request::is('student/misconduct') ? 'active' : ''}}"><a href="student/misconduct">Danh Sách Lỗi Vi Phạm</a></li>
+                                <li class=" {{Request::is('student') ? 'active' : ''}}"><a href="student">Trang Chủ</a></li>
+                                <li class=" {{Request::is('student/issue') ? 'active' : ''}}"><a href="student/issue">Đồ Hỏng</a></li>
+                                <li class=" {{Request::is('student/waterElectricBill') ? 'active' : ''}}"><a href="student/waterElectricBill">Điện nước</a></li>
+                                <li class=" {{Request::is('student/kitchenExpenses') ? 'active' : ''}}"><a href="student/kitchenExpenses">Chi Tiêu Bếp</a></li>
+                                <li class=" {{Request::is('student/misconduct') ? 'active' : ''}}"><a href="student/misconduct">Vi Phạm</a></li>
+                                <li class="dropdown {{ Auth::check() ? 'show' : 'hide' }}">
+                                    <a href="" data-toggle="dropdown">Tài khoản <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="change-password"><i class="fa fa-cogs"></i> Đổi mật khẩu</a></li>
+                                        <li><a href="logout"><i class="fa fa-sign-out"></i> Đăng Xuất</a></li>
+                                    </ul>
+                                </li>
                             </ul>
 
-                            <ul class="nav navbar-nav navbar-right">
+                            <ul id="nav-right" class="nav navbar-nav navbar-right">
                                 <li>
-                                    <form method="POST" action="search.php" class="navbar-form">
+                                    <form method="POST" action="" class="navbar-form">
                                         <div class="input-group search-box">
                                             <input type="text" class="form-control" placeholder="Tìm kiếm...">
                                             <span class="input-group-addon btn btn-primary">

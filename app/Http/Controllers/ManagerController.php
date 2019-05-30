@@ -247,7 +247,7 @@ class ManagerController extends Controller
 
     function sendBill(Request $request)
     {
-        $this->validate($request, [
+        $this->validate($request->all(), [
             'year'     =>  'required',
             'month'  =>  'required',
             'date' =>  'required',

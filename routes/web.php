@@ -50,6 +50,20 @@ Route::group(['prefix' => ''], function () {
 		'as' => 'logout',
 		'uses' => 'LoginController@logout'
 	]);
+
+	Route::get('change-password', function() {
+		return view('change-password');
+	});
+
+	Route::get('getCode', [
+		'as' => 'getCode',
+		'uses' => 'ResetPasswordController@rendVerifyCode'
+	]);
+
+	Route::post('send-verify-code', [
+		'as' => 'send-verify-code',
+		'uses' => 'ResetPasswordController@sendVerifyCode'
+	]);
 });
 
 // ADMIN
