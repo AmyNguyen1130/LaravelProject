@@ -17,14 +17,14 @@
 
                 <div id="new_electric_row" style="display: none">
                     <div class="alert alert-danger error" style="display: none;">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <p style="color:white; display:none;" class="error roomError"></p>
-                        <p style="color:white; display:none;" class="error yearError"></p>
-                        <p style="color:white; display:none;" class="error monthError"></p>
-                        <p style="color:white; display:none;" class="error oldNumberError"></p>
-                        <p style="color:white; display:none;" class="error newNumberError"></p>
-                        <p style="color:white; display:none;" class="error priceError"></p>
-                        <p style="color:white; display:none;" class="error statusError"></p>
+                        <button type="button" class="pull-right" onclick="$('.error').fadeOut()" style="color: red"><i class="fa fa-window-close-o fa-lg"></i> Close</button>
+                        <p style="color:white; display:none;" class="roomError"></p>
+                        <p style="color:white; display:none;" class="yearError"></p>
+                        <p style="color:white; display:none;" class="monthError"></p>
+                        <p style="color:white; display:none;" class="oldNumberError"></p>
+                        <p style="color:white; display:none;" class="newNumberError"></p>
+                        <p style="color:white; display:none;" class="priceError"></p>
+                        <p style="color:white; display:none;" class="statusError"></p>
                     </div>
                     <div style="display: none" class="alert alert-success alert-block success">
                         <button type="button" class="close" data-dismiss="alert">×</button>

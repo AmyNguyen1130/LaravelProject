@@ -74,6 +74,7 @@ function insertIntoElectricsTable() {
         },
         'dataType': 'json',
         success: function (data) {
+            $('.error').hide();
             $('.roomError').html('');
             $('.yearError').html('');
             $('.monthError').html('');
@@ -82,6 +83,7 @@ function insertIntoElectricsTable() {
             $('.priceError').html('');
             $('.statusError').html('');
             if (data.error == true) {
+                $('.error').show();
                 if (data.message.room_id != undefined) {
                     $('.roomError').show().text(data.message.room_id[0]);
                 }
