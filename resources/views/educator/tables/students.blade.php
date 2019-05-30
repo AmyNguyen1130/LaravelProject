@@ -8,21 +8,22 @@
 
         <div class="panel panel-default" style="margin-top: 60px">
             <div class="panel-heading" style="min-height: 53px">
-            <span class="panel-title text-uppercase">Students' misconduct list</span>
+                <span class="panel-title text-uppercase">Students list</span>
                 <button type="button" onclick="$('#filter_electrics').fadeIn(); $('#import_excel').hide(); $('#new_electric_row').hide();" class="btn btn-default pull-right" title="Lọc"><i class="fa fa-filter fa-lg" aria-hidden="true"></i></button>
                 <button type="button" onclick="$('#import_excel').fadeIn(); $('#filter_electrics').hide(); $('#new_electric_row').hide();" class="btn btn-default pull-right" title="Import từ file Excel"><i class="fa fa-upload fa-lg" aria-hidden="true"></i></button>
                 <button type="button" onclick="$('#new_electric_row').fadeIn(); $('#filter_electrics').hide(); $('#import_excel').hide();" class="btn btn-default pull-right" title="Thêm 1 bản ghi"><i class="fa fa-plus-square fa-lg" aria-hidden="true"></i></button>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped" id="table_misconducts">
+                    <table class="table table-bordered table-striped" id="table_students">
                         <thead>
                             <tr>
                                 <th>STUDENT NAME</th>
-                                <th>MISCONDUCT</th>
-                                <th>TIME</th>
-                                <th>MINUS</th>
-                                <th>IS DELETED</th>
+                                <th>EMAIL</th>
+                                <th>BIRTHDAY</th>
+                                <th>GENDER</th>
+                                <th>PHONE</th>
+                                <th>DELETED</th>
                             </tr>
                         </thead>
                         <tbody>

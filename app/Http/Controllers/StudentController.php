@@ -192,10 +192,10 @@ class StudentController extends Controller
     function getMisconductByMonth(Request $req)
     {
         $time = $req->year_misconduct . '-' . $req->month_misconduct;
-        $misconducts = Misconduct::select('id', 'student_id', 'content', 'time', 'minus')->where([
-            ['time', 'like', '%' . $time . '%'],
+        $misconducts = Misconduct::where([
             ['student_id', Auth::user()->id],
-            ['deleted', '0']
+            ['time', 'like', $time . '%'],
+            ['deleted', 0]
         ])->get();
         $sum = 0;
         foreach ($misconducts as $value) {

@@ -375,5 +375,45 @@ Route::group(['prefix' => 'educator/', 'middleware' => 'is_educator'], function 
 			]);
 
 		});
+
+		Route::group(['prefix' => 'students/'], function () {
+			Route::get('', [
+				'as' => 'educator.tables.students',
+				function() {
+					return view('educator.tables.students');
+				}
+			]);
+
+			Route::get('load', [
+				'as' => 'educator.tables.students.load',
+				'uses' => 'EducatorController@loadDataTableStudents'
+			]);
+
+			Route::post('CRUD', [
+				'as' => 'educator.tables.students.CRUD',
+				'uses' => 'EducatorController@CRUDTableStudents'
+			]);
+
+		});
+
+		Route::group(['prefix' => 'issues/'], function () {
+			Route::get('', [
+				'as' => 'educator.tables.issues',
+				function() {
+					return view('educator.tables.issues');
+				}
+			]);
+
+			Route::get('load', [
+				'as' => 'educator.tables.issues.load',
+				'uses' => 'EducatorController@loadDataTableIssues'
+			]);
+
+			Route::post('CRUD', [
+				'as' => 'educator.tables.issues.CRUD',
+				'uses' => 'EducatorController@CRUDTableIssues'
+			]);
+
+		});
 	});
 });

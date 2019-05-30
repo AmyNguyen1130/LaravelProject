@@ -37,6 +37,25 @@ if (table == 'electrics' || table == 'waters') {
         [4, 'minus'],
         [5, 'deleted', '{"0": "false", "1": "true"}'],
     ];
+} else if (table == 'students') {
+    identifier_field = [0, 'id'];
+    editable_field = [
+        [1, 'name'],
+        [2, 'email'],
+        [3, 'birthday'],
+        [4, 'gender', '{"Nam": "Nam", "Nu": "Nu"}'],
+        [5, 'phone'],
+        [6, 'deleted', '{"0": "false", "1": "true"}'],
+    ];
+} else if (table == 'issues') {
+    identifier_field = [0, 'id'];
+    editable_field = [
+        [1, 'content'],
+        [2, 'room_id'],
+        [3, 'student_id'],
+        [4, 'created_at'],
+        [5, 'deleted', '{"0": "false", "1": "true"}'],
+    ];
 }
 
 // END LẤY DỮ LIỆU
@@ -151,7 +170,7 @@ function loadDataTableFilter(method, table, identifier_field, editable_field) {
 }
 
 $(window).load(function () {
-    if (table == 'users' || table == 'electrics' || table == 'waters' || table == 'misconducts') {
+    if (table == 'users' || table == 'electrics' || table == 'waters' || table == 'misconducts' || table == 'students' || table == 'issues') {
         loadDataTable(role, table, identifier_field, editable_field);
     }
 });
