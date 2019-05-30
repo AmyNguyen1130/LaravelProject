@@ -50,6 +50,42 @@ Route::group(['prefix' => ''], function () {
 		'as' => 'logout',
 		'uses' => 'LoginController@logout'
 	]);
+
+	// QUÊN MẬT KHẨU
+
+	Route::get('email-code', function () {
+		return view('verifycode');
+	});
+
+	Route::get('getCode', [
+		'as' => 'getCode',
+		'uses' => 'ResetPasswordController@renderVerifyCode'
+	]);
+
+	//
+
+	Route::get('forgot-password', function () {
+		Cookie::queue(
+			Cookie::forget('verifyCode')
+		);
+		return view('forgot-password');
+	});
+
+	Route::post('send-verify-code', [
+		'as' => 'send-verify-code',
+		'uses' => 'ResetPasswordController@sendVerifyCode'
+	]);
+
+	Route::post('reset-password', [
+		'as' => 'reset-password',
+		'uses' => 'ResetPasswordController@resetPassword'
+	]);
+
+	Route::post('verify-code', [
+		'as' => 'verify-code',
+		'uses' => 'ResetPasswordController@verifyCode'
+	]);
+	// END QUÊN MẬT KHẨU
 });
 
 // ADMIN
@@ -99,13 +135,27 @@ Route::group(['prefix' => 'manager/', 'middleware' => 'is_manager'], function ()
 	Route::get('', [
 		'as' => 'manager.pages.index',
 		function () {
-			if (Auth::check()) {
-				if (Auth::user()->role == "manager") {
-					return view('manager.pages.index');
-				}
-			}
-			return redirect()->back();
+			return view('manager.pages.index');
 		}
+	]);
+
+	Route::get('sendbill', [
+		'as' => 'manager.pages.sendbill',
+		function () {
+			return view('manager.pages.sendbill');
+		}
+	]);
+
+	Route::post('sendbill/send', 'ManagerController@sendBill');
+
+	Route::get('sendbill/loadData', [
+		'as' => 'manager.pages.sendbill.loadData',
+		'uses' => 'ManagerController@loadDataToSendBill'
+	]);
+
+	Route::post('filterBeforeSend', [
+		'as' => 'manager.pages.filterBeforeSend',
+		'uses' => 'ManagerController@loadDataFilterToSendBill'
 	]);
 
 	Route::group(['prefix' => 'tables/'], function () {
@@ -164,7 +214,6 @@ Route::group(['prefix' => 'manager/', 'middleware' => 'is_manager'], function ()
 				'as' => 'manager.tables.electrics.filterStatus',
 				'uses' => 'ElectricController@filterByStatus'
 			]);
-			
 		});
 
 		// BILL WATER
@@ -230,7 +279,7 @@ Route::group(['prefix' => 'student/', 'middleware' => 'is_student'], function ()
 
 	// Water, electric page
 
-	Route::get('bill', [
+	Route::get('waterElectricBill', [
 		'as' => 'student.pages.bill',
 		'uses' => 'StudentController@getBill'
 	]);
@@ -249,7 +298,7 @@ Route::group(['prefix' => 'student/', 'middleware' => 'is_student'], function ()
 
 	// Kitchen Page
 
-	Route::get('getKitchenExpenses', [
+	Route::get('kitchenExpenses', [
 		'as' => 'student.pages.getKitchenExpenses',
 		'uses' => 'StudentController@getKitchenExpenses'
 	]);
@@ -263,7 +312,7 @@ Route::group(['prefix' => 'student/', 'middleware' => 'is_student'], function ()
 
 	// Misconduct page
 
-	Route::get('getMisconduct', [
+	Route::get('misconduct', [
 		'as' => 'student.pages.getMisconduct',
 		'uses' => 'StudentController@getMisconduct'
 	]);

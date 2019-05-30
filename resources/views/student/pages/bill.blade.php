@@ -15,6 +15,7 @@
                 </span>
             </div>
         </div>
+
         <div class="col-sm-2" style="margin-bottom: 50px;">
             <label for="">Năm: </label>
             <select class="form-control" id="year_water">
@@ -24,6 +25,7 @@
             </select>
 
         </div>
+
         <div class="col-sm-2">
             <label for="">Tháng: </label>
             <select class="form-control" id="month_water">
@@ -41,6 +43,7 @@
                 <option value="12">12</option>
             </select>
         </div>
+
         <table class="table table-bordered table-striped" id="table_water">
             <thead>
                 <tr class="bg-primary">
@@ -86,7 +89,6 @@
                 <option value="2018">2018</option>
                 <option value="2017">2017</option>
             </select>
-
         </div>
         <div class="col-sm-2">
             <label for="">Tháng: </label>
@@ -105,6 +107,7 @@
                 <option value="12">12</option>
             </select>
         </div>
+
         <table class="table table-bordered table-striped" id="table_electric">
             <thead>
                 <tr class="bg-primary">

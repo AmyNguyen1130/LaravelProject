@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-	<title>Title Page</title>
+	<title>Dorm Management</title>
 	<base href="{{ asset('') }}">
 
 	<!-- Bootstrap CSS -->
@@ -39,7 +39,6 @@
 							<ul class="list-inline">
 								<li><a class="{{ Auth::check() ? 'hide' : 'show' }}" onclick="loginControl()">Đăng nhập</a></li>
 								<li><a class="{{ Auth::check() ? 'hide' : 'show' }}" onclick="signupControl()">Đăng ký</a></li>
-								<li><a class="{{ Auth::check() ? 'show' : 'hide' }}" href="logout">Đăng Xuất</a></li>
 							</ul>
 						</div>
 					</div>
@@ -57,7 +56,6 @@
 								</button>
 								<ul id="collapse-menu" class="nav list-inline">
 									<li class="text-uppercase {{ Auth::check() ? 'hide' : 'show' }}"><a onclick="loginControl()">Đăng nhập</a></li>
-									<li class="text-uppercase {{ Auth::check() ? 'show' : 'hide' }}"><a href="logout">Đăng Xuất</a></li>
 								</ul>
 							</div>
 							<div class="collapse navbar-collapse" id="myNavbar">
@@ -65,11 +63,18 @@
 									<li class="active"><a href="">Trang Chủ</a></li>
 									<li><a href="">Giới Thiệu</a></li>
 									<li><a href="">Liên Hệ</a></li>
+									<li class="dropdown {{ Auth::check() ? 'show' : 'hide' }}">
+										<a href="" data-toggle="dropdown">Tài khoản <span class="caret"></span></a>
+										<ul class="dropdown-menu">
+											<li><a href="change-password"><i class="fa fa-cogs"></i> Đổi mật khẩu</a></li>
+											<li><a href="logout"><i class="fa fa-sign-out"></i> Đăng Xuất</a></li>
+										</ul>
+									</li>
 								</ul>
 
-								<ul class="nav navbar-nav navbar-right">
+								<ul id="nav-right" class="nav navbar-nav navbar-right">
 									<li>
-										<form method="POST" action="search.php" class="navbar-form">
+										<form method="POST" action="" class="navbar-form">
 											<div class="input-group search-box">
 												<input type="text" class="form-control" placeholder="Tìm kiếm...">
 												<span class="input-group-addon btn btn-primary">
@@ -112,6 +117,7 @@
 
 					<div class="tab-pane active in" id="login-form">
 						<div class="form">
+							
 							<!-- START VALIDATION LOGIN MESSAGE -->
 
 							<div class="alert alert-danger error errorLogin" style="display: none;">

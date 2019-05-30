@@ -15,31 +15,30 @@
                 </span>
             </div>
         </div>
-        <table class="table table-bordered table-striped" id="table_users">
-            <thead>
-                <tr class="bg-primary">
-                    <th>#</th>
-                    <th>TÊN SINH VIÊN</th>
-                    <th>PHÒNG</th>
-                    <th>VẤN ĐỀ</th>
-                    <th>TÌNH TRẠNG</th>
-                    <th>NGÀY BÁO CÁO</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($issues as $issues)
-                <tr>
-                    <td>{{ $issues->id }}</td>
-                    <td>{{ $issues->student_name }}</td>
-                    <td>{{ $issues->room_name }}</td>
-                    <td>{{ $issues->content }}</td>
-                    <td></td>
-                    <td>{{ $issues->created_at}}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-
+        <div class="table-responsive col-sm-12">
+            <table class="table table-bordered table-striped" id="table_users">
+                <thead>
+                    <tr class="bg-primary">
+                        <th>TÊN SINH VIÊN</th>
+                        <th>PHÒNG</th>
+                        <th>VẤN ĐỀ</th>
+                        <th>TÌNH TRẠNG</th>
+                        <th>NGÀY BÁO CÁO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($issues as $issues)
+                    <tr>
+                        <td>{{ $issues->student_name }}</td>
+                        <td>{{ $issues->room_name }}</td>
+                        <td>{{ $issues->content }}</td>
+                        <td></td>
+                        <td>{{ $issues->created_at}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
 
         <div class="solugan">

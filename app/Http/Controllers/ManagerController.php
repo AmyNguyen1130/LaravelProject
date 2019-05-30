@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Electric;
 use Carbon\Carbon;
-use DB;
-use Illuminate\Support\Facades\Validator;
 use App\Water;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
+use App\Student;
 
 class ManagerController extends Controller
 {
@@ -69,7 +70,7 @@ class ManagerController extends Controller
         echo json_encode($input);
     }
 
-    
+
 
     public function getTableWaters()
     {
@@ -126,5 +127,168 @@ class ManagerController extends Controller
             $water->save();
         }
         echo json_encode($input);
+    }
+
+    public function loadDataToSendBill()
+    {
+        $today = Carbon::now();
+        $last_month = $today->year . '-' . ((($today->month - 1) > 9) ? ($today->month - 1) : ("0" . ($today->month - 1)));
+
+        $waters = Water::select('waters.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'waters.deleted')->join('rooms', 'waters.room_id', 'rooms.id')->where('time', $last_month)->get();
+        $htmlWaters = "";
+        foreach ($waters as $water) {
+
+            // DÙNG ĐỂ HIỂN THỊ RA HTML
+            $status = ($water->status == 1) ? "Đã nộp" : "Chưa nộp";
+            $is_active = ($water->deleted == 0) ? "False" : "True";
+            $isDeleted = ($water->deleted == 1) ? "background: #f44242; color: #FFFFFF;" : "";
+            $isPaied = ($water->status == 0) ? "background: #f49d41; color: #FFFFFF;" : "";
+            //
+            $htmlWaters .= "
+                <tr style='" . $isPaied . '' . $isDeleted . "'>
+                    <td class='hidden'>" . $water->id . "</td>
+                    <td>" . $water->room_name . "</td>
+                    <td>" . $water->time . "</td>
+                    <td>" . $water->old_number . "</td>
+                    <td>" . $water->new_number . "</td>
+                    <td>" . $water->price . "</td>
+                    <td>" . $status . "</td>
+                    <td>" . $is_active . "</td>
+                </tr>
+                ";
+        }
+
+        $electrics = Electric::select('electrics.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'electrics.deleted')->join('rooms', 'electrics.room_id', 'rooms.id')->where('time', $last_month)->get();
+        $htmlElectrics = "";
+        foreach ($electrics as $electric) {
+
+            // DÙNG ĐỂ HIỂN THỊ RA HTML
+            $status = ($electric->status == 1) ? "Đã nộp" : "Chưa nộp";
+            $is_active = ($electric->deleted == 0) ? "False" : "True";
+            $isDeleted = ($electric->deleted == 1) ? "background: #f44242; color: #FFFFFF;" : "";
+            $isPaied = ($electric->status == 0) ? "background: #f49d41; color: #FFFFFF;" : "";
+            //
+            $htmlElectrics .= "
+            <tr style='" . $isPaied . '' . $isDeleted . "'>
+                <td class='hidden'>" . $electric->id . "</td>
+                <td>" . $electric->room_name . "</td>
+                <td>" . $electric->time . "</td>
+                <td>" . $electric->old_number . "</td>
+                <td>" . $electric->new_number . "</td>
+                <td>" . $electric->price . "</td>
+                <td>" . $status . "</td>
+                <td>" . $is_active . "</td>
+            </tr>
+            ";
+        }
+
+        return response()->json([
+            'htmlWaters' => $htmlWaters,
+            'htmlElectrics' => $htmlElectrics,
+        ], 200);
+    }
+
+    public function loadDataFilterToSendBill(Request $req)
+    {
+        $time = $req->sendbill_year . "-" . $req->sendbill_month;
+        $waters = Water::select('waters.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'waters.deleted')->join('rooms', 'waters.room_id', 'rooms.id')->where('time', $time)->get();
+        $htmlWaters = "";
+        foreach ($waters as $water) {
+
+            // DÙNG ĐỂ HIỂN THỊ RA HTML
+            $status = ($water->status == 1) ? "Đã nộp" : "Chưa nộp";
+            $is_active = ($water->deleted == 0) ? "False" : "True";
+            $isDeleted = ($water->deleted == 1) ? "background: #f44242; color: #FFFFFF;" : "";
+            $isPaied = ($water->status == 0) ? "background: #f49d41; color: #FFFFFF;" : "";
+            //
+            $htmlWaters .= "
+                <tr style='" . $isPaied . '' . $isDeleted . "'>
+                    <td class='hidden'>" . $water->id . "</td>
+                    <td>" . $water->room_name . "</td>
+                    <td>" . $water->time . "</td>
+                    <td>" . $water->old_number . "</td>
+                    <td>" . $water->new_number . "</td>
+                    <td>" . $water->price . "</td>
+                    <td>" . $status . "</td>
+                    <td>" . $is_active . "</td>
+                </tr>
+                ";
+        }
+
+        $electrics = Electric::select('electrics.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'electrics.deleted')->join('rooms', 'electrics.room_id', 'rooms.id')->where('time', $time)->get();
+        $htmlElectrics = "";
+        foreach ($electrics as $electric) {
+
+            // DÙNG ĐỂ HIỂN THỊ RA HTML
+            $status = ($electric->status == 1) ? "Đã nộp" : "Chưa nộp";
+            $is_active = ($electric->deleted == 0) ? "False" : "True";
+            $isDeleted = ($electric->deleted == 1) ? "background: #f44242; color: #FFFFFF;" : "";
+            $isPaied = ($electric->status == 0) ? "background: #f49d41; color: #FFFFFF;" : "";
+            //
+            $htmlElectrics .= "
+            <tr style='" . $isPaied . '' . $isDeleted . "'>
+                <td class='hidden'>" . $electric->id . "</td>
+                <td>" . $electric->room_name . "</td>
+                <td>" . $electric->time . "</td>
+                <td>" . $electric->old_number . "</td>
+                <td>" . $electric->new_number . "</td>
+                <td>" . $electric->price . "</td>
+                <td>" . $status . "</td>
+                <td>" . $is_active . "</td>
+            </tr>
+            ";
+        }
+
+        return response()->json([
+            'htmlWaters' => $htmlWaters,
+            'htmlElectrics' => $htmlElectrics,
+            'time' => $time,
+        ], 200);
+    }
+
+    function sendBill(Request $request)
+    {
+        $this->validate($request, [
+            'year'     =>  'required',
+            'month'  =>  'required',
+            'date' =>  'required',
+            'time' =>  'required'
+        ]);
+
+        $bill_month = $request->year . "-" . $request->month;
+        $deadline = $request->time . " (" . $request->date . ")";
+
+        $waters = Water::select('waters.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'waters.deleted')->join('rooms', 'waters.room_id', 'rooms.id')->where('time', $bill_month)->get();
+        $electrics = Electric::select('electrics.id', 'room_id', 'time', 'old_number', 'new_number', 'price', 'status', 'rooms.name as room_name', 'electrics.deleted')->join('rooms', 'electrics.room_id', 'rooms.id')->where('time', $bill_month)->get();
+
+        $data = array(
+            'bill_month'  => $bill_month,
+            'waters'      =>  $waters,
+            'electrics'   =>   $electrics,
+            'deadline'    => $deadline
+        );
+
+        // ĐOẠN NÀY DÙNG ĐỂ TEST SEND MAIL
+        $listEmail = array(
+            'tai.tran@student.passerellesnumeriques.org',
+            // 'ly.doan@student.passerellesnumeriques.org',
+            // 'phuong.tran@student.passerellesnumeriques.org',
+            // 'quyet.y@student.passerellesnumeriques.org',
+        );
+
+        foreach ($listEmail as $email) {
+            Mail::to($email)->send(new SendMail($data, '[Dormitory] [Electricity and Water Bills] [' . $data['bill_month'] . ']', 'sendbill'));
+        }
+        // 
+
+        /* ĐOẠN NÀY LÀ ĐỂ DÙNG THẬT
+        $students = Student::all();
+
+        foreach ($students as $student) {
+            Mail::to($student->email)->send(new SendMail($data, '[Dormitory] [Electricity and Water Bills] [' . $data['bill_month'] . ']', 'sendbill'));
+        }
+        */
+
+        return back()->with('success', 'Gửi email thông báo thành công');
     }
 }
