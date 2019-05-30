@@ -74,6 +74,40 @@ function insertIntoElectricsTable() {
         },
         'dataType': 'json',
         success: function (data) {
+            $('.roomError').html('');
+            $('.yearError').html('');
+            $('.monthError').html('');
+            $('.oldNumberError').html('');
+            $('.newNumberError').html('');
+            $('.priceError').html('');
+            $('.statusError').html('');
+            if (data.error == true) {
+                if (data.message.room_id != undefined) {
+                    $('.roomError').show().text(data.message.room_id[0]);
+                }
+                if (data.message.year != undefined) {
+                    $('.yearError').show().text(data.message.year[0]);
+                }
+                if (data.message.month != undefined) {
+                    $('.monthError').show().text(data.message.month[0]);
+                }
+                if (data.message.old_number != undefined) {
+                    $('.oldNumberError').show().text(data.message.old_number[0]);
+                }
+                if (data.message.new_number != undefined) {
+                    $('.newNumberError').show().text(data.message.new_number[0]);
+                }
+                if (data.message.price != undefined) {
+                    $('.priceError').show().text(data.message.price[0]);
+                }
+                if (data.message.status != undefined) {
+                    $('.statusError').show().text(data.message.status[0]);
+                }
+                $('.error').show();
+            }else {
+                $('.success').show();
+                $('.insertSuccess').show().text(data.message);
+            }
             console.log(data);
         }
     });

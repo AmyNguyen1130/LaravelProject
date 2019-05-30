@@ -16,6 +16,20 @@
             <div class="panel-body">
 
                 <div id="new_electric_row" style="display: none">
+                    <div class="alert alert-danger error" style="display: none;">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <p style="color:white; display:none;" class="error roomError"></p>
+                        <p style="color:white; display:none;" class="error yearError"></p>
+                        <p style="color:white; display:none;" class="error monthError"></p>
+                        <p style="color:white; display:none;" class="error oldNumberError"></p>
+                        <p style="color:white; display:none;" class="error newNumberError"></p>
+                        <p style="color:white; display:none;" class="error priceError"></p>
+                        <p style="color:white; display:none;" class="error statusError"></p>
+                    </div>
+                    <div style="display: none" class="alert alert-success alert-block success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <p style="color:white; display:none;" class="insertSuccess"></p>
+                    </div>
                     <form action="" method="POST" role="form">
 
                         {{ csrf_field() }}
@@ -189,7 +203,7 @@
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="col-xs-6 col-sm-2">
                             <div class="form-group">
                                 <select class="form-control" id="filter_room_id">
