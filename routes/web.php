@@ -392,6 +392,11 @@ Route::group(['prefix' => 'educator/', 'middleware' => 'is_educator'], function 
 				'uses' => 'EducatorController@loadDataTableStudents'
 			]);
 
+			Route::post('search', [
+				'as' => 'educator.tables.students.search',
+				'uses' => 'EducatorController@searchStudent'
+			]);
+
 			Route::post('CRUD', [
 				'as' => 'educator.tables.students.CRUD',
 				'uses' => 'EducatorController@CRUDTableStudents'

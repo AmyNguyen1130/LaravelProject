@@ -112,6 +112,40 @@ class EducatorController extends Controller
         echo json_encode($input);
     }
 
+    public function searchStudent(Request $request)
+    {
+        if ($students = Student::where('name', 'like', "%" . $request->name . "%")->get()) {
+
+            $data = "";
+            foreach ($students as $student) {
+
+                // HỖ TRỢ HIỂN THỊ HTML
+                $deleted = ($student->deleted == 0) ? "false" : "true";
+                $isDeleted = ($student->deleted == 1) ? "background: #f44242; color: #FFFFFF;" : "";
+                //
+                $data .= "
+                <tr style='" . $isDeleted . "'>
+                    <td class='hidden'>" . $student->id . "</td>
+                    <td>" . $student->name . "</td>
+                    <td>" . $student->email . "</td>
+                    <td>" . $student->birthday . "</td>
+                    <td>" . $student->gender . "</td>
+                    <td>" . $student->phone . "</td>
+                    <td>" . $deleted . "</td>
+                </tr>
+                ";
+            }
+
+            return response()->json([
+                'error' => false,
+                'student' => $data
+            ]);
+        }
+        return response()->json([
+            'error' => true
+        ]);
+    }
+
     public function loadDataTableIssues()
     {
         $issues = Issue::all();

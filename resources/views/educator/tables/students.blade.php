@@ -37,17 +37,6 @@
 
                         <div class="col-xs-6 col-sm-2">
                             <div class="form-group">
-                                <select class="form-control" id="insert_room_id">
-                                    <option selected disabled>Phòng</option>
-                                    @foreach($rooms as $room)
-                                    <option value="{{ $room->id }}">{{ $room->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-6 col-sm-2">
-                            <div class="form-group">
                                 <input type="text" class="form-control" id="insert_new_number" placeholder="Họ tên sinh viên">
                             </div>
                         </div>
@@ -61,6 +50,16 @@
                         <div class="col-xs-6 col-sm-2">
                             <div class="form-group">
                                 <input type="date" class="form-control" placeholder="Ngày sinh">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-2">
+                            <div class="form-group">
+                                <select class="form-control" id="insert_room_id">
+                                    <option selected disabled>Giới tính</option>
+                                    <option value="">Nam</option>
+                                    <option value="">Nu</option>
+                                </select>
                             </div>
                         </div>
 
@@ -136,13 +135,13 @@
 
                         <div class="col-xs-12 col-sm-2">
                             <div class="form-group">
-                                <h5>Chọn thông tin: </h5>
+                                <h5>Tên sinh viên: </h5>
                             </div>
                         </div>
 
                         <div class="col-xs-6 col-sm-4">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Nhập tên sinh viên">
+                                <input type="text" class="form-control" id="student-name" placeholder="Nhập tên sinh viên">
                             </div>
                         </div>
 

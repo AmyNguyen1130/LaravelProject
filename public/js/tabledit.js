@@ -126,6 +126,31 @@ function tableData(role, table, identifier_field, editable_field) {
     });
 }
 
+// SEARCH STUDENT
+
+$('#student-name').keyup(function () {
+    searchStudent()
+});
+
+function searchStudent() {
+    $.ajax({
+        'type': 'POST',
+        'url': 'educator/tables/students/search',
+        'data': {
+            'name': $('#student-name').val()
+        },
+        'dataType': 'json',
+        success: function (data) {
+            if (data.error == false) {
+                $('tbody').html(data.student)
+                tableData("educator", "students", identifier_field, editable_field)
+            } else {
+                var result = 'Không có kết quả nào trùng khớp với "' + $('#student-name').val() + '';
+                $('tbody').html(result)
+            }
+        }
+    });
+}
 
 // LỌC TIỀN ĐIỆN
 

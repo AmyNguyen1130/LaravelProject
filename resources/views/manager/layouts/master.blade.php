@@ -11,7 +11,7 @@
     <link rel="icon" href="images/favicon.ico" type="image/ico" />
     <base href="{{ asset('') }}">
 
-    <title>Gentelella Alela! | </title>
+    <title>Dorm Management | Manager</title>
 
     <!-- Bootstrap -->
     <link href="public/admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">

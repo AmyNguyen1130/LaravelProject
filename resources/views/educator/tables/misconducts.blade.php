@@ -182,7 +182,7 @@
                                 <th>MISCONDUCT</th>
                                 <th>TIME</th>
                                 <th>MINUS</th>
-                                <th>IS DELETED</th>
+                                <th>DELETED</th>
                             </tr>
                         </thead>
                         <tbody>
