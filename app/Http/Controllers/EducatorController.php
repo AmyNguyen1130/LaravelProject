@@ -9,6 +9,11 @@ use App\Issue;
 
 class EducatorController extends Controller
 {
+    public function loadEducatorPage()
+    {
+        $students = Student::select('id', 'name')->get();
+        return view('educator.tables.misconducts', compact('students'));
+    }
     public function loadDataTableMisconducts()
     {
         $lists = Misconduct::select('misconducts.id', 'students.name as student_name', 'content', 'time', 'minus', 'misconducts.deleted')->join('students', 'misconducts.student_id', 'students.id')->get();

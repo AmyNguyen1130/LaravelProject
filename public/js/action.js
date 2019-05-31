@@ -135,6 +135,49 @@ function insertIntoWatersTable() {
     });
 }
 
+// INSERT INTO MISCONDUCT
+
+function insertIntoMisconductsTable() {
+    $.ajax({
+        'type': 'POST',
+        'url': 'educator/tables/misconducts/insert',
+        'data': {
+            'student_id': $('#insert_student_id').val(),
+            'time': $('#insert_time').val(),
+            'misconduct': $('#insert_misconduct').val(),
+            'minus': $('#insert_minus').val(),
+        },
+        'dataType': 'json',
+        success: function (data) {
+            $('.error').hide();
+            $('.studentError').html('');
+            $('.timeError').html('');
+            $('.misconductError').html('');
+            $('.minusError').html('');
+            if (data.error == true) {
+                $('.error').show();
+                if (data.message.student_id != undefined) {
+                    $('.studentError').show().text(data.message.student_id[0]);
+                }
+                if (data.message.time != undefined) {
+                    $('.timeError').show().text(data.message.time[0]);
+                }
+                if (data.message.misconduct != undefined) {
+                    $('.misconductError').show().text(data.message.misconduct[0]);
+                }
+                if (data.message.minus != undefined) {
+                    $('.minusError').show().text(data.message.minus[0]);
+                }
+                $('.error').show();
+            }else {
+                $('.success').show();
+                $('.insertSuccess').show().text(data.message);
+            }
+            console.log(data);
+        }
+    });
+}
+
 $(document).ready(function () {
 
     $('#insert_year').change(function () {
@@ -156,7 +199,9 @@ $(document).ready(function () {
     $('#save_new_water').click(function () {
         insertIntoWatersTable();
     });
-
+    $('#save_new_misconduct').click(function () {
+        insertIntoMisconductsTable();
+    });
 });
 
 // END CODE INSERT NEW RECORD
