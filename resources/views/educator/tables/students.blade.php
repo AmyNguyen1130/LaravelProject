@@ -15,6 +15,7 @@
             </div>
             <div class="panel-body">
 
+                <!--  -->
                 <div id="new_electric_row" style="display: none">
                     <div class="alert alert-danger error" style="display: none;">
                         <button type="button" class="pull-right" onclick="$('.error').fadeOut()" style="color: red"><i class="fa fa-window-close-o fa-lg"></i> Close</button>
@@ -79,6 +80,7 @@
 
                     </form>
                 </div>
+                <!--  -->
 
                 <!--  -->
                 <div id="import_excel" style="display: none">
@@ -100,7 +102,7 @@
                     </div>
                     @endif
 
-                    <form action="manager/tables/electrics/import" method="POST" role="form" enctype="multipart/form-data">
+                    <form action="educator/tables/students/import" method="POST" role="form" enctype="multipart/form-data">
 
                         {{ csrf_field() }}
 

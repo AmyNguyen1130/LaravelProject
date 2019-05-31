@@ -394,6 +394,11 @@ Route::group(['prefix' => 'educator/', 'middleware' => 'is_educator'], function 
 				'uses' => 'EducatorController@CRUDTableStudents'
 			]);
 
+			Route::post('import', [
+				'as' => 'educator.tables.students.import',
+				'uses' => 'ExcelController@importStudents'
+			]);
+
 		});
 
 		Route::group(['prefix' => 'issues/'], function () {
