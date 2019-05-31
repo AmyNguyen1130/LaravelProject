@@ -281,13 +281,11 @@ class ManagerController extends Controller
         }
         // 
 
-        /* ĐOẠN NÀY LÀ ĐỂ DÙNG THẬT
-        $students = Student::all();
+        // $students = Student::all();
 
-        foreach ($students as $student) {
-            Mail::to($student->email)->send(new SendMail($data, '[Dormitory] [Electricity and Water Bills] [' . $data['bill_month'] . ']', 'sendbill'));
-        }
-        */
+        // foreach ($students as $student) {
+        //     Mail::to($student->email)->send(new SendMail($data, '[Dormitory] [Electricity and Water Bills] [' . $data['bill_month'] . ']', 'sendbill'));
+        // }
 
         return back()->with('success', 'Gửi email thông báo thành công');
     }
