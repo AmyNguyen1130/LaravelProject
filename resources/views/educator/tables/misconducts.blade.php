@@ -18,13 +18,10 @@
                 <div id="new_electric_row" style="display: none">
                     <div class="alert alert-danger error" style="display: none;">
                         <button type="button" class="pull-right" onclick="$('.error').fadeOut()" style="color: red"><i class="fa fa-window-close-o fa-lg"></i> Close</button>
-                        <p style="color:white; display:none;" class="roomError"></p>
-                        <p style="color:white; display:none;" class="yearError"></p>
-                        <p style="color:white; display:none;" class="monthError"></p>
-                        <p style="color:white; display:none;" class="oldNumberError"></p>
-                        <p style="color:white; display:none;" class="newNumberError"></p>
-                        <p style="color:white; display:none;" class="priceError"></p>
-                        <p style="color:white; display:none;" class="statusError"></p>
+                        <p style="color:white; display:none;" class="studentError"></p>
+                        <p style="color:white; display:none;" class="timeError"></p>
+                        <p style="color:white; display:none;" class="misconductError"></p>
+                        <p style="color:white; display:none;" class="minusError"></p>
                     </div>
                     <div style="display: none" class="alert alert-success alert-block success">
                         <button type="button" class="close" data-dismiss="alert">×</button>
@@ -36,10 +33,10 @@
 
                         <div class="col-xs-6 col-sm-2">
                             <div class="form-group">
-                                <select class="form-control" id="insert_room_id">
-                                    <option selected disabled>Phòng</option>
-                                    @foreach($rooms as $room)
-                                    <option value="{{ $room->id }}">{{ $room->name }}</option>
+                                <select class="form-control" id="insert_student_id">
+                                    <option selected disabled>Sinh Viên</option>
+                                    @foreach($students as $student)
+                                    <option value="{{ $student->id }}">{{ $student->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -47,49 +44,25 @@
 
                         <div class="col-xs-6 col-sm-2">
                             <div class="form-group">
-                                <select class="form-control" id="insert_year">
-                                    <option selected disabled>Năm</option>
-                                    <option value="2019">2019</option>
-                                    <option value="2018">2018</option>
-                                    <option value="2017">2017</option>
-                                </select>
+                                <input type="date" id="insert_time" class="form-control">
+                            </div>
+                        </div>
+
+
+                        <div class="col-xs-6 col-sm-2">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="insert_misconduct" placeholder="Lỗi vi phạm">
                             </div>
                         </div>
 
                         <div class="col-xs-6 col-sm-2">
                             <div class="form-group">
-                                <select class="form-control" id="insert_month">
-                                    <option selected disabled>Tháng</option>
-                                    <option value="1">01</option>
-                                    <option value="2">02</option>
-                                    <option value="3">03</option>
-                                    <option value="4">04</option>
-                                    <option value="5">05</option>
-                                    <option value="6">06</option>
-                                    <option value="7">07</option>
-                                    <option value="8">08</option>
-                                    <option value="9">09</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-6 col-sm-2">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="insert_new_number" placeholder="Lỗi vi phạm">
-                            </div>
-                        </div>
-
-                        <div class="col-xs-6 col-sm-2">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="insert_price" placeholder="Số tiền trừ">
+                                <input type="text" class="form-control" id="insert_minus" placeholder="Số tiền trừ">
                             </div>
                         </div>
 
                         <div class="col-xs-6 col-sm-1">
-                            <button type="button" id="save_new_electric" class="btn btn-primary col-xs-12">Lưu</button>
+                            <button type="button" id="save_new_misconduct" class="btn btn-primary col-xs-12">Lưu</button>
                         </div>
 
                         <div class="col-xs-6 col-sm-1">

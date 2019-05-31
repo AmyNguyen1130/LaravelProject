@@ -329,7 +329,7 @@ Route::group(['prefix' => 'educator/', 'middleware' => 'is_educator'], function 
 
 	Route::get('', [
 		'as' => 'educator.pages.index',
-		function () {
+		function() {
 			return view('educator.pages.index');
 		}
 	]);
@@ -359,9 +359,7 @@ Route::group(['prefix' => 'educator/', 'middleware' => 'is_educator'], function 
 		Route::group(['prefix' => 'misconducts/'], function () {
 			Route::get('', [
 				'as' => 'educator.tables.misconducts',
-				function() {
-					return view('educator.tables.misconducts');
-				}
+				'uses' => 'EducatorController@loadEducatorPage'
 			]);
 
 			Route::get('load', [
@@ -372,6 +370,11 @@ Route::group(['prefix' => 'educator/', 'middleware' => 'is_educator'], function 
 			Route::post('CRUD', [
 				'as' => 'educator.tables.misconducts.CRUD',
 				'uses' => 'EducatorController@CRUDTableMisconducts'
+			]);
+
+			Route::post('insert', [
+				'as' => 'educator.tables.misconducts.insert',
+				'uses' => 'MisconductController@insertNewRocord'
 			]);
 
 		});
