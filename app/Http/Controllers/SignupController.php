@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Support\MessageBag;
 use App\Student;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class SignupController extends Controller
 {
@@ -125,14 +126,13 @@ class SignupController extends Controller
 
             if ($user->save()) {
                 $student->save();
-                // Saved thì đặt cho nó ra Session để cho tình trạng là đã đăng nhập luôn rồi
-                Session::put('user', $user);
-                return response()->json([
-                    'error' => false,
-                    'user' => $user
-                ], 200);
+                if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                    return response()->json([
+                        'error' => false,
+                        'user' => $user
+                    ], 200);
+                }
             }
         }
     }
-
 }
