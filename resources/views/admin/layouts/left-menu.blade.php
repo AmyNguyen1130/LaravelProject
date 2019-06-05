@@ -26,25 +26,7 @@
                 <h3>General</h3>
                 <ul class="nav side-menu">
                     <li><a href="admin"><i class="fa fa-home"></i> Home </a></li>
-                    <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="form.html">General Form</a></li>
-                            <li><a href="form_advanced.html">Advanced Components</a></li>
-                            <li><a href="form_validation.html">Form Validation</a></li>
-                            <li><a href="form_wizards.html">Form Wizard</a></li>
-                            <li><a href="form_upload.html">Form Upload</a></li>
-                            <li><a href="form_buttons.html">Form Buttons</a></li>
-                        </ul>
-                    </li>
-                    <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="admin/tables/users">Users</a></li>
-                            <li><a href="admin/tables/categories">Categories</a></li>
-                            <li><a href="admin/tables/products">Products</a></li>
-                            <li><a href="admin/tables/orders">Orders</a></li>
-                            <li><a href="admin/tables/bills">Bills</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="admin/tables/users"><i class="fa fa-table"></i> Users </a></li>
                     <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="chartjs.html">Chart JS</a></li>

@@ -270,7 +270,7 @@ class ManagerController extends Controller
 
         // ĐOẠN NÀY DÙNG ĐỂ TEST SEND MAIL
         $listEmail = array(
-            'tai.tran@student.passerellesnumeriques.org',
+            'ngoctai.dev@gmail.com',
             // 'ly.doan@student.passerellesnumeriques.org',
             // 'phuong.tran@student.passerellesnumeriques.org',
             // 'quyet.y@student.passerellesnumeriques.org',
@@ -280,6 +280,9 @@ class ManagerController extends Controller
             Mail::to($email)->send(new SendMail($data, '[Dormitory] [Electricity and Water Bills] [' . $data['bill_month'] . ']', 'sendbill'));
         }
         // 
+
+
+        // PHẦN NÀY ĐỂ GỬI MAIL CHO ALL SINH VIÊN
 
         // $students = Student::all();
 
